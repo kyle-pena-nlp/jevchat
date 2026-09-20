@@ -10,7 +10,7 @@ The options are an alphabet plus an option to stop emitting. Jev returns a proba
 one, and the sampler draws the next symbol from that normalised distribution.
 Append, repeat, and stop when STOP is drawn.
 
-There are several alphabets and sampling strategies available.  
+There are several alphabets (including truncated token lists) and sampling strategies available.  
 
 The idea is for fun, the cost is somewhat impractical, and the results are hilarious.
 
