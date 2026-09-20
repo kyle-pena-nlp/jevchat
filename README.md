@@ -11,7 +11,7 @@ one, and the sampler draws the next symbol from that normalised distribution.
 Append, repeat, and stop when STOP is drawn. The decision model becomes a language
 model, one symbol at a time.
 
-There are several alphabets and sampling strategies.  The results are hilarious.
+There are several alphabets and sampling strategies.  The idea is for fun, the cost is somewhat impractical, and the results are hilarious.
 
 <img width="450" height="403" alt="image" src="https://github.com/user-attachments/assets/8be3a47a-da3c-4df6-a617-d485c61a7db7" />
 
