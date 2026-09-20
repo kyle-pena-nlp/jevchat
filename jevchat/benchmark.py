@@ -73,6 +73,21 @@ MODES: tuple[tuple[str, dict], ...] = (
                          "presentation": "symbol"}),
     ("buckets, hypothesis w40", {"strategy": "buckets", "bucket_size": 127,
                                  "presentation": "hypothesis", "window": 40}),
+    # bucket_size is pinned so `refine` has several buckets to weigh against each
+    # other even on the small alphabets.
+    ("buckets, size 16", {"strategy": "buckets", "bucket_size": 16}),
+    ("refine, 0 rounds", {"strategy": "refine", "bucket_size": 16,
+                          "refine_rounds": 0}),
+    ("refine, 1 round m=3", {"strategy": "refine", "bucket_size": 16,
+                             "refine_rounds": 1, "refine_nucleus": 3}),
+    ("refine, 2 rounds m=3", {"strategy": "refine", "bucket_size": 16,
+                              "refine_rounds": 2, "refine_nucleus": 3}),
+    ("refine, 1 round m=6", {"strategy": "refine", "bucket_size": 16,
+                             "refine_rounds": 1, "refine_nucleus": 6}),
+    ("refine, buckets sorted", {"strategy": "refine", "bucket_size": 16,
+                                "bucket_order": "sorted"}),
+    ("refine, buckets shuffled", {"strategy": "refine", "bucket_size": 16,
+                                  "bucket_order": "shuffled"}),
 )
 
 

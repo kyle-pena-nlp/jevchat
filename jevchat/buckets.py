@@ -26,6 +26,12 @@ from . import present
 from .alphabet import MAX_CHOICES, Alphabet, Symbol
 from .client import ChoiceAnswer, JevClient, JevError
 
+# How the alphabet is cut up. "given" keeps the alphabet's own order, which for a
+# BPE vocabulary is frequency order and so is arbitrary with respect to spelling.
+# "sorted" groups look-alikes together, so a bucket question compares similar
+# options while the winners question compares dissimilar ones.
+BUCKET_ORDERS = ("given", "sorted", "shuffled")
+
 OTHER_KEY = "OTHER"
 OTHER_DESCRIPTION = (
     "None of the options listed in this question. The symbol that comes next is "
@@ -58,8 +64,16 @@ class Plan:
         return max(1, -(-self.questions_per_step // self.batch))
 
 
-def build(alphabet: Alphabet, bucket_size: int, batch: int) -> Plan:
+def build(
+    alphabet: Alphabet,
+    bucket_size: int,
+    batch: int,
+    order: str = "given",
+    seed: int | None = None,
+) -> Plan:
     """Cut `alphabet` into buckets of at most `bucket_size` symbols."""
+    if order not in BUCKET_ORDERS:
+        raise ValueError(f"unknown bucket order {order!r}")
     if bucket_size < 1:
         raise ValueError("bucket_size must be >= 1")
     if bucket_size > MAX_BUCKET:
@@ -71,6 +85,10 @@ def build(alphabet: Alphabet, bucket_size: int, batch: int) -> Plan:
         raise ValueError("bucket_batch must be >= 1")
 
     symbols = list(alphabet.symbols)
+    if order == "sorted":
+        symbols.sort(key=lambda s: (s.emit, s.key))
+    elif order == "shuffled":
+        random.Random(0 if seed is None else seed).shuffle(symbols)
     buckets = tuple(
         tuple(symbols[i : i + bucket_size]) for i in range(0, len(symbols), bucket_size)
     )
@@ -155,23 +173,21 @@ def distribution(
     return out
 
 
-def ask(
+def send(
     client: JevClient,
-    plan: Plan,
-    alphabet: Alphabet,
     state: dict | str,
-    config,
+    questions: dict[str, dict],
+    batch: int,
     *,
-    text: str = "",
-    rng: random.Random | None = None,
     cancel=None,
-) -> ChoiceAnswer:
-    """Ask every bucket, in as few requests as the context window allows."""
-    questions, options = build_questions(plan, alphabet, config, text=text, rng=rng)
+) -> tuple[dict, float]:
+    """Post `questions` in as few requests as the context window allows.
+
+    On overflow the batch is halved and retried rather than failing the step.
+    """
     names = list(questions)
     answers: dict = {}
     latency = 0.0
-    batch = plan.batch
     index = 0
 
     while index < len(names):
@@ -185,7 +201,6 @@ def ask(
                 ),
             )
         except JevError as exc:
-            # Back off to smaller requests rather than failing the whole step.
             if "overflowed" in str(exc) and batch > 1:
                 batch //= 2
                 continue
@@ -193,7 +208,23 @@ def ask(
         answers.update(part)
         latency += took
         index += batch
+    return answers, latency
 
+
+def ask(
+    client: JevClient,
+    plan: Plan,
+    alphabet: Alphabet,
+    state: dict | str,
+    config,
+    *,
+    text: str = "",
+    rng: random.Random | None = None,
+    cancel=None,
+) -> ChoiceAnswer:
+    """Ask every bucket, in as few requests as the context window allows."""
+    questions, options = build_questions(plan, alphabet, config, text=text, rng=rng)
+    answers, latency = send(client, state, questions, plan.batch, cancel=cancel)
     probabilities = distribution(plan, alphabet, answers, options)
     return ChoiceAnswer(
         choice=max(probabilities, key=probabilities.__getitem__),

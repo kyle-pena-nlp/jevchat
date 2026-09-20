@@ -9,6 +9,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
+from .buckets import BUCKET_ORDERS
 from .present import PRESENTATIONS
 
 CONFIG_FILENAME = "jevchat.toml"
@@ -37,10 +38,13 @@ DEFAULT_INSTRUCTIONS = (
     "`question` completely and ends on a finished sentence."
 )
 
-STRATEGIES = ("choice", "bisect", "buckets")
+STRATEGIES = ("choice", "bisect", "buckets", "refine")
 
 # One option in every bucket is spent on OTHER.
 MAX_BUCKET = 254
+
+# The most bucket winners `refine` can weigh against each other in one question.
+MAX_PROBE = 254
 
 # Environment variable names checked for the API key, in order.
 API_KEY_VARS = ("api_key", "JEV_API_KEY", "TYPESAFE_API_KEY", "API_KEY")
@@ -78,14 +82,20 @@ class Config:
     #   choice  one choice question over the whole alphabet (x `ensemble`)
     #   bisect  a tree of earlier/later noul questions down to `bisect_cutoff`,
     #           then one choice question inside the group that is reached
-    #   buckets one question per slice of the alphabet, each with an OTHER option;
-    #           the only strategy that can hold more than 255 symbols
+    #   buckets one question per slice of the alphabet, each with an OTHER option
+    #   refine  buckets without OTHER, weighted by a question over the winners, then
+    #           refined by rescoring each bucket's nucleus (see jevchat/refine.py)
     strategy: str = "buckets"
     bisect_cutoff: int = 20
     bisect_swap: bool = True
     bucket_size: int = 127
     bucket_batch: int = 48
     bucket_describe: bool = False
+    # How the alphabet is cut into buckets: "given" (its own order), "sorted"
+    # (look-alikes grouped together), or "shuffled".
+    bucket_order: str = "given"
+    refine_nucleus: int = 3
+    refine_rounds: int = 1
 
     # --- how the next symbol is sampled ------------------------------------
     temperature: float = 0.4
@@ -98,6 +108,12 @@ class Config:
     min_steps: int = 3
     max_steps: int = 400
     max_chars: int = 1500
+    # Candidate replies kept alive at once. 1 samples one symbol at a time; more
+    # lets later evidence abandon a prefix that turned out badly, at one score per
+    # live beam per step. Above 1, `temperature`, `top_p` and `top_k` no longer
+    # apply: beams are ranked by probability, not drawn.
+    beam_width: int = 1
+    beam_length_penalty: float = 1.0
     seed: int | None = None
 
     # --- transport ---------------------------------------------------------
@@ -108,6 +124,10 @@ class Config:
     # --- display -----------------------------------------------------------
     live: bool = True
     show_dist: int = 3
+
+    # Which options the user actually named, in the file or on the command line.
+    # Everything else is open to being resolved once the alphabet is known.
+    explicit: frozenset[str] = frozenset()
 
     @property
     def active_instructions(self) -> str:
@@ -132,7 +152,7 @@ class Config:
             raw = tomllib.loads(path.read_text())
             data = raw.get("jevchat", raw)
 
-        known = {f.name for f in fields(cls)}
+        known = {f.name for f in fields(cls)} - {"explicit"}
         unknown = set(data) - known
         if unknown:
             raise ConfigError(
@@ -140,12 +160,42 @@ class Config:
                 f"valid options are {', '.join(sorted(known))}"
             )
 
-        cfg = cls(**data)
         clean = {k: v for k, v in (overrides or {}).items() if v is not None}
-        if clean:
-            cfg = replace(cfg, **clean)
+        cfg = replace(cls(**data), **clean) if clean else cls(**data)
+        cfg = replace(cfg, explicit=frozenset(data) | frozenset(clean))
         cfg.validate()
         return cfg
+
+    def with_overrides(self, **kwargs) -> "Config":
+        """Apply overrides and mark them as deliberately chosen."""
+        return replace(self, **kwargs,
+                       explicit=self.explicit | frozenset(kwargs))
+
+    def resolve(self, alphabet) -> "Config":
+        """Fill in settings that depend on the alphabet and the strategy.
+
+        Precedence: command line > jevchat.toml > the alphabet's declared
+        preferences > what the strategy requires > the plain defaults.
+        """
+        known = {f.name for f in fields(self)} - {"explicit"}
+        auto: dict = {}
+        for name, value in alphabet.defaults:
+            if name in known and name not in self.explicit:
+                auto[name] = value
+
+        if self.strategy == "refine" and "bucket_size" not in self.explicit:
+            # refine asks one question over every bucket's winner, so the number of
+            # buckets has to fit inside a single question.
+            needed = -(-(alphabet.size - 1) // MAX_PROBE)
+            auto["bucket_size"] = min(
+                MAX_BUCKET, max(auto.get("bucket_size", self.bucket_size), needed)
+            )
+
+        if not auto:
+            return self
+        resolved = replace(self, **auto)
+        resolved.validate()
+        return resolved
 
     def validate(self) -> None:
         if self.temperature < 0:
@@ -173,6 +223,19 @@ class Config:
             raise ConfigError(f"bucket_size must be between 1 and {MAX_BUCKET}")
         if self.bucket_batch < 1:
             raise ConfigError("bucket_batch must be >= 1")
+        if self.bucket_order not in BUCKET_ORDERS:
+            raise ConfigError(
+                f"bucket_order must be one of {', '.join(BUCKET_ORDERS)}, "
+                f"not {self.bucket_order!r}"
+            )
+        if self.beam_width < 1:
+            raise ConfigError("beam_width must be >= 1")
+        if self.beam_length_penalty < 0:
+            raise ConfigError("beam_length_penalty must be >= 0")
+        if self.refine_nucleus < 1:
+            raise ConfigError("refine_nucleus must be >= 1")
+        if self.refine_rounds < 0:
+            raise ConfigError("refine_rounds must be >= 0")
         if self.presentation not in PRESENTATIONS:
             raise ConfigError(
                 f"presentation must be one of {', '.join(PRESENTATIONS)}, "

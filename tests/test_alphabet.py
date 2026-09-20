@@ -103,3 +103,41 @@ def test_custom_alphabet_from_a_file(tmp_path):
 def test_missing_alphabet_mentions_the_builtins():
     with pytest.raises(AlphabetError, match="lower26"):
         alphabet_mod.load("nope")
+
+
+def test_alphabet_defaults_are_loaded_from_json(tmp_path):
+    path = tmp_path / "d.json"
+    path.write_text(json.dumps({
+        "name": "d", "description": "",
+        "defaults": {"repetition_penalty": 1.0, "presentation": "symbol"},
+        "symbols": ["a", "b"],
+    }))
+    assert dict(alphabet_mod.load(str(path)).defaults) == {
+        "repetition_penalty": 1.0, "presentation": "symbol"}
+
+
+def test_alphabets_without_defaults_declare_none():
+    assert alphabet_mod.load("words1k").defaults == ()
+
+
+def test_character_alphabets_turn_off_the_repetition_penalty():
+    # It would block legitimate double letters like the 'ee' in "green".
+    for name in ("ascii", "lower26", "bigrams"):
+        assert dict(alphabet_mod.load(name).defaults)["repetition_penalty"] == 1.0
+
+
+def test_subword_alphabets_prefer_symbol_options():
+    # Hypothesis options were neutral on subword vocabularies and cost ~43% more.
+    for name in ("bpe2k", "bpe5k", "bpe50k"):
+        assert dict(alphabet_mod.load(name).defaults)["presentation"] == "symbol"
+
+
+def test_lookalike_alphabets_ask_for_sorted_buckets():
+    # Grouping look-alikes measured 2/6 -> 5/6 top-1 on bpe50k.
+    for name in ("bpe2k", "bpe5k", "bpe50k", "bigrams"):
+        assert dict(alphabet_mod.load(name).defaults)["bucket_order"] == "sorted"
+
+
+def test_word_alphabets_keep_their_own_order():
+    # Alphabetical order does not group similar words, and it measured no effect.
+    assert "bucket_order" not in dict(alphabet_mod.load("words1k").defaults)

@@ -87,6 +87,11 @@ poetry run jevchat -s bisect --bisect-cutoff 32 --no-bisect-swap ask "how many e
 # The only strategy that can hold more than 255 symbols.
 poetry run jevchat -a words1k -s buckets ask "what colour is snow?"
 poetry run jevchat -a bpe5k -s buckets --bucket-size 127 ask "what is the capital of france?"
+
+# refine — buckets, then a question over the winners, then a rescored nucleus.
+# Twice the probability on the right symbol and ~19x the vocabulary resolved.
+poetry run jevchat -a words1k -s refine ask "where do fish live?"
+poetry run jevchat -a words1k -s refine --refine-nucleus 6 --refine-rounds 2 ask "…"
 ```
 
 ### Presentations
@@ -98,6 +103,16 @@ poetry run jevchat -p hypothesis --window 40 ask "what colour is snow?"
 # symbol — options are the bare symbols, as the first version of this did
 poetry run jevchat -p symbol ask "what colour is snow?"
 ```
+
+### Beam search
+
+```bash
+# keep 3 candidate replies alive instead of committing symbol by symbol
+poetry run jevchat -b 3 ask "what is the opposite of hot?"
+```
+
+Costs one score per live beam per step. Above width 1, `temperature`, `top_p` and
+`top_k` stop applying — beams are ranked by probability, not drawn from.
 
 ### Alphabets
 
@@ -255,7 +270,9 @@ jevchat/
   client.py      POST /v1/systemone, parallel questions, retries, usage accounting
   bisect.py      the earlier/later tree, and folding its answers into one distribution
   buckets.py     slicing an alphabet across questions, each with an OTHER escape
+  refine.py      bucket, probe the winners, project back down, rescore the nucleus
   present.py     symbol vs hypothesis options, and folding answers back to keys
+  beam.py        keeping several candidate replies alive instead of committing
   benchmark.py   the twelve continuations behind `jevchat bench`
   config.py      defaults, jevchat.toml, .env key loading
   sampler.py     normalise, bias, ban, temperature, top-k, top-p, draw
@@ -266,7 +283,8 @@ jevchat/
 tools/
   wordlist.py            the hand-built common-word list
   make_word_alphabet.py  -> alphabets/words1k.json
-  make_bpe_alphabet.py   -> alphabets/bpe2k.json, bpe5k.json (needs a network)
+  make_bpe_alphabet.py   -> alphabets/bpe2k.json, bpe5k.json, bpe50k.json (network)
+  make_ngram_alphabet.py -> alphabets/bigrams.json
 ```
 
 ## The experiment log
@@ -284,6 +302,6 @@ be read.
 poetry run pytest
 ```
 
-122 tests, all offline — a scripted fake client for the generation loop and an
+158 tests, all offline — a scripted fake client for the generation loop and an
 `httpx.MockTransport` for the HTTP layer. No API key and no network needed.
 `jevchat bench` is the part that does hit the API.

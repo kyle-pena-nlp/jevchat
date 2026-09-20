@@ -30,6 +30,17 @@ the order of the options. Five contexts.
 Jev does not reproduce its own distribution exactly. One case even flipped its
 top-1 symbol between the two askings.
 
+The floor was re-measured alongside §10 and §11, and it moves:
+
+| measurement | top-1 | Spearman | TV | \|log-odds\| |
+|---|---|---|---|---|
+| §0 | 4/5 | 0.91 | 0.30 | 0.90 |
+| §10 | 4/5 | 0.95 | 0.23 | 0.69 |
+| §11 | 4/5 | — | 0.22 | 0.73 |
+
+So the floor is itself a range — Spearman 0.91–0.95, TV 0.22–0.30, 0.69–0.90 nats —
+and comparisons in that band should be read as ties.
+
 **This bounds everything else.** No sampler can converge on a target more precisely
 than the oracle defines it, and any comparison in this document closer than
 ~0.9 nats or ~0.9 Spearman is at or near the floor. It was measured too late —
@@ -515,6 +526,277 @@ tail symbols light up. Signal should reproduce; noise should not. Untested.
 
 ---
 
+## 12. `refine` shipped as a strategy
+
+§10 and §11 built as `jevchat/refine.py`, reachable as `--strategy refine` and
+included in `jevchat bench`.
+
+**On `words1k` (1,122 options — needs bucketing), 10 word continuations:**
+
+| mode | top-1 | P(correct) | non-zero | ms/step | in-tok | questions | reqs |
+|---|---|---|---|---|---|---|---|
+| buckets, hypothesis w40 | 9/10 | 0.311 | 46 | 310 | 12,074 | 10 | 1 |
+| refine, 0 rounds | 10/10 | 0.574 | 867 | 961 | 19,415 | 73 | 3 |
+| refine, 1 round m=3 | 9/10 | 0.661 | 870 | 1,183 | 21,775 | 74 | 4 |
+| refine, 2 rounds m=3 | 9/10 | 0.659 | 870 | 1,243 | 24,135 | 75 | 5 |
+| **refine, 1 round m=6** | 9/10 | **0.674** | **871** | 992 | 21,774 | 74 | 4 |
+
+**Twice the probability on the right symbol, and 19× the vocabulary resolved** —
+871 of 1,122 symbols carry finite mass against 46 for `buckets`. Cost is ~4 requests
+and ~1s per symbol against 1 request and 0.3s.
+
+A second round adds nothing (0.659 vs 0.661); the up-down-up loop converges after
+one turn.
+
+**On `ascii` (89 options — fits one question), 12 character continuations:**
+
+| mode | top-1 | P(correct) | non-zero | in-tok | reqs |
+|---|---|---|---|---|---|
+| choice, hypothesis w40 | **12/12** | **0.594** | 12 | 1,406 | 1 |
+| buckets, hypothesis w40 | 10/12 | 0.543 | 10 | 1,520 | 1 |
+| refine, 1 round m=6 | 11/12 | 0.563 | **62** | 3,348 | 3 |
+
+When the alphabet fits in one question, bucketing can only add error, so plain
+`choice` wins on accuracy. `refine` still resolves 5× the support. **It earns its
+keep on alphabets that do not fit.**
+
+### The censoring fix, which the whole thing depended on
+
+First implementation took a reported `0.00` literally. A bucket whose winner rounded
+to zero got `w_k = 0`, which **silently deleted every symbol in it**:
+
+| | non-zero of 1,122 | P(correct) |
+|---|---|---|
+| literal zero | 14 – 25 | 0.86 |
+| censored at 0.0025 | 867 – 871 | 0.67 |
+
+Sweeping `bucket_size` 16 → 254 (71 → 5 buckets) barely moved the literal-zero
+figure (16, 21, 24, 25), so it was not a bucket-count problem: *any* winners question
+rounds weak buckets away. Jev's 0.01 rounding means a reported `0.00` is a **censored
+observation** — "somewhere below 0.005" — and using the interval's midpoint keeps
+those buckets alive.
+
+This is the §10 objection I raised, retracted, and then hit in practice. It only
+shows up once the head is concentrated: on `ascii` the mass is spread widely enough
+that most buckets survive regardless.
+
+Note the trade it exposes — concentration against coverage. Literal zeros gave
+`P(correct) = 0.86` by deleting everything uncertain; censoring spreads the mass back
+out and drops it to 0.67. The second is the honest distribution.
+
+Generation is comparable or slightly better:
+
+```
+where do fish live?   buckets → " water."          refine → " They live in water"
+what do bees make?    buckets → " honey. none"     refine → " honey."
+```
+
+**Not the default.** `buckets` stays default on latency: 0.3s against 1s per symbol
+matters in a chat. `refine` is the mode to reach for when the distribution itself is
+the output.
+
+### At the full 50k
+
+`refine` asks one question over *every* bucket's winner, so the bucket count must
+fit inside a single question: `n_buckets <= 254`, which forces
+`bucket_size >= 197` on `bpe50k`. The default 127 gives 393 buckets and fails
+outright — the reason the resolution layer in §14 exists.
+
+One symbol of `bpe50k`, `bucket_size 254` (197 buckets):
+
+| presentation | s/symbol | requests | input tokens | non-zero of 49,862 |
+|---|---|---|---|---|
+| `symbol` | **6.2** | 11 | 338,039 | 5,259 |
+| `hypothesis` | 11.1 | 19 | 599,452 | 5,478 |
+
+~$0.014 per emitted token. A four-token reply took 21.5s and produced **"Paris."**,
+with a sane distribution behind it — `' Paris'` 0.164, `'Paris'` 0.094, then `'P'`
+and `' P'` trailing, which is the tokenizer correctly hedging between the
+space-prefixed and bare forms.
+
+It resolves 5,259 of 49,862 symbols (10.5%) — better than any single question could,
+but far short of the 77% `refine` reaches on `words1k`, because 197 buckets of 254
+options each still have a 0.01 floor *within* each bucket.
+
+**The refinement round degenerates here.** The pool is `n_buckets × m` and must also
+fit one question, so `m` clamps to 1 and the pool becomes exactly the winners set —
+the round re-asks the same question. It still averages noise, but it is not the
+up-down-up refinement of §11. Breaking that needs the hierarchy from §10, which is
+the one place a third level would earn its keep rather than compounding error.
+
+---
+
+## 13. A bigram alphabet
+
+*Every two-character ASCII string, so each step commits two characters.*
+
+`tools/make_ngram_alphabet.py` builds 87² = 7,569 pairs over the single characters
+of `ascii`, plus STOP.
+
+**Mixing lengths does not work.** The first build included the 87 unigrams as well,
+for parity. Under hypothesis options the unigram always won:
+
+```
+after "P":   'a' 0.115   vs   'ar' 0.083
+after "Pa":  's' 0.145   vs   'r' 0.090,  'ri' 0.062     -> "Pas"
+```
+
+A shorter option is a valid prefix of strictly more continuations, so it is never
+less plausible. The alphabet degenerated to unigrams while still paying 7,657
+options of dilution. `--min-n 2 --n 2` makes every option the same length and
+removes the bias.
+
+**Measured** against the next *two* characters of a known continuation, 6 cases:
+
+| alphabet | strategy | options | top-1 | P(correct) | ranks |
+|---|---|---|---|---|---|
+| `ascii` (one char) | choice | 89 | 3/6 | 0.432 | 2,1,1,2,1,2 |
+| `bigrams` | refine | 7,570 | 2/6 | 0.257 | 7,1,2,3,1,15 |
+| `bigrams` | buckets | 7,570 | 2/6 | 0.022 | 4,4,1,3,1,79 |
+
+Two readings, and they point opposite ways:
+
+* **Per step, `ascii` is better** — 0.432 against 0.257, and every rank within 2.
+* **Per character, bigrams is not obviously worse.** `ascii` needs two steps to
+  cover what one bigram covers, so its two-character accuracy is roughly 0.43² ≈
+  0.19 against the bigram's 0.257 in one step.
+
+Cost settles it for now: bigrams needs `refine` (3 requests, ~1.5 s/step) against
+`ascii`'s single request at ~0.3 s, so **2.5× more per character**, and generation
+is visibly worse (`"P\nC\nA\n"` against `ascii`'s `"Paris."`).
+
+**`refine` is what makes it usable at all.** On the same alphabet, `buckets` scores
+P(correct) = 0.022 against `refine`'s 0.257 — **12×**. The larger the vocabulary,
+the more the OTHER-stitched weights cost you.
+
+The obvious next step is pruning: most of the 7,569 pairs are nonsense (`'qz'`,
+`'P\n'`, `'7%'`) and collectively soak up mass. A vocabulary of plausible pairs
+only would cut the dilution that this measurement is dominated by.
+
+---
+
+## 14. Settings resolved from the alphabet and strategy
+
+Defaults were a single flat set, so several combinations needed manual flags and
+one failed outright — `-a bpe50k -s refine` errored, since 393 buckets cannot be
+probed by one 255-option question.
+
+Now an alphabet can declare preferences in its JSON, and `Config.resolve()` applies
+them to anything the user has not named. Precedence: **command line > `jevchat.toml`
+> the alphabet's preferences > what the strategy requires > plain defaults.**
+
+| alphabet | resolves to |
+|---|---|
+| `ascii`, `lower26`, `bigrams` | `repetition_penalty = 1.0` (double letters) |
+| `bpe2k`, `bpe5k`, `bpe50k` | `presentation = symbol` (same score, 43% cheaper) |
+| any, with `strategy = refine` | `bucket_size` raised until the probe fits one question |
+
+```
+bpe50k   49,862 options -> bucket_size 197 (254 buckets)  symbol      rep_pen 1.1
+bigrams   7,570 options -> bucket_size 127 ( 61 buckets)  hypothesis  rep_pen 1.0
+words1k   1,122 options -> bucket_size 127 (  9 buckets)  hypothesis  rep_pen 1.1
+```
+
+---
+
+## 15. Clustering the buckets
+
+*Does it matter which symbols share a bucket?*
+
+`buckets.build` cut the alphabet into contiguous slices of its own order, which for
+`bpe50k` is BPE frequency order — arbitrary with respect to spelling. The idea:
+group look-alikes, so a bucket question makes a *fine* discrimination among
+competitors while the winners question makes an *easy* one among dissimilar
+representatives.
+
+**`bigrams`** (7,570 options, prefix-clustered by construction), next two characters,
+8 cases:
+
+| bucket order | top-1 | P(correct) | ranks |
+|---|---|---|---|
+| clustered | 5/8 | 0.226 | 4,1,1,1,1,22,1,3 |
+| clustered, repeat | 5/8 | 0.245 | 3,1,1,1,1,15,2,1 |
+| shuffled, seed 0 | 2/8 | 0.157 | 11,1,2,6,1,208,13,2 |
+| shuffled, seed 1 | 3/8 | 0.167 | 5,1,1,9,1,133,6,5 |
+
+Within-condition variance is small and between-condition is large, so the effect is
+real: **~45% more probability on the right symbol**, and the shuffled runs throw out
+ranks of 208 and 133 where clustering keeps everything under 22.
+
+**`bpe50k`** (49,862 options), gold = any token prefixing the continuation, 6 cases:
+
+| bucket order | top-1 | P(gold) | ranks |
+|---|---|---|---|
+| frequency (the alphabet's own) | 2/6 | 0.098 | 2,1,4,2,1,2 |
+| **lexicographic** | **5/6** | 0.120 | **1,1,1,1,1,2** |
+
+**2/6 → 5/6 from sorting the vocabulary before bucketing.** One config change.
+
+**`words1k`** showed **no effect** — sorted and shuffled both scored P(correct) 0.705.
+
+That contrast is the finding. Clustering helps only when the sort order groups
+options that genuinely compete for the same slot. Lexicographic order does that for
+character n-grams and subword pieces, where a shared prefix means a shared
+constraint. It does nothing for whole words, where alphabetical adjacency is
+semantically arbitrary — `bear` and `beautiful` are neighbours in sort order and
+unrelated in use.
+
+**Shipped:** the subword and n-gram alphabets declare `bucket_order = "sorted"`;
+`words1k` keeps its own order. Getting the same benefit on a word alphabet would
+need semantic clustering — which is what GPT-2's embedding matrix was suggested for
+in the open questions.
+
+---
+
+## 16. Beam search (implemented, does not help)
+
+*Keep several candidate replies alive instead of committing symbol by symbol.*
+
+Every other strategy commits to one symbol per step, and since each Jev call is
+stateless a bad symbol is never repaired. Beam search keeps the `beam_width` best
+partial replies, ranked by mean log probability, so a prefix that looked fine at
+step 2 can be abandoned at step 5.
+
+**First measurement of actual replies.** Every other number in this log is
+single-step accuracy given a human-written prefix. Twelve questions with checkable
+one-word answers, scored on whether the finished reply contains the answer:
+
+| beam width | correct | s/reply | tokens/reply | requests/reply |
+|---|---|---|---|---|
+| 1 | 11/12 | 1.2 | 43,371 | 4 |
+| 3 | 11/12 | 6.1 | 300,545 | 19 |
+| 5 | 10/12 | 16.9 | 893,829 | 51 |
+
+**No improvement, at 5× the time and 7× the tokens for width 3.** Width 5 is worse.
+
+The reason is structural: beam search attacks error *compounding*, and these replies
+are two to four symbols long — there is nothing to compound. It would matter for
+long-form prose, which §"What to expect" establishes is out of reach anyway. The
+remaining failures are not search failures either: width 1's miss was
+`"They need water."` for *do people need water?*, which is a correct answer the
+substring metric rejects.
+
+That flaw is worth stating plainly — **the metric undercounts**, so real accuracy is
+above 11/12 and the differences between widths are inside its noise.
+
+### The bug this nearly hid
+
+The first implementation ran each step's distribution through the whole sampling
+pipeline, including `temperature = 0.0`, which collapses a distribution to a single
+symbol. With one candidate per beam there is nothing to branch on, so widths 3 and 5
+used **exactly the same 4 requests as width 1** and produced near-identical replies.
+
+It surfaced from the request counts, not the output — the replies looked plausible
+either way, and the unit tests missed it because they set `temperature = 1.0`
+explicitly. Beam expansion now applies only the semantic guards (`stop_bias`,
+`min_steps`, `no_repeat_space`, repetition penalty) and skips
+`temperature`/`top_p`/`top_k`, which are sampling controls. Two regression tests
+cover it.
+
+**Shipped but off.** `beam_width` defaults to 1.
+
+---
+
 ## What shipped
 
 | decision | because |
@@ -529,6 +811,12 @@ tail symbols light up. Signal should reproduce; noise should not. Untested.
 | `bucket_describe = false` | 2.3× tokens, no gain |
 | OTHER, not anchors | anchors disagree by 1.62 nats |
 | concatenate, not `1 − P(OTHER)` weighting | scored identically |
+| `refine` available, not default | 2× P(correct) and 19× support, at 4× the requests |
+| rounded `0.00` treated as censored | taking it literally deleted whole buckets |
+| alphabets declare their own defaults | one flat set needed manual flags, and `refine` + `bpe50k` failed outright |
+| fixed-length n-grams, never mixed | a shorter option is always a valid prefix of more continuations |
+| `bucket_order = "sorted"` for subword/n-gram alphabets | 2/6 → 5/6 top-1 on `bpe50k`; no effect on words |
+| `beam_width = 1` (beam available, off) | no accuracy gain, 5× the time; replies are too short to compound error |
 
 ## Open questions
 
@@ -539,16 +827,20 @@ tail symbols light up. Signal should reproduce; noise should not. Untested.
 * **More replicates.** Five contexts against a 0.9-nat floor could not separate
   representatives from OTHER. Anything claiming a TV difference below ~0.08 needs
   more.
+* **A better end-to-end metric.** §16's substring check rejects correct paraphrases
+  (`"They need water."` for *do people need water?*), so it undercounts and cannot
+  resolve small differences. Everything else in this log is single-step.
 * **Simulating the full distribution** rather than truncating to a shortlist. The
   pairwise/Bradley–Terry route is the only one measured that assigns finite mass to
   everything it touches, but it converges to a flatter distribution than bulk
   scoring and the temperature correction does not close the gap. Nucleus
   reselection (§11) is the most promising measured route.
 * **Batching trie levels** into one request per level (§9) — untested, worth ~10×.
-* **Semantic bucketing.** `bisect` failed partly because alphabetical halves are
-  semantically meaningless. GPT-2's own token embedding matrix (50257 × 768) would
-  give a free similarity metric over exactly `bpe50k`, enabling clustered buckets
-  and neighbourhood proposals for MCMC.
+* **Semantic bucketing.** §15 showed clustering buckets by *spelling* is worth
+  2/6 → 5/6 on `bpe50k` but nothing on a word alphabet, where alphabetical order is
+  semantically arbitrary. GPT-2's own token embedding matrix (50257 × 768) would
+  give a free similarity metric for clustering `words1k`-style vocabularies the same
+  way.
 * **Parallelising bucket requests.** They are independent; `buckets.ask` sends them
   sequentially. Worth ~3× on the large alphabets.
 * **The noise floor itself.** Everything above is bounded by Jev disagreeing with

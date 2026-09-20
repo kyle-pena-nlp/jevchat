@@ -93,6 +93,9 @@ def main() -> None:
               "to shorter pieces. Too large for one Jev question: use "
               "--strategy buckets."
         ),
+        # Frequency order is arbitrary with respect to spelling; sorting groups
+        # look-alikes into the same bucket, which measured 2/6 -> 5/6 top-1.
+        "defaults": {"presentation": "symbol", "bucket_order": "sorted"},
         "stop": {"key": "<|STOP|>",
                  "description": "The reply is already complete and well formed: stop writing."},
         "symbols": symbols,

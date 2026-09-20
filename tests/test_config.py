@@ -84,3 +84,59 @@ def test_missing_key_explains_where_to_put_one(tmp_path, monkeypatch):
     empty.write_text("\n")
     with pytest.raises(ConfigError, match=r"\.env"):
         load_api_key(env_file=empty)
+
+
+# --- resolution: settings that depend on the alphabet and the strategy ---------
+
+def _alpha(size, **defaults):
+    from jevchat.alphabet import Alphabet, Symbol
+    return Alphabet(name="x", description="",
+                    symbols=tuple(Symbol(f"k{i}", "x") for i in range(size - 1)),
+                    defaults=tuple(sorted(defaults.items())))
+
+
+def test_an_alphabet_can_declare_preferences():
+    resolved = Config().resolve(_alpha(50, repetition_penalty=1.0))
+    assert resolved.repetition_penalty == 1.0
+
+
+def test_an_explicit_setting_beats_the_alphabet():
+    cfg = Config.load(overrides={"repetition_penalty": 1.4})
+    assert cfg.resolve(_alpha(50, repetition_penalty=1.0)).repetition_penalty == 1.4
+
+
+def test_the_config_file_also_counts_as_explicit(tmp_path):
+    (tmp_path / "jevchat.toml").write_text("[jevchat]\nrepetition_penalty = 1.4\n")
+    cfg = Config.load(start_dir=tmp_path)
+    assert cfg.resolve(_alpha(50, repetition_penalty=1.0)).repetition_penalty == 1.4
+
+
+def test_refine_raises_bucket_size_so_the_probe_fits_one_question():
+    # 49,861 symbols cannot be probed as 393 buckets of 127.
+    resolved = Config(strategy="refine").resolve(_alpha(49862))
+    assert resolved.bucket_size == 197
+    assert -(-49861 // resolved.bucket_size) <= 254
+
+
+def test_refine_leaves_bucket_size_alone_when_it_already_fits():
+    assert Config(strategy="refine").resolve(_alpha(1122)).bucket_size == 127
+
+
+def test_an_explicit_bucket_size_is_not_raised():
+    cfg = Config.load(overrides={"strategy": "refine", "bucket_size": 127})
+    assert cfg.resolve(_alpha(49862)).bucket_size == 127
+
+
+def test_buckets_does_not_need_the_probe_to_fit():
+    assert Config(strategy="buckets").resolve(_alpha(49862)).bucket_size == 127
+
+
+def test_with_overrides_marks_them_explicit():
+    cfg = Config().with_overrides(repetition_penalty=1.4)
+    assert "repetition_penalty" in cfg.explicit
+    assert cfg.resolve(_alpha(50, repetition_penalty=1.0)).repetition_penalty == 1.4
+
+
+def test_resolution_still_validates():
+    with pytest.raises(ConfigError):
+        Config().resolve(_alpha(50, top_p=9.0))

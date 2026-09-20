@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from . import bisect as bisect_mod
 from . import buckets as buckets_mod
 from . import present
+from . import refine as refine_mod
 from .alphabet import MAX_CHOICES, Alphabet, AlphabetError
 from .client import Cancelled, ChoiceAnswer, JevClient, JevError
 from .config import Config
@@ -101,8 +102,10 @@ class Scorer:
             tree=(
                 bisect_mod.build(alphabet, config.bisect_cutoff)
                 if config.strategy == "bisect"
-                else buckets_mod.build(alphabet, config.bucket_size, config.bucket_batch)
-                if config.strategy == "buckets"
+                else buckets_mod.build(alphabet, config.bucket_size,
+                                       config.bucket_batch,
+                                       order=config.bucket_order, seed=config.seed)
+                if config.strategy in {"buckets", "refine"}
                 else None
             ),
             criteria_items=list(alphabet.criteria().items()),
@@ -112,10 +115,17 @@ class Scorer:
     def requests_per_step(self) -> int:
         if self.config.strategy == "buckets":
             return self.tree.requests_per_step
+        if self.config.strategy == "refine":
+            # pass 1 (batched) + the winners question + one per refinement round
+            return self.tree.requests_per_step + 1 + max(0, self.config.refine_rounds)
         return 1
 
     @property
     def questions_per_step(self) -> int:
+        if self.config.strategy == "refine":
+            return (len(self.tree.buckets) + 1          # buckets + STOP
+                    + 1                                  # the winners question
+                    + max(0, self.config.refine_rounds))
         if self.config.strategy == "buckets":
             return self.tree.questions_per_step
         if self.tree is not None:
@@ -127,6 +137,11 @@ class Scorer:
 
     def score(self, state: dict | str, text: str = "", *, cancel=None) -> ChoiceAnswer:
         rng = self.order_rng if self.config.shuffle_criteria else None
+        if self.config.strategy == "refine":
+            return refine_mod.ask(
+                self.client, self.tree, self.alphabet, state, self.config,
+                text=text, rng=rng, cancel=cancel,
+            )
         if self.config.strategy == "buckets":
             return buckets_mod.ask(
                 self.client, self.tree, self.alphabet, state, self.config,
@@ -194,6 +209,14 @@ def generate(
     Set ``cancel`` at any time to stop: the in-flight request is allowed to
     finish, then generation ends with reason ``cancelled`` and the partial text.
     """
+    if config.beam_width > 1:
+        from . import beam as beam_mod       # imported here: beam builds on Scorer
+        yield from beam_mod.search(
+            client, alphabet, config, question,
+            history=history, cancel=cancel, rng=rng,
+        )
+        return
+
     rng = rng or random.Random(config.seed)
     scorer = Scorer.build(client, alphabet, config)
     # Symbols that would open with whitespace, e.g. " the" in the token alphabet.

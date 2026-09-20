@@ -5233,5 +5233,9 @@
   " circumst",
   " Canadian",
   " joined"
- ]
+ ],
+ "defaults": {
+  "presentation": "symbol",
+  "bucket_order": "sorted"
+ }
 }

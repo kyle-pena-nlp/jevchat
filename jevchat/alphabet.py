@@ -40,6 +40,10 @@ class Alphabet:
     stop_key: str = "STOP"
     stop_description: str = "The reply is complete: nothing more should be added."
     source: str | None = None
+    # Settings this alphabet prefers, applied only where the user has not said
+    # otherwise. A character alphabet wants no repetition penalty; a subword one
+    # gains nothing from hypothesis options and pays 43% more for them.
+    defaults: tuple[tuple[str, object], ...] = ()
 
     def __post_init__(self) -> None:
         if not self.symbols:
@@ -114,6 +118,7 @@ def from_json(data: dict, *, source: str | None = None) -> Alphabet:
         symbols=tuple(_symbol_from_json(s, i, name) for i, s in enumerate(raw_symbols)),
         stop_key=str(stop.get("key", defaults["stop_key"].default)),
         stop_description=str(stop.get("description", defaults["stop_description"].default)),
+        defaults=tuple(sorted((data.get("defaults") or {}).items())),
         source=source,
     )
 

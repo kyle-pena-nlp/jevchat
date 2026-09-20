@@ -1,450 +1,453 @@
 {
-  "name": "ascii",
-  "description": "Printable ASCII: letters, digits, punctuation, space and line breaks. Can spell anything, one character per API call.",
-  "stop": {
-    "key": "STOP",
-    "description": "The reply is already complete and well formed: stop writing."
+ "name": "ascii",
+ "description": "Printable ASCII: letters, digits, punctuation, space and line breaks. Can spell anything, one character per API call.",
+ "stop": {
+  "key": "STOP",
+  "description": "The reply is already complete and well formed: stop writing."
+ },
+ "symbols": [
+  {
+   "key": "a",
+   "emit": "a",
+   "description": "the lowercase letter 'a'"
   },
-  "symbols": [
-    {
-      "key": "a",
-      "emit": "a",
-      "description": "the lowercase letter 'a'"
-    },
-    {
-      "key": "b",
-      "emit": "b",
-      "description": "the lowercase letter 'b'"
-    },
-    {
-      "key": "c",
-      "emit": "c",
-      "description": "the lowercase letter 'c'"
-    },
-    {
-      "key": "d",
-      "emit": "d",
-      "description": "the lowercase letter 'd'"
-    },
-    {
-      "key": "e",
-      "emit": "e",
-      "description": "the lowercase letter 'e'"
-    },
-    {
-      "key": "f",
-      "emit": "f",
-      "description": "the lowercase letter 'f'"
-    },
-    {
-      "key": "g",
-      "emit": "g",
-      "description": "the lowercase letter 'g'"
-    },
-    {
-      "key": "h",
-      "emit": "h",
-      "description": "the lowercase letter 'h'"
-    },
-    {
-      "key": "i",
-      "emit": "i",
-      "description": "the lowercase letter 'i'"
-    },
-    {
-      "key": "j",
-      "emit": "j",
-      "description": "the lowercase letter 'j'"
-    },
-    {
-      "key": "k",
-      "emit": "k",
-      "description": "the lowercase letter 'k'"
-    },
-    {
-      "key": "l",
-      "emit": "l",
-      "description": "the lowercase letter 'l'"
-    },
-    {
-      "key": "m",
-      "emit": "m",
-      "description": "the lowercase letter 'm'"
-    },
-    {
-      "key": "n",
-      "emit": "n",
-      "description": "the lowercase letter 'n'"
-    },
-    {
-      "key": "o",
-      "emit": "o",
-      "description": "the lowercase letter 'o'"
-    },
-    {
-      "key": "p",
-      "emit": "p",
-      "description": "the lowercase letter 'p'"
-    },
-    {
-      "key": "q",
-      "emit": "q",
-      "description": "the lowercase letter 'q'"
-    },
-    {
-      "key": "r",
-      "emit": "r",
-      "description": "the lowercase letter 'r'"
-    },
-    {
-      "key": "s",
-      "emit": "s",
-      "description": "the lowercase letter 's'"
-    },
-    {
-      "key": "t",
-      "emit": "t",
-      "description": "the lowercase letter 't'"
-    },
-    {
-      "key": "u",
-      "emit": "u",
-      "description": "the lowercase letter 'u'"
-    },
-    {
-      "key": "v",
-      "emit": "v",
-      "description": "the lowercase letter 'v'"
-    },
-    {
-      "key": "w",
-      "emit": "w",
-      "description": "the lowercase letter 'w'"
-    },
-    {
-      "key": "x",
-      "emit": "x",
-      "description": "the lowercase letter 'x'"
-    },
-    {
-      "key": "y",
-      "emit": "y",
-      "description": "the lowercase letter 'y'"
-    },
-    {
-      "key": "z",
-      "emit": "z",
-      "description": "the lowercase letter 'z'"
-    },
-    {
-      "key": "A",
-      "emit": "A",
-      "description": "the capital letter 'A'"
-    },
-    {
-      "key": "B",
-      "emit": "B",
-      "description": "the capital letter 'B'"
-    },
-    {
-      "key": "C",
-      "emit": "C",
-      "description": "the capital letter 'C'"
-    },
-    {
-      "key": "D",
-      "emit": "D",
-      "description": "the capital letter 'D'"
-    },
-    {
-      "key": "E",
-      "emit": "E",
-      "description": "the capital letter 'E'"
-    },
-    {
-      "key": "F",
-      "emit": "F",
-      "description": "the capital letter 'F'"
-    },
-    {
-      "key": "G",
-      "emit": "G",
-      "description": "the capital letter 'G'"
-    },
-    {
-      "key": "H",
-      "emit": "H",
-      "description": "the capital letter 'H'"
-    },
-    {
-      "key": "I",
-      "emit": "I",
-      "description": "the capital letter 'I'"
-    },
-    {
-      "key": "J",
-      "emit": "J",
-      "description": "the capital letter 'J'"
-    },
-    {
-      "key": "K",
-      "emit": "K",
-      "description": "the capital letter 'K'"
-    },
-    {
-      "key": "L",
-      "emit": "L",
-      "description": "the capital letter 'L'"
-    },
-    {
-      "key": "M",
-      "emit": "M",
-      "description": "the capital letter 'M'"
-    },
-    {
-      "key": "N",
-      "emit": "N",
-      "description": "the capital letter 'N'"
-    },
-    {
-      "key": "O",
-      "emit": "O",
-      "description": "the capital letter 'O'"
-    },
-    {
-      "key": "P",
-      "emit": "P",
-      "description": "the capital letter 'P'"
-    },
-    {
-      "key": "Q",
-      "emit": "Q",
-      "description": "the capital letter 'Q'"
-    },
-    {
-      "key": "R",
-      "emit": "R",
-      "description": "the capital letter 'R'"
-    },
-    {
-      "key": "S",
-      "emit": "S",
-      "description": "the capital letter 'S'"
-    },
-    {
-      "key": "T",
-      "emit": "T",
-      "description": "the capital letter 'T'"
-    },
-    {
-      "key": "U",
-      "emit": "U",
-      "description": "the capital letter 'U'"
-    },
-    {
-      "key": "V",
-      "emit": "V",
-      "description": "the capital letter 'V'"
-    },
-    {
-      "key": "W",
-      "emit": "W",
-      "description": "the capital letter 'W'"
-    },
-    {
-      "key": "X",
-      "emit": "X",
-      "description": "the capital letter 'X'"
-    },
-    {
-      "key": "Y",
-      "emit": "Y",
-      "description": "the capital letter 'Y'"
-    },
-    {
-      "key": "Z",
-      "emit": "Z",
-      "description": "the capital letter 'Z'"
-    },
-    {
-      "key": "0",
-      "emit": "0",
-      "description": "the digit 0"
-    },
-    {
-      "key": "1",
-      "emit": "1",
-      "description": "the digit 1"
-    },
-    {
-      "key": "2",
-      "emit": "2",
-      "description": "the digit 2"
-    },
-    {
-      "key": "3",
-      "emit": "3",
-      "description": "the digit 3"
-    },
-    {
-      "key": "4",
-      "emit": "4",
-      "description": "the digit 4"
-    },
-    {
-      "key": "5",
-      "emit": "5",
-      "description": "the digit 5"
-    },
-    {
-      "key": "6",
-      "emit": "6",
-      "description": "the digit 6"
-    },
-    {
-      "key": "7",
-      "emit": "7",
-      "description": "the digit 7"
-    },
-    {
-      "key": "8",
-      "emit": "8",
-      "description": "the digit 8"
-    },
-    {
-      "key": "9",
-      "emit": "9",
-      "description": "the digit 9"
-    },
-    {
-      "key": "SPACE",
-      "emit": " ",
-      "description": "a single space"
-    },
-    {
-      "key": "NEWLINE",
-      "emit": "\n",
-      "description": "a newline (line break)"
-    },
-    {
-      "key": "PARAGRAPH",
-      "emit": "\n\n",
-      "description": "a blank line (paragraph break)"
-    },
-    {
-      "key": ".",
-      "emit": ".",
-      "description": "a period"
-    },
-    {
-      "key": ",",
-      "emit": ",",
-      "description": "a comma"
-    },
-    {
-      "key": "!",
-      "emit": "!",
-      "description": "an exclamation mark"
-    },
-    {
-      "key": "?",
-      "emit": "?",
-      "description": "a question mark"
-    },
-    {
-      "key": "'",
-      "emit": "'",
-      "description": "an apostrophe"
-    },
-    {
-      "key": "\"",
-      "emit": "\"",
-      "description": "a double quote"
-    },
-    {
-      "key": "-",
-      "emit": "-",
-      "description": "a hyphen"
-    },
-    {
-      "key": ":",
-      "emit": ":",
-      "description": "a colon"
-    },
-    {
-      "key": ";",
-      "emit": ";",
-      "description": "a semicolon"
-    },
-    {
-      "key": "(",
-      "emit": "(",
-      "description": "an opening parenthesis"
-    },
-    {
-      "key": ")",
-      "emit": ")",
-      "description": "a closing parenthesis"
-    },
-    {
-      "key": "/",
-      "emit": "/",
-      "description": "a forward slash"
-    },
-    {
-      "key": "%",
-      "emit": "%",
-      "description": "a percent sign"
-    },
-    {
-      "key": "$",
-      "emit": "$",
-      "description": "a dollar sign"
-    },
-    {
-      "key": "&",
-      "emit": "&",
-      "description": "an ampersand"
-    },
-    {
-      "key": "*",
-      "emit": "*",
-      "description": "an asterisk"
-    },
-    {
-      "key": "#",
-      "emit": "#",
-      "description": "a hash"
-    },
-    {
-      "key": "+",
-      "emit": "+",
-      "description": "a plus sign"
-    },
-    {
-      "key": "=",
-      "emit": "=",
-      "description": "an equals sign"
-    },
-    {
-      "key": "@",
-      "emit": "@",
-      "description": "an at sign"
-    },
-    {
-      "key": "[",
-      "emit": "[",
-      "description": "an opening square bracket"
-    },
-    {
-      "key": "]",
-      "emit": "]",
-      "description": "a closing square bracket"
-    },
-    {
-      "key": "_",
-      "emit": "_",
-      "description": "an underscore"
-    }
-  ]
+  {
+   "key": "b",
+   "emit": "b",
+   "description": "the lowercase letter 'b'"
+  },
+  {
+   "key": "c",
+   "emit": "c",
+   "description": "the lowercase letter 'c'"
+  },
+  {
+   "key": "d",
+   "emit": "d",
+   "description": "the lowercase letter 'd'"
+  },
+  {
+   "key": "e",
+   "emit": "e",
+   "description": "the lowercase letter 'e'"
+  },
+  {
+   "key": "f",
+   "emit": "f",
+   "description": "the lowercase letter 'f'"
+  },
+  {
+   "key": "g",
+   "emit": "g",
+   "description": "the lowercase letter 'g'"
+  },
+  {
+   "key": "h",
+   "emit": "h",
+   "description": "the lowercase letter 'h'"
+  },
+  {
+   "key": "i",
+   "emit": "i",
+   "description": "the lowercase letter 'i'"
+  },
+  {
+   "key": "j",
+   "emit": "j",
+   "description": "the lowercase letter 'j'"
+  },
+  {
+   "key": "k",
+   "emit": "k",
+   "description": "the lowercase letter 'k'"
+  },
+  {
+   "key": "l",
+   "emit": "l",
+   "description": "the lowercase letter 'l'"
+  },
+  {
+   "key": "m",
+   "emit": "m",
+   "description": "the lowercase letter 'm'"
+  },
+  {
+   "key": "n",
+   "emit": "n",
+   "description": "the lowercase letter 'n'"
+  },
+  {
+   "key": "o",
+   "emit": "o",
+   "description": "the lowercase letter 'o'"
+  },
+  {
+   "key": "p",
+   "emit": "p",
+   "description": "the lowercase letter 'p'"
+  },
+  {
+   "key": "q",
+   "emit": "q",
+   "description": "the lowercase letter 'q'"
+  },
+  {
+   "key": "r",
+   "emit": "r",
+   "description": "the lowercase letter 'r'"
+  },
+  {
+   "key": "s",
+   "emit": "s",
+   "description": "the lowercase letter 's'"
+  },
+  {
+   "key": "t",
+   "emit": "t",
+   "description": "the lowercase letter 't'"
+  },
+  {
+   "key": "u",
+   "emit": "u",
+   "description": "the lowercase letter 'u'"
+  },
+  {
+   "key": "v",
+   "emit": "v",
+   "description": "the lowercase letter 'v'"
+  },
+  {
+   "key": "w",
+   "emit": "w",
+   "description": "the lowercase letter 'w'"
+  },
+  {
+   "key": "x",
+   "emit": "x",
+   "description": "the lowercase letter 'x'"
+  },
+  {
+   "key": "y",
+   "emit": "y",
+   "description": "the lowercase letter 'y'"
+  },
+  {
+   "key": "z",
+   "emit": "z",
+   "description": "the lowercase letter 'z'"
+  },
+  {
+   "key": "A",
+   "emit": "A",
+   "description": "the capital letter 'A'"
+  },
+  {
+   "key": "B",
+   "emit": "B",
+   "description": "the capital letter 'B'"
+  },
+  {
+   "key": "C",
+   "emit": "C",
+   "description": "the capital letter 'C'"
+  },
+  {
+   "key": "D",
+   "emit": "D",
+   "description": "the capital letter 'D'"
+  },
+  {
+   "key": "E",
+   "emit": "E",
+   "description": "the capital letter 'E'"
+  },
+  {
+   "key": "F",
+   "emit": "F",
+   "description": "the capital letter 'F'"
+  },
+  {
+   "key": "G",
+   "emit": "G",
+   "description": "the capital letter 'G'"
+  },
+  {
+   "key": "H",
+   "emit": "H",
+   "description": "the capital letter 'H'"
+  },
+  {
+   "key": "I",
+   "emit": "I",
+   "description": "the capital letter 'I'"
+  },
+  {
+   "key": "J",
+   "emit": "J",
+   "description": "the capital letter 'J'"
+  },
+  {
+   "key": "K",
+   "emit": "K",
+   "description": "the capital letter 'K'"
+  },
+  {
+   "key": "L",
+   "emit": "L",
+   "description": "the capital letter 'L'"
+  },
+  {
+   "key": "M",
+   "emit": "M",
+   "description": "the capital letter 'M'"
+  },
+  {
+   "key": "N",
+   "emit": "N",
+   "description": "the capital letter 'N'"
+  },
+  {
+   "key": "O",
+   "emit": "O",
+   "description": "the capital letter 'O'"
+  },
+  {
+   "key": "P",
+   "emit": "P",
+   "description": "the capital letter 'P'"
+  },
+  {
+   "key": "Q",
+   "emit": "Q",
+   "description": "the capital letter 'Q'"
+  },
+  {
+   "key": "R",
+   "emit": "R",
+   "description": "the capital letter 'R'"
+  },
+  {
+   "key": "S",
+   "emit": "S",
+   "description": "the capital letter 'S'"
+  },
+  {
+   "key": "T",
+   "emit": "T",
+   "description": "the capital letter 'T'"
+  },
+  {
+   "key": "U",
+   "emit": "U",
+   "description": "the capital letter 'U'"
+  },
+  {
+   "key": "V",
+   "emit": "V",
+   "description": "the capital letter 'V'"
+  },
+  {
+   "key": "W",
+   "emit": "W",
+   "description": "the capital letter 'W'"
+  },
+  {
+   "key": "X",
+   "emit": "X",
+   "description": "the capital letter 'X'"
+  },
+  {
+   "key": "Y",
+   "emit": "Y",
+   "description": "the capital letter 'Y'"
+  },
+  {
+   "key": "Z",
+   "emit": "Z",
+   "description": "the capital letter 'Z'"
+  },
+  {
+   "key": "0",
+   "emit": "0",
+   "description": "the digit 0"
+  },
+  {
+   "key": "1",
+   "emit": "1",
+   "description": "the digit 1"
+  },
+  {
+   "key": "2",
+   "emit": "2",
+   "description": "the digit 2"
+  },
+  {
+   "key": "3",
+   "emit": "3",
+   "description": "the digit 3"
+  },
+  {
+   "key": "4",
+   "emit": "4",
+   "description": "the digit 4"
+  },
+  {
+   "key": "5",
+   "emit": "5",
+   "description": "the digit 5"
+  },
+  {
+   "key": "6",
+   "emit": "6",
+   "description": "the digit 6"
+  },
+  {
+   "key": "7",
+   "emit": "7",
+   "description": "the digit 7"
+  },
+  {
+   "key": "8",
+   "emit": "8",
+   "description": "the digit 8"
+  },
+  {
+   "key": "9",
+   "emit": "9",
+   "description": "the digit 9"
+  },
+  {
+   "key": "SPACE",
+   "emit": " ",
+   "description": "a single space"
+  },
+  {
+   "key": "NEWLINE",
+   "emit": "\n",
+   "description": "a newline (line break)"
+  },
+  {
+   "key": "PARAGRAPH",
+   "emit": "\n\n",
+   "description": "a blank line (paragraph break)"
+  },
+  {
+   "key": ".",
+   "emit": ".",
+   "description": "a period"
+  },
+  {
+   "key": ",",
+   "emit": ",",
+   "description": "a comma"
+  },
+  {
+   "key": "!",
+   "emit": "!",
+   "description": "an exclamation mark"
+  },
+  {
+   "key": "?",
+   "emit": "?",
+   "description": "a question mark"
+  },
+  {
+   "key": "'",
+   "emit": "'",
+   "description": "an apostrophe"
+  },
+  {
+   "key": "\"",
+   "emit": "\"",
+   "description": "a double quote"
+  },
+  {
+   "key": "-",
+   "emit": "-",
+   "description": "a hyphen"
+  },
+  {
+   "key": ":",
+   "emit": ":",
+   "description": "a colon"
+  },
+  {
+   "key": ";",
+   "emit": ";",
+   "description": "a semicolon"
+  },
+  {
+   "key": "(",
+   "emit": "(",
+   "description": "an opening parenthesis"
+  },
+  {
+   "key": ")",
+   "emit": ")",
+   "description": "a closing parenthesis"
+  },
+  {
+   "key": "/",
+   "emit": "/",
+   "description": "a forward slash"
+  },
+  {
+   "key": "%",
+   "emit": "%",
+   "description": "a percent sign"
+  },
+  {
+   "key": "$",
+   "emit": "$",
+   "description": "a dollar sign"
+  },
+  {
+   "key": "&",
+   "emit": "&",
+   "description": "an ampersand"
+  },
+  {
+   "key": "*",
+   "emit": "*",
+   "description": "an asterisk"
+  },
+  {
+   "key": "#",
+   "emit": "#",
+   "description": "a hash"
+  },
+  {
+   "key": "+",
+   "emit": "+",
+   "description": "a plus sign"
+  },
+  {
+   "key": "=",
+   "emit": "=",
+   "description": "an equals sign"
+  },
+  {
+   "key": "@",
+   "emit": "@",
+   "description": "an at sign"
+  },
+  {
+   "key": "[",
+   "emit": "[",
+   "description": "an opening square bracket"
+  },
+  {
+   "key": "]",
+   "emit": "]",
+   "description": "a closing square bracket"
+  },
+  {
+   "key": "_",
+   "emit": "_",
+   "description": "an underscore"
+  }
+ ],
+ "defaults": {
+  "repetition_penalty": 1.0
+ }
 }

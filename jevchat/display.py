@@ -153,10 +153,17 @@ class PlainRenderer(Renderer):
         self.alphabet = alphabet
         self.show_dist = show_dist
         self._last_report = 0
+        self._shown = ""
 
     def update(self, step: Step) -> None:
-        if step.emit:
-            sys.stdout.write(step.emit)
+        # Beam search can replace the reply rather than extend it, so write the
+        # difference when there is one and start a fresh line when there is not.
+        if step.text != self._shown:
+            if step.text.startswith(self._shown):
+                sys.stdout.write(step.text[len(self._shown) :])
+            else:
+                sys.stdout.write("\n" + step.text)
+            self._shown = step.text
             sys.stdout.flush()
         if step.stats.steps - self._last_report >= 25:
             self._last_report = step.stats.steps

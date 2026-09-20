@@ -68,7 +68,7 @@ def top_p_filter(probs: dict[str, float], p: float) -> dict[str, float]:
     return normalize(kept)
 
 
-def sample(
+def shape(
     probs: dict[str, float],
     *,
     temperature: float = 1.0,
@@ -76,12 +76,11 @@ def sample(
     top_k: int = 0,
     banned: set[str] | None = None,
     bias: dict[str, float] | None = None,
-    rng: random.Random | None = None,
-) -> Draw:
-    """Sample one key from Jev's scores over the alphabet.
+) -> tuple[dict[str, float], dict[str, float]]:
+    """Apply bias, bans and the filters. Returns (shaped, normalised raw).
 
-    Order of operations: normalise -> multiplicative bias -> drop banned keys ->
-    temperature -> top-k -> top-p -> draw.
+    Order: normalise -> multiplicative bias -> drop banned keys -> temperature ->
+    top-k -> top-p.
     """
     if not probs:
         raise SamplerError("empty probability distribution")
@@ -102,7 +101,22 @@ def sample(
     shaped = apply_temperature(shaped, temperature)
     shaped = top_k_filter(shaped, top_k)
     shaped = top_p_filter(shaped, top_p)
+    return shaped, raw
 
+
+def sample(
+    probs: dict[str, float],
+    *,
+    temperature: float = 1.0,
+    top_p: float = 1.0,
+    top_k: int = 0,
+    banned: set[str] | None = None,
+    bias: dict[str, float] | None = None,
+    rng: random.Random | None = None,
+) -> Draw:
+    """Sample one key from Jev's scores over the alphabet."""
+    shaped, raw = shape(probs, temperature=temperature, top_p=top_p, top_k=top_k,
+                        banned=banned, bias=bias)
     rng = rng or random.Random()
     target = rng.random()
     cumulative = 0.0

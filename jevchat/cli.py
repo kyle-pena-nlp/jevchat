@@ -15,6 +15,7 @@ from rich.text import Text
 from . import alphabet as alphabet_mod
 from .alphabet import Alphabet, AlphabetError
 from .client import JevClient, JevError
+from .buckets import BUCKET_ORDERS
 from .config import STRATEGIES, Config, ConfigError, load_api_key
 from .present import PRESENTATIONS
 from .display import make_renderer
@@ -65,10 +66,17 @@ def sampling_options(func):
                      help="Symbols per bucket question (buckets strategy)."),
         click.option("--bucket-batch", type=int, metavar="N",
                      help="Most bucket questions to put in one request."),
+        click.option("--bucket-order", type=click.Choice(BUCKET_ORDERS),
+                     help="How to cut the alphabet up: given (its own order), "
+                          "sorted (look-alikes together), or shuffled."),
         click.option("--bucket-describe/--no-bucket-describe", "bucket_describe",
                      default=None,
                      help="Send a description with every option. Costs ~2.3x the "
                           "input tokens and did not improve accuracy."),
+        click.option("--refine-nucleus", type=int, metavar="N",
+                     help="Symbols per bucket pooled for rescoring (refine strategy)."),
+        click.option("--refine-rounds", type=int, metavar="N",
+                     help="Reweighting rounds after the winners question."),
         click.option("--ensemble", type=int, metavar="N",
                      help="Score N re-orderings per step as parallel questions in one "
                           "request, and average them. Latency is near flat in N; input "
@@ -78,6 +86,11 @@ def sampling_options(func):
         click.option("--max-steps", type=int, help="Hard cap on sampled symbols."),
         click.option("--max-chars", type=int, help="Hard cap on reply length."),
         click.option("--min-steps", type=int, help="Symbols before STOP is allowed."),
+        click.option("-b", "--beam-width", type=int, metavar="N",
+                     help="Candidate replies kept alive at once. 1 is plain "
+                          "sampling; more costs one score per beam per step."),
+        click.option("--beam-length-penalty", type=float,
+                     help="Beams rank by mean log probability ^ this."),
         click.option("--seed", type=int, help="Seed the sampler for a reproducible reply."),
         click.option("--model", help="Jev model id (default jev-latest)."),
         click.option("--show-dist", type=int, metavar="N",
@@ -103,6 +116,7 @@ def _build(params: dict) -> tuple[Config, Alphabet, JevClient]:
 
     config = Config.load(config_path=config_path, overrides=params)
     alpha = alphabet_mod.load(config.alphabet)
+    config = config.resolve(alpha)
     client = JevClient(
         load_api_key(env_file=env_file),
         model=config.model,
@@ -263,7 +277,7 @@ def bench(ctx: click.Context, only: tuple[str, ...], case_set: str) -> None:
 
     with client:
         for name, overrides in modes:
-            config = replace(base, **overrides)
+            config = base.with_overrides(**overrides).resolve(alpha)
             try:
                 result = benchmark.run_mode(client, alpha, config, name, cases)
             except (JevError, AlphabetError) as exc:
