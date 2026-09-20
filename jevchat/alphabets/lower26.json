@@ -1,0 +1,145 @@
+{
+  "name": "lower26",
+  "description": "a-z plus a space. The literal 'score over the letters of the alphabet' setup: everything comes out lowercase and unpunctuated.",
+  "stop": {
+    "key": "STOP",
+    "description": "The reply is already complete and well formed: stop writing."
+  },
+  "symbols": [
+    {
+      "key": "a",
+      "emit": "a",
+      "description": "the lowercase letter 'a'"
+    },
+    {
+      "key": "b",
+      "emit": "b",
+      "description": "the lowercase letter 'b'"
+    },
+    {
+      "key": "c",
+      "emit": "c",
+      "description": "the lowercase letter 'c'"
+    },
+    {
+      "key": "d",
+      "emit": "d",
+      "description": "the lowercase letter 'd'"
+    },
+    {
+      "key": "e",
+      "emit": "e",
+      "description": "the lowercase letter 'e'"
+    },
+    {
+      "key": "f",
+      "emit": "f",
+      "description": "the lowercase letter 'f'"
+    },
+    {
+      "key": "g",
+      "emit": "g",
+      "description": "the lowercase letter 'g'"
+    },
+    {
+      "key": "h",
+      "emit": "h",
+      "description": "the lowercase letter 'h'"
+    },
+    {
+      "key": "i",
+      "emit": "i",
+      "description": "the lowercase letter 'i'"
+    },
+    {
+      "key": "j",
+      "emit": "j",
+      "description": "the lowercase letter 'j'"
+    },
+    {
+      "key": "k",
+      "emit": "k",
+      "description": "the lowercase letter 'k'"
+    },
+    {
+      "key": "l",
+      "emit": "l",
+      "description": "the lowercase letter 'l'"
+    },
+    {
+      "key": "m",
+      "emit": "m",
+      "description": "the lowercase letter 'm'"
+    },
+    {
+      "key": "n",
+      "emit": "n",
+      "description": "the lowercase letter 'n'"
+    },
+    {
+      "key": "o",
+      "emit": "o",
+      "description": "the lowercase letter 'o'"
+    },
+    {
+      "key": "p",
+      "emit": "p",
+      "description": "the lowercase letter 'p'"
+    },
+    {
+      "key": "q",
+      "emit": "q",
+      "description": "the lowercase letter 'q'"
+    },
+    {
+      "key": "r",
+      "emit": "r",
+      "description": "the lowercase letter 'r'"
+    },
+    {
+      "key": "s",
+      "emit": "s",
+      "description": "the lowercase letter 's'"
+    },
+    {
+      "key": "t",
+      "emit": "t",
+      "description": "the lowercase letter 't'"
+    },
+    {
+      "key": "u",
+      "emit": "u",
+      "description": "the lowercase letter 'u'"
+    },
+    {
+      "key": "v",
+      "emit": "v",
+      "description": "the lowercase letter 'v'"
+    },
+    {
+      "key": "w",
+      "emit": "w",
+      "description": "the lowercase letter 'w'"
+    },
+    {
+      "key": "x",
+      "emit": "x",
+      "description": "the lowercase letter 'x'"
+    },
+    {
+      "key": "y",
+      "emit": "y",
+      "description": "the lowercase letter 'y'"
+    },
+    {
+      "key": "z",
+      "emit": "z",
+      "description": "the lowercase letter 'z'"
+    },
+    {
+      "key": "SPACE",
+      "emit": " ",
+      "description": "a single space"
+    }
+  ]
+}

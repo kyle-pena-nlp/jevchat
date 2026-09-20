@@ -1,0 +1,5615 @@
+{
+ "name": "words1k",
+ "description": "1009 common English words (with a leading space) plus capitalised forms of the commonest, and bare letters, digits, suffixes and punctuation so anything out of vocabulary can still be spelled out. Too large for one Jev question: use --strategy buckets.",
+ "stop": {
+  "key": "STOP",
+  "description": "The reply is already complete and well formed: stop writing."
+ },
+ "symbols": [
+  {
+   "key": " a",
+   "emit": " a",
+   "description": "the word 'a', with a leading space"
+  },
+  {
+   "key": " A",
+   "emit": " A",
+   "description": "the capitalised word 'A', with a leading space"
+  },
+  {
+   "key": " an",
+   "emit": " an",
+   "description": "the word 'an', with a leading space"
+  },
+  {
+   "key": " An",
+   "emit": " An",
+   "description": "the capitalised word 'An', with a leading space"
+  },
+  {
+   "key": " the",
+   "emit": " the",
+   "description": "the word 'the', with a leading space"
+  },
+  {
+   "key": " The",
+   "emit": " The",
+   "description": "the capitalised word 'The', with a leading space"
+  },
+  {
+   "key": " and",
+   "emit": " and",
+   "description": "the word 'and', with a leading space"
+  },
+  {
+   "key": " or",
+   "emit": " or",
+   "description": "the word 'or', with a leading space"
+  },
+  {
+   "key": " but",
+   "emit": " but",
+   "description": "the word 'but', with a leading space"
+  },
+  {
+   "key": " But",
+   "emit": " But",
+   "description": "the capitalised word 'But', with a leading space"
+  },
+  {
+   "key": " if",
+   "emit": " if",
+   "description": "the word 'if', with a leading space"
+  },
+  {
+   "key": " If",
+   "emit": " If",
+   "description": "the capitalised word 'If', with a leading space"
+  },
+  {
+   "key": " then",
+   "emit": " then",
+   "description": "the word 'then', with a leading space"
+  },
+  {
+   "key": " than",
+   "emit": " than",
+   "description": "the word 'than', with a leading space"
+  },
+  {
+   "key": " that",
+   "emit": " that",
+   "description": "the word 'that', with a leading space"
+  },
+  {
+   "key": " That",
+   "emit": " That",
+   "description": "the capitalised word 'That', with a leading space"
+  },
+  {
+   "key": " this",
+   "emit": " this",
+   "description": "the word 'this', with a leading space"
+  },
+  {
+   "key": " This",
+   "emit": " This",
+   "description": "the capitalised word 'This', with a leading space"
+  },
+  {
+   "key": " these",
+   "emit": " these",
+   "description": "the word 'these', with a leading space"
+  },
+  {
+   "key": " those",
+   "emit": " those",
+   "description": "the word 'those', with a leading space"
+  },
+  {
+   "key": " there",
+   "emit": " there",
+   "description": "the word 'there', with a leading space"
+  },
+  {
+   "key": " There",
+   "emit": " There",
+   "description": "the capitalised word 'There', with a leading space"
+  },
+  {
+   "key": " here",
+   "emit": " here",
+   "description": "the word 'here', with a leading space"
+  },
+  {
+   "key": " when",
+   "emit": " when",
+   "description": "the word 'when', with a leading space"
+  },
+  {
+   "key": " When",
+   "emit": " When",
+   "description": "the capitalised word 'When', with a leading space"
+  },
+  {
+   "key": " where",
+   "emit": " where",
+   "description": "the word 'where', with a leading space"
+  },
+  {
+   "key": " while",
+   "emit": " while",
+   "description": "the word 'while', with a leading space"
+  },
+  {
+   "key": " what",
+   "emit": " what",
+   "description": "the word 'what', with a leading space"
+  },
+  {
+   "key": " What",
+   "emit": " What",
+   "description": "the capitalised word 'What', with a leading space"
+  },
+  {
+   "key": " which",
+   "emit": " which",
+   "description": "the word 'which', with a leading space"
+  },
+  {
+   "key": " who",
+   "emit": " who",
+   "description": "the word 'who', with a leading space"
+  },
+  {
+   "key": " whom",
+   "emit": " whom",
+   "description": "the word 'whom', with a leading space"
+  },
+  {
+   "key": " whose",
+   "emit": " whose",
+   "description": "the word 'whose', with a leading space"
+  },
+  {
+   "key": " why",
+   "emit": " why",
+   "description": "the word 'why', with a leading space"
+  },
+  {
+   "key": " Why",
+   "emit": " Why",
+   "description": "the capitalised word 'Why', with a leading space"
+  },
+  {
+   "key": " how",
+   "emit": " how",
+   "description": "the word 'how', with a leading space"
+  },
+  {
+   "key": " How",
+   "emit": " How",
+   "description": "the capitalised word 'How', with a leading space"
+  },
+  {
+   "key": " all",
+   "emit": " all",
+   "description": "the word 'all', with a leading space"
+  },
+  {
+   "key": " any",
+   "emit": " any",
+   "description": "the word 'any', with a leading space"
+  },
+  {
+   "key": " both",
+   "emit": " both",
+   "description": "the word 'both', with a leading space"
+  },
+  {
+   "key": " each",
+   "emit": " each",
+   "description": "the word 'each', with a leading space"
+  },
+  {
+   "key": " every",
+   "emit": " every",
+   "description": "the word 'every', with a leading space"
+  },
+  {
+   "key": " few",
+   "emit": " few",
+   "description": "the word 'few', with a leading space"
+  },
+  {
+   "key": " many",
+   "emit": " many",
+   "description": "the word 'many', with a leading space"
+  },
+  {
+   "key": " most",
+   "emit": " most",
+   "description": "the word 'most', with a leading space"
+  },
+  {
+   "key": " Most",
+   "emit": " Most",
+   "description": "the capitalised word 'Most', with a leading space"
+  },
+  {
+   "key": " much",
+   "emit": " much",
+   "description": "the word 'much', with a leading space"
+  },
+  {
+   "key": " no",
+   "emit": " no",
+   "description": "the word 'no', with a leading space"
+  },
+  {
+   "key": " No",
+   "emit": " No",
+   "description": "the capitalised word 'No', with a leading space"
+  },
+  {
+   "key": " none",
+   "emit": " none",
+   "description": "the word 'none', with a leading space"
+  },
+  {
+   "key": " not",
+   "emit": " not",
+   "description": "the word 'not', with a leading space"
+  },
+  {
+   "key": " other",
+   "emit": " other",
+   "description": "the word 'other', with a leading space"
+  },
+  {
+   "key": " some",
+   "emit": " some",
+   "description": "the word 'some', with a leading space"
+  },
+  {
+   "key": " Some",
+   "emit": " Some",
+   "description": "the capitalised word 'Some', with a leading space"
+  },
+  {
+   "key": " such",
+   "emit": " such",
+   "description": "the word 'such', with a leading space"
+  },
+  {
+   "key": " only",
+   "emit": " only",
+   "description": "the word 'only', with a leading space"
+  },
+  {
+   "key": " own",
+   "emit": " own",
+   "description": "the word 'own', with a leading space"
+  },
+  {
+   "key": " same",
+   "emit": " same",
+   "description": "the word 'same', with a leading space"
+  },
+  {
+   "key": " so",
+   "emit": " so",
+   "description": "the word 'so', with a leading space"
+  },
+  {
+   "key": " So",
+   "emit": " So",
+   "description": "the capitalised word 'So', with a leading space"
+  },
+  {
+   "key": " too",
+   "emit": " too",
+   "description": "the word 'too', with a leading space"
+  },
+  {
+   "key": " very",
+   "emit": " very",
+   "description": "the word 'very', with a leading space"
+  },
+  {
+   "key": " can",
+   "emit": " can",
+   "description": "the word 'can', with a leading space"
+  },
+  {
+   "key": " could",
+   "emit": " could",
+   "description": "the word 'could', with a leading space"
+  },
+  {
+   "key": " may",
+   "emit": " may",
+   "description": "the word 'may', with a leading space"
+  },
+  {
+   "key": " might",
+   "emit": " might",
+   "description": "the word 'might', with a leading space"
+  },
+  {
+   "key": " must",
+   "emit": " must",
+   "description": "the word 'must', with a leading space"
+  },
+  {
+   "key": " shall",
+   "emit": " shall",
+   "description": "the word 'shall', with a leading space"
+  },
+  {
+   "key": " should",
+   "emit": " should",
+   "description": "the word 'should', with a leading space"
+  },
+  {
+   "key": " will",
+   "emit": " will",
+   "description": "the word 'will', with a leading space"
+  },
+  {
+   "key": " would",
+   "emit": " would",
+   "description": "the word 'would', with a leading space"
+  },
+  {
+   "key": " do",
+   "emit": " do",
+   "description": "the word 'do', with a leading space"
+  },
+  {
+   "key": " does",
+   "emit": " does",
+   "description": "the word 'does', with a leading space"
+  },
+  {
+   "key": " did",
+   "emit": " did",
+   "description": "the word 'did', with a leading space"
+  },
+  {
+   "key": " done",
+   "emit": " done",
+   "description": "the word 'done', with a leading space"
+  },
+  {
+   "key": " have",
+   "emit": " have",
+   "description": "the word 'have', with a leading space"
+  },
+  {
+   "key": " has",
+   "emit": " has",
+   "description": "the word 'has', with a leading space"
+  },
+  {
+   "key": " had",
+   "emit": " had",
+   "description": "the word 'had', with a leading space"
+  },
+  {
+   "key": " be",
+   "emit": " be",
+   "description": "the word 'be', with a leading space"
+  },
+  {
+   "key": " am",
+   "emit": " am",
+   "description": "the word 'am', with a leading space"
+  },
+  {
+   "key": " is",
+   "emit": " is",
+   "description": "the word 'is', with a leading space"
+  },
+  {
+   "key": " are",
+   "emit": " are",
+   "description": "the word 'are', with a leading space"
+  },
+  {
+   "key": " was",
+   "emit": " was",
+   "description": "the word 'was', with a leading space"
+  },
+  {
+   "key": " were",
+   "emit": " were",
+   "description": "the word 'were', with a leading space"
+  },
+  {
+   "key": " been",
+   "emit": " been",
+   "description": "the word 'been', with a leading space"
+  },
+  {
+   "key": " being",
+   "emit": " being",
+   "description": "the word 'being', with a leading space"
+  },
+  {
+   "key": " get",
+   "emit": " get",
+   "description": "the word 'get', with a leading space"
+  },
+  {
+   "key": " as",
+   "emit": " as",
+   "description": "the word 'as', with a leading space"
+  },
+  {
+   "key": " at",
+   "emit": " at",
+   "description": "the word 'at', with a leading space"
+  },
+  {
+   "key": " by",
+   "emit": " by",
+   "description": "the word 'by', with a leading space"
+  },
+  {
+   "key": " for",
+   "emit": " for",
+   "description": "the word 'for', with a leading space"
+  },
+  {
+   "key": " from",
+   "emit": " from",
+   "description": "the word 'from', with a leading space"
+  },
+  {
+   "key": " in",
+   "emit": " in",
+   "description": "the word 'in', with a leading space"
+  },
+  {
+   "key": " into",
+   "emit": " into",
+   "description": "the word 'into', with a leading space"
+  },
+  {
+   "key": " of",
+   "emit": " of",
+   "description": "the word 'of', with a leading space"
+  },
+  {
+   "key": " off",
+   "emit": " off",
+   "description": "the word 'off', with a leading space"
+  },
+  {
+   "key": " on",
+   "emit": " on",
+   "description": "the word 'on', with a leading space"
+  },
+  {
+   "key": " onto",
+   "emit": " onto",
+   "description": "the word 'onto', with a leading space"
+  },
+  {
+   "key": " out",
+   "emit": " out",
+   "description": "the word 'out', with a leading space"
+  },
+  {
+   "key": " over",
+   "emit": " over",
+   "description": "the word 'over', with a leading space"
+  },
+  {
+   "key": " under",
+   "emit": " under",
+   "description": "the word 'under', with a leading space"
+  },
+  {
+   "key": " up",
+   "emit": " up",
+   "description": "the word 'up', with a leading space"
+  },
+  {
+   "key": " down",
+   "emit": " down",
+   "description": "the word 'down', with a leading space"
+  },
+  {
+   "key": " to",
+   "emit": " to",
+   "description": "the word 'to', with a leading space"
+  },
+  {
+   "key": " with",
+   "emit": " with",
+   "description": "the word 'with', with a leading space"
+  },
+  {
+   "key": " without",
+   "emit": " without",
+   "description": "the word 'without', with a leading space"
+  },
+  {
+   "key": " within",
+   "emit": " within",
+   "description": "the word 'within', with a leading space"
+  },
+  {
+   "key": " about",
+   "emit": " about",
+   "description": "the word 'about', with a leading space"
+  },
+  {
+   "key": " above",
+   "emit": " above",
+   "description": "the word 'above', with a leading space"
+  },
+  {
+   "key": " across",
+   "emit": " across",
+   "description": "the word 'across', with a leading space"
+  },
+  {
+   "key": " after",
+   "emit": " after",
+   "description": "the word 'after', with a leading space"
+  },
+  {
+   "key": " against",
+   "emit": " against",
+   "description": "the word 'against', with a leading space"
+  },
+  {
+   "key": " along",
+   "emit": " along",
+   "description": "the word 'along', with a leading space"
+  },
+  {
+   "key": " among",
+   "emit": " among",
+   "description": "the word 'among', with a leading space"
+  },
+  {
+   "key": " around",
+   "emit": " around",
+   "description": "the word 'around', with a leading space"
+  },
+  {
+   "key": " because",
+   "emit": " because",
+   "description": "the word 'because', with a leading space"
+  },
+  {
+   "key": " before",
+   "emit": " before",
+   "description": "the word 'before', with a leading space"
+  },
+  {
+   "key": " behind",
+   "emit": " behind",
+   "description": "the word 'behind', with a leading space"
+  },
+  {
+   "key": " below",
+   "emit": " below",
+   "description": "the word 'below', with a leading space"
+  },
+  {
+   "key": " beneath",
+   "emit": " beneath",
+   "description": "the word 'beneath', with a leading space"
+  },
+  {
+   "key": " beside",
+   "emit": " beside",
+   "description": "the word 'beside', with a leading space"
+  },
+  {
+   "key": " between",
+   "emit": " between",
+   "description": "the word 'between', with a leading space"
+  },
+  {
+   "key": " beyond",
+   "emit": " beyond",
+   "description": "the word 'beyond', with a leading space"
+  },
+  {
+   "key": " during",
+   "emit": " during",
+   "description": "the word 'during', with a leading space"
+  },
+  {
+   "key": " except",
+   "emit": " except",
+   "description": "the word 'except', with a leading space"
+  },
+  {
+   "key": " inside",
+   "emit": " inside",
+   "description": "the word 'inside', with a leading space"
+  },
+  {
+   "key": " near",
+   "emit": " near",
+   "description": "the word 'near', with a leading space"
+  },
+  {
+   "key": " outside",
+   "emit": " outside",
+   "description": "the word 'outside', with a leading space"
+  },
+  {
+   "key": " since",
+   "emit": " since",
+   "description": "the word 'since', with a leading space"
+  },
+  {
+   "key": " through",
+   "emit": " through",
+   "description": "the word 'through', with a leading space"
+  },
+  {
+   "key": " throughout",
+   "emit": " throughout",
+   "description": "the word 'throughout', with a leading space"
+  },
+  {
+   "key": " toward",
+   "emit": " toward",
+   "description": "the word 'toward', with a leading space"
+  },
+  {
+   "key": " towards",
+   "emit": " towards",
+   "description": "the word 'towards', with a leading space"
+  },
+  {
+   "key": " until",
+   "emit": " until",
+   "description": "the word 'until', with a leading space"
+  },
+  {
+   "key": " upon",
+   "emit": " upon",
+   "description": "the word 'upon', with a leading space"
+  },
+  {
+   "key": " via",
+   "emit": " via",
+   "description": "the word 'via', with a leading space"
+  },
+  {
+   "key": " i",
+   "emit": " i",
+   "description": "the word 'i', with a leading space"
+  },
+  {
+   "key": " I",
+   "emit": " I",
+   "description": "the capitalised word 'I', with a leading space"
+  },
+  {
+   "key": " me",
+   "emit": " me",
+   "description": "the word 'me', with a leading space"
+  },
+  {
+   "key": " my",
+   "emit": " my",
+   "description": "the word 'my', with a leading space"
+  },
+  {
+   "key": " mine",
+   "emit": " mine",
+   "description": "the word 'mine', with a leading space"
+  },
+  {
+   "key": " myself",
+   "emit": " myself",
+   "description": "the word 'myself', with a leading space"
+  },
+  {
+   "key": " you",
+   "emit": " you",
+   "description": "the word 'you', with a leading space"
+  },
+  {
+   "key": " You",
+   "emit": " You",
+   "description": "the capitalised word 'You', with a leading space"
+  },
+  {
+   "key": " your",
+   "emit": " your",
+   "description": "the word 'your', with a leading space"
+  },
+  {
+   "key": " yours",
+   "emit": " yours",
+   "description": "the word 'yours', with a leading space"
+  },
+  {
+   "key": " yourself",
+   "emit": " yourself",
+   "description": "the word 'yourself', with a leading space"
+  },
+  {
+   "key": " he",
+   "emit": " he",
+   "description": "the word 'he', with a leading space"
+  },
+  {
+   "key": " He",
+   "emit": " He",
+   "description": "the capitalised word 'He', with a leading space"
+  },
+  {
+   "key": " him",
+   "emit": " him",
+   "description": "the word 'him', with a leading space"
+  },
+  {
+   "key": " his",
+   "emit": " his",
+   "description": "the word 'his', with a leading space"
+  },
+  {
+   "key": " himself",
+   "emit": " himself",
+   "description": "the word 'himself', with a leading space"
+  },
+  {
+   "key": " she",
+   "emit": " she",
+   "description": "the word 'she', with a leading space"
+  },
+  {
+   "key": " She",
+   "emit": " She",
+   "description": "the capitalised word 'She', with a leading space"
+  },
+  {
+   "key": " her",
+   "emit": " her",
+   "description": "the word 'her', with a leading space"
+  },
+  {
+   "key": " hers",
+   "emit": " hers",
+   "description": "the word 'hers', with a leading space"
+  },
+  {
+   "key": " herself",
+   "emit": " herself",
+   "description": "the word 'herself', with a leading space"
+  },
+  {
+   "key": " it",
+   "emit": " it",
+   "description": "the word 'it', with a leading space"
+  },
+  {
+   "key": " It",
+   "emit": " It",
+   "description": "the capitalised word 'It', with a leading space"
+  },
+  {
+   "key": " its",
+   "emit": " its",
+   "description": "the word 'its', with a leading space"
+  },
+  {
+   "key": " itself",
+   "emit": " itself",
+   "description": "the word 'itself', with a leading space"
+  },
+  {
+   "key": " we",
+   "emit": " we",
+   "description": "the word 'we', with a leading space"
+  },
+  {
+   "key": " We",
+   "emit": " We",
+   "description": "the capitalised word 'We', with a leading space"
+  },
+  {
+   "key": " us",
+   "emit": " us",
+   "description": "the word 'us', with a leading space"
+  },
+  {
+   "key": " our",
+   "emit": " our",
+   "description": "the word 'our', with a leading space"
+  },
+  {
+   "key": " ours",
+   "emit": " ours",
+   "description": "the word 'ours', with a leading space"
+  },
+  {
+   "key": " ourselves",
+   "emit": " ourselves",
+   "description": "the word 'ourselves', with a leading space"
+  },
+  {
+   "key": " they",
+   "emit": " they",
+   "description": "the word 'they', with a leading space"
+  },
+  {
+   "key": " They",
+   "emit": " They",
+   "description": "the capitalised word 'They', with a leading space"
+  },
+  {
+   "key": " them",
+   "emit": " them",
+   "description": "the word 'them', with a leading space"
+  },
+  {
+   "key": " their",
+   "emit": " their",
+   "description": "the word 'their', with a leading space"
+  },
+  {
+   "key": " theirs",
+   "emit": " theirs",
+   "description": "the word 'theirs', with a leading space"
+  },
+  {
+   "key": " themselves",
+   "emit": " themselves",
+   "description": "the word 'themselves', with a leading space"
+  },
+  {
+   "key": " one",
+   "emit": " one",
+   "description": "the word 'one', with a leading space"
+  },
+  {
+   "key": " One",
+   "emit": " One",
+   "description": "the capitalised word 'One', with a leading space"
+  },
+  {
+   "key": " say",
+   "emit": " say",
+   "description": "the word 'say', with a leading space"
+  },
+  {
+   "key": " go",
+   "emit": " go",
+   "description": "the word 'go', with a leading space"
+  },
+  {
+   "key": " make",
+   "emit": " make",
+   "description": "the word 'make', with a leading space"
+  },
+  {
+   "key": " know",
+   "emit": " know",
+   "description": "the word 'know', with a leading space"
+  },
+  {
+   "key": " think",
+   "emit": " think",
+   "description": "the word 'think', with a leading space"
+  },
+  {
+   "key": " take",
+   "emit": " take",
+   "description": "the word 'take', with a leading space"
+  },
+  {
+   "key": " see",
+   "emit": " see",
+   "description": "the word 'see', with a leading space"
+  },
+  {
+   "key": " come",
+   "emit": " come",
+   "description": "the word 'come', with a leading space"
+  },
+  {
+   "key": " want",
+   "emit": " want",
+   "description": "the word 'want', with a leading space"
+  },
+  {
+   "key": " look",
+   "emit": " look",
+   "description": "the word 'look', with a leading space"
+  },
+  {
+   "key": " use",
+   "emit": " use",
+   "description": "the word 'use', with a leading space"
+  },
+  {
+   "key": " find",
+   "emit": " find",
+   "description": "the word 'find', with a leading space"
+  },
+  {
+   "key": " give",
+   "emit": " give",
+   "description": "the word 'give', with a leading space"
+  },
+  {
+   "key": " tell",
+   "emit": " tell",
+   "description": "the word 'tell', with a leading space"
+  },
+  {
+   "key": " work",
+   "emit": " work",
+   "description": "the word 'work', with a leading space"
+  },
+  {
+   "key": " call",
+   "emit": " call",
+   "description": "the word 'call', with a leading space"
+  },
+  {
+   "key": " try",
+   "emit": " try",
+   "description": "the word 'try', with a leading space"
+  },
+  {
+   "key": " ask",
+   "emit": " ask",
+   "description": "the word 'ask', with a leading space"
+  },
+  {
+   "key": " need",
+   "emit": " need",
+   "description": "the word 'need', with a leading space"
+  },
+  {
+   "key": " feel",
+   "emit": " feel",
+   "description": "the word 'feel', with a leading space"
+  },
+  {
+   "key": " become",
+   "emit": " become",
+   "description": "the word 'become', with a leading space"
+  },
+  {
+   "key": " leave",
+   "emit": " leave",
+   "description": "the word 'leave', with a leading space"
+  },
+  {
+   "key": " put",
+   "emit": " put",
+   "description": "the word 'put', with a leading space"
+  },
+  {
+   "key": " mean",
+   "emit": " mean",
+   "description": "the word 'mean', with a leading space"
+  },
+  {
+   "key": " keep",
+   "emit": " keep",
+   "description": "the word 'keep', with a leading space"
+  },
+  {
+   "key": " let",
+   "emit": " let",
+   "description": "the word 'let', with a leading space"
+  },
+  {
+   "key": " begin",
+   "emit": " begin",
+   "description": "the word 'begin', with a leading space"
+  },
+  {
+   "key": " seem",
+   "emit": " seem",
+   "description": "the word 'seem', with a leading space"
+  },
+  {
+   "key": " help",
+   "emit": " help",
+   "description": "the word 'help', with a leading space"
+  },
+  {
+   "key": " talk",
+   "emit": " talk",
+   "description": "the word 'talk', with a leading space"
+  },
+  {
+   "key": " turn",
+   "emit": " turn",
+   "description": "the word 'turn', with a leading space"
+  },
+  {
+   "key": " start",
+   "emit": " start",
+   "description": "the word 'start', with a leading space"
+  },
+  {
+   "key": " show",
+   "emit": " show",
+   "description": "the word 'show', with a leading space"
+  },
+  {
+   "key": " hear",
+   "emit": " hear",
+   "description": "the word 'hear', with a leading space"
+  },
+  {
+   "key": " play",
+   "emit": " play",
+   "description": "the word 'play', with a leading space"
+  },
+  {
+   "key": " run",
+   "emit": " run",
+   "description": "the word 'run', with a leading space"
+  },
+  {
+   "key": " move",
+   "emit": " move",
+   "description": "the word 'move', with a leading space"
+  },
+  {
+   "key": " like",
+   "emit": " like",
+   "description": "the word 'like', with a leading space"
+  },
+  {
+   "key": " live",
+   "emit": " live",
+   "description": "the word 'live', with a leading space"
+  },
+  {
+   "key": " believe",
+   "emit": " believe",
+   "description": "the word 'believe', with a leading space"
+  },
+  {
+   "key": " hold",
+   "emit": " hold",
+   "description": "the word 'hold', with a leading space"
+  },
+  {
+   "key": " bring",
+   "emit": " bring",
+   "description": "the word 'bring', with a leading space"
+  },
+  {
+   "key": " happen",
+   "emit": " happen",
+   "description": "the word 'happen', with a leading space"
+  },
+  {
+   "key": " write",
+   "emit": " write",
+   "description": "the word 'write', with a leading space"
+  },
+  {
+   "key": " provide",
+   "emit": " provide",
+   "description": "the word 'provide', with a leading space"
+  },
+  {
+   "key": " sit",
+   "emit": " sit",
+   "description": "the word 'sit', with a leading space"
+  },
+  {
+   "key": " stand",
+   "emit": " stand",
+   "description": "the word 'stand', with a leading space"
+  },
+  {
+   "key": " lose",
+   "emit": " lose",
+   "description": "the word 'lose', with a leading space"
+  },
+  {
+   "key": " pay",
+   "emit": " pay",
+   "description": "the word 'pay', with a leading space"
+  },
+  {
+   "key": " meet",
+   "emit": " meet",
+   "description": "the word 'meet', with a leading space"
+  },
+  {
+   "key": " include",
+   "emit": " include",
+   "description": "the word 'include', with a leading space"
+  },
+  {
+   "key": " continue",
+   "emit": " continue",
+   "description": "the word 'continue', with a leading space"
+  },
+  {
+   "key": " set",
+   "emit": " set",
+   "description": "the word 'set', with a leading space"
+  },
+  {
+   "key": " learn",
+   "emit": " learn",
+   "description": "the word 'learn', with a leading space"
+  },
+  {
+   "key": " change",
+   "emit": " change",
+   "description": "the word 'change', with a leading space"
+  },
+  {
+   "key": " lead",
+   "emit": " lead",
+   "description": "the word 'lead', with a leading space"
+  },
+  {
+   "key": " understand",
+   "emit": " understand",
+   "description": "the word 'understand', with a leading space"
+  },
+  {
+   "key": " watch",
+   "emit": " watch",
+   "description": "the word 'watch', with a leading space"
+  },
+  {
+   "key": " follow",
+   "emit": " follow",
+   "description": "the word 'follow', with a leading space"
+  },
+  {
+   "key": " stop",
+   "emit": " stop",
+   "description": "the word 'stop', with a leading space"
+  },
+  {
+   "key": " create",
+   "emit": " create",
+   "description": "the word 'create', with a leading space"
+  },
+  {
+   "key": " speak",
+   "emit": " speak",
+   "description": "the word 'speak', with a leading space"
+  },
+  {
+   "key": " read",
+   "emit": " read",
+   "description": "the word 'read', with a leading space"
+  },
+  {
+   "key": " allow",
+   "emit": " allow",
+   "description": "the word 'allow', with a leading space"
+  },
+  {
+   "key": " add",
+   "emit": " add",
+   "description": "the word 'add', with a leading space"
+  },
+  {
+   "key": " spend",
+   "emit": " spend",
+   "description": "the word 'spend', with a leading space"
+  },
+  {
+   "key": " grow",
+   "emit": " grow",
+   "description": "the word 'grow', with a leading space"
+  },
+  {
+   "key": " open",
+   "emit": " open",
+   "description": "the word 'open', with a leading space"
+  },
+  {
+   "key": " walk",
+   "emit": " walk",
+   "description": "the word 'walk', with a leading space"
+  },
+  {
+   "key": " win",
+   "emit": " win",
+   "description": "the word 'win', with a leading space"
+  },
+  {
+   "key": " offer",
+   "emit": " offer",
+   "description": "the word 'offer', with a leading space"
+  },
+  {
+   "key": " remember",
+   "emit": " remember",
+   "description": "the word 'remember', with a leading space"
+  },
+  {
+   "key": " love",
+   "emit": " love",
+   "description": "the word 'love', with a leading space"
+  },
+  {
+   "key": " consider",
+   "emit": " consider",
+   "description": "the word 'consider', with a leading space"
+  },
+  {
+   "key": " appear",
+   "emit": " appear",
+   "description": "the word 'appear', with a leading space"
+  },
+  {
+   "key": " buy",
+   "emit": " buy",
+   "description": "the word 'buy', with a leading space"
+  },
+  {
+   "key": " wait",
+   "emit": " wait",
+   "description": "the word 'wait', with a leading space"
+  },
+  {
+   "key": " serve",
+   "emit": " serve",
+   "description": "the word 'serve', with a leading space"
+  },
+  {
+   "key": " die",
+   "emit": " die",
+   "description": "the word 'die', with a leading space"
+  },
+  {
+   "key": " send",
+   "emit": " send",
+   "description": "the word 'send', with a leading space"
+  },
+  {
+   "key": " expect",
+   "emit": " expect",
+   "description": "the word 'expect', with a leading space"
+  },
+  {
+   "key": " build",
+   "emit": " build",
+   "description": "the word 'build', with a leading space"
+  },
+  {
+   "key": " stay",
+   "emit": " stay",
+   "description": "the word 'stay', with a leading space"
+  },
+  {
+   "key": " fall",
+   "emit": " fall",
+   "description": "the word 'fall', with a leading space"
+  },
+  {
+   "key": " cut",
+   "emit": " cut",
+   "description": "the word 'cut', with a leading space"
+  },
+  {
+   "key": " reach",
+   "emit": " reach",
+   "description": "the word 'reach', with a leading space"
+  },
+  {
+   "key": " remain",
+   "emit": " remain",
+   "description": "the word 'remain', with a leading space"
+  },
+  {
+   "key": " suggest",
+   "emit": " suggest",
+   "description": "the word 'suggest', with a leading space"
+  },
+  {
+   "key": " raise",
+   "emit": " raise",
+   "description": "the word 'raise', with a leading space"
+  },
+  {
+   "key": " pass",
+   "emit": " pass",
+   "description": "the word 'pass', with a leading space"
+  },
+  {
+   "key": " sell",
+   "emit": " sell",
+   "description": "the word 'sell', with a leading space"
+  },
+  {
+   "key": " require",
+   "emit": " require",
+   "description": "the word 'require', with a leading space"
+  },
+  {
+   "key": " report",
+   "emit": " report",
+   "description": "the word 'report', with a leading space"
+  },
+  {
+   "key": " decide",
+   "emit": " decide",
+   "description": "the word 'decide', with a leading space"
+  },
+  {
+   "key": " pull",
+   "emit": " pull",
+   "description": "the word 'pull', with a leading space"
+  },
+  {
+   "key": " return",
+   "emit": " return",
+   "description": "the word 'return', with a leading space"
+  },
+  {
+   "key": " explain",
+   "emit": " explain",
+   "description": "the word 'explain', with a leading space"
+  },
+  {
+   "key": " hope",
+   "emit": " hope",
+   "description": "the word 'hope', with a leading space"
+  },
+  {
+   "key": " develop",
+   "emit": " develop",
+   "description": "the word 'develop', with a leading space"
+  },
+  {
+   "key": " carry",
+   "emit": " carry",
+   "description": "the word 'carry', with a leading space"
+  },
+  {
+   "key": " break",
+   "emit": " break",
+   "description": "the word 'break', with a leading space"
+  },
+  {
+   "key": " receive",
+   "emit": " receive",
+   "description": "the word 'receive', with a leading space"
+  },
+  {
+   "key": " agree",
+   "emit": " agree",
+   "description": "the word 'agree', with a leading space"
+  },
+  {
+   "key": " support",
+   "emit": " support",
+   "description": "the word 'support', with a leading space"
+  },
+  {
+   "key": " hit",
+   "emit": " hit",
+   "description": "the word 'hit', with a leading space"
+  },
+  {
+   "key": " produce",
+   "emit": " produce",
+   "description": "the word 'produce', with a leading space"
+  },
+  {
+   "key": " eat",
+   "emit": " eat",
+   "description": "the word 'eat', with a leading space"
+  },
+  {
+   "key": " cover",
+   "emit": " cover",
+   "description": "the word 'cover', with a leading space"
+  },
+  {
+   "key": " catch",
+   "emit": " catch",
+   "description": "the word 'catch', with a leading space"
+  },
+  {
+   "key": " draw",
+   "emit": " draw",
+   "description": "the word 'draw', with a leading space"
+  },
+  {
+   "key": " choose",
+   "emit": " choose",
+   "description": "the word 'choose', with a leading space"
+  },
+  {
+   "key": " cause",
+   "emit": " cause",
+   "description": "the word 'cause', with a leading space"
+  },
+  {
+   "key": " point",
+   "emit": " point",
+   "description": "the word 'point', with a leading space"
+  },
+  {
+   "key": " listen",
+   "emit": " listen",
+   "description": "the word 'listen', with a leading space"
+  },
+  {
+   "key": " realize",
+   "emit": " realize",
+   "description": "the word 'realize', with a leading space"
+  },
+  {
+   "key": " place",
+   "emit": " place",
+   "description": "the word 'place', with a leading space"
+  },
+  {
+   "key": " close",
+   "emit": " close",
+   "description": "the word 'close', with a leading space"
+  },
+  {
+   "key": " wear",
+   "emit": " wear",
+   "description": "the word 'wear', with a leading space"
+  },
+  {
+   "key": " enjoy",
+   "emit": " enjoy",
+   "description": "the word 'enjoy', with a leading space"
+  },
+  {
+   "key": " teach",
+   "emit": " teach",
+   "description": "the word 'teach', with a leading space"
+  },
+  {
+   "key": " forget",
+   "emit": " forget",
+   "description": "the word 'forget', with a leading space"
+  },
+  {
+   "key": " arrive",
+   "emit": " arrive",
+   "description": "the word 'arrive', with a leading space"
+  },
+  {
+   "key": " drive",
+   "emit": " drive",
+   "description": "the word 'drive', with a leading space"
+  },
+  {
+   "key": " wash",
+   "emit": " wash",
+   "description": "the word 'wash', with a leading space"
+  },
+  {
+   "key": " cook",
+   "emit": " cook",
+   "description": "the word 'cook', with a leading space"
+  },
+  {
+   "key": " clean",
+   "emit": " clean",
+   "description": "the word 'clean', with a leading space"
+  },
+  {
+   "key": " sleep",
+   "emit": " sleep",
+   "description": "the word 'sleep', with a leading space"
+  },
+  {
+   "key": " wake",
+   "emit": " wake",
+   "description": "the word 'wake', with a leading space"
+  },
+  {
+   "key": " dream",
+   "emit": " dream",
+   "description": "the word 'dream', with a leading space"
+  },
+  {
+   "key": " laugh",
+   "emit": " laugh",
+   "description": "the word 'laugh', with a leading space"
+  },
+  {
+   "key": " cry",
+   "emit": " cry",
+   "description": "the word 'cry', with a leading space"
+  },
+  {
+   "key": " smile",
+   "emit": " smile",
+   "description": "the word 'smile', with a leading space"
+  },
+  {
+   "key": " drink",
+   "emit": " drink",
+   "description": "the word 'drink', with a leading space"
+  },
+  {
+   "key": " swim",
+   "emit": " swim",
+   "description": "the word 'swim', with a leading space"
+  },
+  {
+   "key": " fly",
+   "emit": " fly",
+   "description": "the word 'fly', with a leading space"
+  },
+  {
+   "key": " jump",
+   "emit": " jump",
+   "description": "the word 'jump', with a leading space"
+  },
+  {
+   "key": " climb",
+   "emit": " climb",
+   "description": "the word 'climb', with a leading space"
+  },
+  {
+   "key": " push",
+   "emit": " push",
+   "description": "the word 'push', with a leading space"
+  },
+  {
+   "key": " throw",
+   "emit": " throw",
+   "description": "the word 'throw', with a leading space"
+  },
+  {
+   "key": " fill",
+   "emit": " fill",
+   "description": "the word 'fill', with a leading space"
+  },
+  {
+   "key": " empty",
+   "emit": " empty",
+   "description": "the word 'empty', with a leading space"
+  },
+  {
+   "key": " burn",
+   "emit": " burn",
+   "description": "the word 'burn', with a leading space"
+  },
+  {
+   "key": " freeze",
+   "emit": " freeze",
+   "description": "the word 'freeze', with a leading space"
+  },
+  {
+   "key": " melt",
+   "emit": " melt",
+   "description": "the word 'melt', with a leading space"
+  },
+  {
+   "key": " boil",
+   "emit": " boil",
+   "description": "the word 'boil', with a leading space"
+  },
+  {
+   "key": " bake",
+   "emit": " bake",
+   "description": "the word 'bake', with a leading space"
+  },
+  {
+   "key": " fix",
+   "emit": " fix",
+   "description": "the word 'fix', with a leading space"
+  },
+  {
+   "key": " repair",
+   "emit": " repair",
+   "description": "the word 'repair', with a leading space"
+  },
+  {
+   "key": " paint",
+   "emit": " paint",
+   "description": "the word 'paint', with a leading space"
+  },
+  {
+   "key": " sing",
+   "emit": " sing",
+   "description": "the word 'sing', with a leading space"
+  },
+  {
+   "key": " dance",
+   "emit": " dance",
+   "description": "the word 'dance', with a leading space"
+  },
+  {
+   "key": " count",
+   "emit": " count",
+   "description": "the word 'count', with a leading space"
+  },
+  {
+   "key": " measure",
+   "emit": " measure",
+   "description": "the word 'measure', with a leading space"
+  },
+  {
+   "key": " weigh",
+   "emit": " weigh",
+   "description": "the word 'weigh', with a leading space"
+  },
+  {
+   "key": " divide",
+   "emit": " divide",
+   "description": "the word 'divide', with a leading space"
+  },
+  {
+   "key": " multiply",
+   "emit": " multiply",
+   "description": "the word 'multiply', with a leading space"
+  },
+  {
+   "key": " solve",
+   "emit": " solve",
+   "description": "the word 'solve', with a leading space"
+  },
+  {
+   "key": " answer",
+   "emit": " answer",
+   "description": "the word 'answer', with a leading space"
+  },
+  {
+   "key": " question",
+   "emit": " question",
+   "description": "the word 'question', with a leading space"
+  },
+  {
+   "key": " describe",
+   "emit": " describe",
+   "description": "the word 'describe', with a leading space"
+  },
+  {
+   "key": " compare",
+   "emit": " compare",
+   "description": "the word 'compare', with a leading space"
+  },
+  {
+   "key": " match",
+   "emit": " match",
+   "description": "the word 'match', with a leading space"
+  },
+  {
+   "key": " sort",
+   "emit": " sort",
+   "description": "the word 'sort', with a leading space"
+  },
+  {
+   "key": " order",
+   "emit": " order",
+   "description": "the word 'order', with a leading space"
+  },
+  {
+   "key": " arrange",
+   "emit": " arrange",
+   "description": "the word 'arrange', with a leading space"
+  },
+  {
+   "key": " collect",
+   "emit": " collect",
+   "description": "the word 'collect', with a leading space"
+  },
+  {
+   "key": " gather",
+   "emit": " gather",
+   "description": "the word 'gather', with a leading space"
+  },
+  {
+   "key": " spread",
+   "emit": " spread",
+   "description": "the word 'spread', with a leading space"
+  },
+  {
+   "key": " share",
+   "emit": " share",
+   "description": "the word 'share', with a leading space"
+  },
+  {
+   "key": " trade",
+   "emit": " trade",
+   "description": "the word 'trade', with a leading space"
+  },
+  {
+   "key": " lend",
+   "emit": " lend",
+   "description": "the word 'lend', with a leading space"
+  },
+  {
+   "key": " borrow",
+   "emit": " borrow",
+   "description": "the word 'borrow', with a leading space"
+  },
+  {
+   "key": " save",
+   "emit": " save",
+   "description": "the word 'save', with a leading space"
+  },
+  {
+   "key": " waste",
+   "emit": " waste",
+   "description": "the word 'waste', with a leading space"
+  },
+  {
+   "key": " earn",
+   "emit": " earn",
+   "description": "the word 'earn', with a leading space"
+  },
+  {
+   "key": " owe",
+   "emit": " owe",
+   "description": "the word 'owe', with a leading space"
+  },
+  {
+   "key": " rent",
+   "emit": " rent",
+   "description": "the word 'rent', with a leading space"
+  },
+  {
+   "key": " hire",
+   "emit": " hire",
+   "description": "the word 'hire', with a leading space"
+  },
+  {
+   "key": " train",
+   "emit": " train",
+   "description": "the word 'train', with a leading space"
+  },
+  {
+   "key": " practice",
+   "emit": " practice",
+   "description": "the word 'practice', with a leading space"
+  },
+  {
+   "key": " study",
+   "emit": " study",
+   "description": "the word 'study', with a leading space"
+  },
+  {
+   "key": " review",
+   "emit": " review",
+   "description": "the word 'review', with a leading space"
+  },
+  {
+   "key": " test",
+   "emit": " test",
+   "description": "the word 'test', with a leading space"
+  },
+  {
+   "key": " check",
+   "emit": " check",
+   "description": "the word 'check', with a leading space"
+  },
+  {
+   "key": " prove",
+   "emit": " prove",
+   "description": "the word 'prove', with a leading space"
+  },
+  {
+   "key": " accept",
+   "emit": " accept",
+   "description": "the word 'accept', with a leading space"
+  },
+  {
+   "key": " reject",
+   "emit": " reject",
+   "description": "the word 'reject', with a leading space"
+  },
+  {
+   "key": " approve",
+   "emit": " approve",
+   "description": "the word 'approve', with a leading space"
+  },
+  {
+   "key": " deny",
+   "emit": " deny",
+   "description": "the word 'deny', with a leading space"
+  },
+  {
+   "key": " confirm",
+   "emit": " confirm",
+   "description": "the word 'confirm', with a leading space"
+  },
+  {
+   "key": " cancel",
+   "emit": " cancel",
+   "description": "the word 'cancel', with a leading space"
+  },
+  {
+   "key": " delay",
+   "emit": " delay",
+   "description": "the word 'delay', with a leading space"
+  },
+  {
+   "key": " hurry",
+   "emit": " hurry",
+   "description": "the word 'hurry', with a leading space"
+  },
+  {
+   "key": " belong",
+   "emit": " belong",
+   "description": "the word 'belong', with a leading space"
+  },
+  {
+   "key": " depend",
+   "emit": " depend",
+   "description": "the word 'depend', with a leading space"
+  },
+  {
+   "key": " prefer",
+   "emit": " prefer",
+   "description": "the word 'prefer', with a leading space"
+  },
+  {
+   "key": " promise",
+   "emit": " promise",
+   "description": "the word 'promise', with a leading space"
+  },
+  {
+   "key": " refuse",
+   "emit": " refuse",
+   "description": "the word 'refuse', with a leading space"
+  },
+  {
+   "key": " remind",
+   "emit": " remind",
+   "description": "the word 'remind', with a leading space"
+  },
+  {
+   "key": " repeat",
+   "emit": " repeat",
+   "description": "the word 'repeat', with a leading space"
+  },
+  {
+   "key": " replace",
+   "emit": " replace",
+   "description": "the word 'replace', with a leading space"
+  },
+  {
+   "key": " rest",
+   "emit": " rest",
+   "description": "the word 'rest', with a leading space"
+  },
+  {
+   "key": " search",
+   "emit": " search",
+   "description": "the word 'search', with a leading space"
+  },
+  {
+   "key": " shake",
+   "emit": " shake",
+   "description": "the word 'shake', with a leading space"
+  },
+  {
+   "key": " shout",
+   "emit": " shout",
+   "description": "the word 'shout', with a leading space"
+  },
+  {
+   "key": " sign",
+   "emit": " sign",
+   "description": "the word 'sign', with a leading space"
+  },
+  {
+   "key": " smell",
+   "emit": " smell",
+   "description": "the word 'smell', with a leading space"
+  },
+  {
+   "key": " sound",
+   "emit": " sound",
+   "description": "the word 'sound', with a leading space"
+  },
+  {
+   "key": " spell",
+   "emit": " spell",
+   "description": "the word 'spell', with a leading space"
+  },
+  {
+   "key": " stick",
+   "emit": " stick",
+   "description": "the word 'stick', with a leading space"
+  },
+  {
+   "key": " strike",
+   "emit": " strike",
+   "description": "the word 'strike', with a leading space"
+  },
+  {
+   "key": " succeed",
+   "emit": " succeed",
+   "description": "the word 'succeed', with a leading space"
+  },
+  {
+   "key": " suffer",
+   "emit": " suffer",
+   "description": "the word 'suffer', with a leading space"
+  },
+  {
+   "key": " suppose",
+   "emit": " suppose",
+   "description": "the word 'suppose', with a leading space"
+  },
+  {
+   "key": " surprise",
+   "emit": " surprise",
+   "description": "the word 'surprise', with a leading space"
+  },
+  {
+   "key": " swing",
+   "emit": " swing",
+   "description": "the word 'swing', with a leading space"
+  },
+  {
+   "key": " taste",
+   "emit": " taste",
+   "description": "the word 'taste', with a leading space"
+  },
+  {
+   "key": " thank",
+   "emit": " thank",
+   "description": "the word 'thank', with a leading space"
+  },
+  {
+   "key": " travel",
+   "emit": " travel",
+   "description": "the word 'travel', with a leading space"
+  },
+  {
+   "key": " treat",
+   "emit": " treat",
+   "description": "the word 'treat', with a leading space"
+  },
+  {
+   "key": " trust",
+   "emit": " trust",
+   "description": "the word 'trust', with a leading space"
+  },
+  {
+   "key": " visit",
+   "emit": " visit",
+   "description": "the word 'visit', with a leading space"
+  },
+  {
+   "key": " vote",
+   "emit": " vote",
+   "description": "the word 'vote', with a leading space"
+  },
+  {
+   "key": " warn",
+   "emit": " warn",
+   "description": "the word 'warn', with a leading space"
+  },
+  {
+   "key": " wonder",
+   "emit": " wonder",
+   "description": "the word 'wonder', with a leading space"
+  },
+  {
+   "key": " worry",
+   "emit": " worry",
+   "description": "the word 'worry', with a leading space"
+  },
+  {
+   "key": " wrap",
+   "emit": " wrap",
+   "description": "the word 'wrap', with a leading space"
+  },
+  {
+   "key": " good",
+   "emit": " good",
+   "description": "the word 'good', with a leading space"
+  },
+  {
+   "key": " bad",
+   "emit": " bad",
+   "description": "the word 'bad', with a leading space"
+  },
+  {
+   "key": " big",
+   "emit": " big",
+   "description": "the word 'big', with a leading space"
+  },
+  {
+   "key": " small",
+   "emit": " small",
+   "description": "the word 'small', with a leading space"
+  },
+  {
+   "key": " large",
+   "emit": " large",
+   "description": "the word 'large', with a leading space"
+  },
+  {
+   "key": " little",
+   "emit": " little",
+   "description": "the word 'little', with a leading space"
+  },
+  {
+   "key": " long",
+   "emit": " long",
+   "description": "the word 'long', with a leading space"
+  },
+  {
+   "key": " short",
+   "emit": " short",
+   "description": "the word 'short', with a leading space"
+  },
+  {
+   "key": " high",
+   "emit": " high",
+   "description": "the word 'high', with a leading space"
+  },
+  {
+   "key": " low",
+   "emit": " low",
+   "description": "the word 'low', with a leading space"
+  },
+  {
+   "key": " old",
+   "emit": " old",
+   "description": "the word 'old', with a leading space"
+  },
+  {
+   "key": " new",
+   "emit": " new",
+   "description": "the word 'new', with a leading space"
+  },
+  {
+   "key": " young",
+   "emit": " young",
+   "description": "the word 'young', with a leading space"
+  },
+  {
+   "key": " early",
+   "emit": " early",
+   "description": "the word 'early', with a leading space"
+  },
+  {
+   "key": " late",
+   "emit": " late",
+   "description": "the word 'late', with a leading space"
+  },
+  {
+   "key": " fast",
+   "emit": " fast",
+   "description": "the word 'fast', with a leading space"
+  },
+  {
+   "key": " slow",
+   "emit": " slow",
+   "description": "the word 'slow', with a leading space"
+  },
+  {
+   "key": " hot",
+   "emit": " hot",
+   "description": "the word 'hot', with a leading space"
+  },
+  {
+   "key": " cold",
+   "emit": " cold",
+   "description": "the word 'cold', with a leading space"
+  },
+  {
+   "key": " warm",
+   "emit": " warm",
+   "description": "the word 'warm', with a leading space"
+  },
+  {
+   "key": " cool",
+   "emit": " cool",
+   "description": "the word 'cool', with a leading space"
+  },
+  {
+   "key": " dry",
+   "emit": " dry",
+   "description": "the word 'dry', with a leading space"
+  },
+  {
+   "key": " wet",
+   "emit": " wet",
+   "description": "the word 'wet', with a leading space"
+  },
+  {
+   "key": " hard",
+   "emit": " hard",
+   "description": "the word 'hard', with a leading space"
+  },
+  {
+   "key": " soft",
+   "emit": " soft",
+   "description": "the word 'soft', with a leading space"
+  },
+  {
+   "key": " heavy",
+   "emit": " heavy",
+   "description": "the word 'heavy', with a leading space"
+  },
+  {
+   "key": " light",
+   "emit": " light",
+   "description": "the word 'light', with a leading space"
+  },
+  {
+   "key": " dark",
+   "emit": " dark",
+   "description": "the word 'dark', with a leading space"
+  },
+  {
+   "key": " bright",
+   "emit": " bright",
+   "description": "the word 'bright', with a leading space"
+  },
+  {
+   "key": " dirty",
+   "emit": " dirty",
+   "description": "the word 'dirty', with a leading space"
+  },
+  {
+   "key": " full",
+   "emit": " full",
+   "description": "the word 'full', with a leading space"
+  },
+  {
+   "key": " closed",
+   "emit": " closed",
+   "description": "the word 'closed', with a leading space"
+  },
+  {
+   "key": " far",
+   "emit": " far",
+   "description": "the word 'far', with a leading space"
+  },
+  {
+   "key": " deep",
+   "emit": " deep",
+   "description": "the word 'deep', with a leading space"
+  },
+  {
+   "key": " shallow",
+   "emit": " shallow",
+   "description": "the word 'shallow', with a leading space"
+  },
+  {
+   "key": " wide",
+   "emit": " wide",
+   "description": "the word 'wide', with a leading space"
+  },
+  {
+   "key": " narrow",
+   "emit": " narrow",
+   "description": "the word 'narrow', with a leading space"
+  },
+  {
+   "key": " thick",
+   "emit": " thick",
+   "description": "the word 'thick', with a leading space"
+  },
+  {
+   "key": " thin",
+   "emit": " thin",
+   "description": "the word 'thin', with a leading space"
+  },
+  {
+   "key": " strong",
+   "emit": " strong",
+   "description": "the word 'strong', with a leading space"
+  },
+  {
+   "key": " weak",
+   "emit": " weak",
+   "description": "the word 'weak', with a leading space"
+  },
+  {
+   "key": " rich",
+   "emit": " rich",
+   "description": "the word 'rich', with a leading space"
+  },
+  {
+   "key": " poor",
+   "emit": " poor",
+   "description": "the word 'poor', with a leading space"
+  },
+  {
+   "key": " cheap",
+   "emit": " cheap",
+   "description": "the word 'cheap', with a leading space"
+  },
+  {
+   "key": " expensive",
+   "emit": " expensive",
+   "description": "the word 'expensive', with a leading space"
+  },
+  {
+   "key": " easy",
+   "emit": " easy",
+   "description": "the word 'easy', with a leading space"
+  },
+  {
+   "key": " difficult",
+   "emit": " difficult",
+   "description": "the word 'difficult', with a leading space"
+  },
+  {
+   "key": " simple",
+   "emit": " simple",
+   "description": "the word 'simple', with a leading space"
+  },
+  {
+   "key": " complex",
+   "emit": " complex",
+   "description": "the word 'complex', with a leading space"
+  },
+  {
+   "key": " safe",
+   "emit": " safe",
+   "description": "the word 'safe', with a leading space"
+  },
+  {
+   "key": " dangerous",
+   "emit": " dangerous",
+   "description": "the word 'dangerous', with a leading space"
+  },
+  {
+   "key": " healthy",
+   "emit": " healthy",
+   "description": "the word 'healthy', with a leading space"
+  },
+  {
+   "key": " sick",
+   "emit": " sick",
+   "description": "the word 'sick', with a leading space"
+  },
+  {
+   "key": " happy",
+   "emit": " happy",
+   "description": "the word 'happy', with a leading space"
+  },
+  {
+   "key": " sad",
+   "emit": " sad",
+   "description": "the word 'sad', with a leading space"
+  },
+  {
+   "key": " angry",
+   "emit": " angry",
+   "description": "the word 'angry', with a leading space"
+  },
+  {
+   "key": " calm",
+   "emit": " calm",
+   "description": "the word 'calm', with a leading space"
+  },
+  {
+   "key": " quiet",
+   "emit": " quiet",
+   "description": "the word 'quiet', with a leading space"
+  },
+  {
+   "key": " loud",
+   "emit": " loud",
+   "description": "the word 'loud', with a leading space"
+  },
+  {
+   "key": " busy",
+   "emit": " busy",
+   "description": "the word 'busy', with a leading space"
+  },
+  {
+   "key": " free",
+   "emit": " free",
+   "description": "the word 'free', with a leading space"
+  },
+  {
+   "key": " true",
+   "emit": " true",
+   "description": "the word 'true', with a leading space"
+  },
+  {
+   "key": " false",
+   "emit": " false",
+   "description": "the word 'false', with a leading space"
+  },
+  {
+   "key": " right",
+   "emit": " right",
+   "description": "the word 'right', with a leading space"
+  },
+  {
+   "key": " wrong",
+   "emit": " wrong",
+   "description": "the word 'wrong', with a leading space"
+  },
+  {
+   "key": " different",
+   "emit": " different",
+   "description": "the word 'different', with a leading space"
+  },
+  {
+   "key": " similar",
+   "emit": " similar",
+   "description": "the word 'similar', with a leading space"
+  },
+  {
+   "key": " equal",
+   "emit": " equal",
+   "description": "the word 'equal', with a leading space"
+  },
+  {
+   "key": " whole",
+   "emit": " whole",
+   "description": "the word 'whole', with a leading space"
+  },
+  {
+   "key": " partial",
+   "emit": " partial",
+   "description": "the word 'partial', with a leading space"
+  },
+  {
+   "key": " ready",
+   "emit": " ready",
+   "description": "the word 'ready', with a leading space"
+  },
+  {
+   "key": " finished",
+   "emit": " finished",
+   "description": "the word 'finished', with a leading space"
+  },
+  {
+   "key": " common",
+   "emit": " common",
+   "description": "the word 'common', with a leading space"
+  },
+  {
+   "key": " rare",
+   "emit": " rare",
+   "description": "the word 'rare', with a leading space"
+  },
+  {
+   "key": " usual",
+   "emit": " usual",
+   "description": "the word 'usual', with a leading space"
+  },
+  {
+   "key": " strange",
+   "emit": " strange",
+   "description": "the word 'strange', with a leading space"
+  },
+  {
+   "key": " normal",
+   "emit": " normal",
+   "description": "the word 'normal', with a leading space"
+  },
+  {
+   "key": " special",
+   "emit": " special",
+   "description": "the word 'special', with a leading space"
+  },
+  {
+   "key": " general",
+   "emit": " general",
+   "description": "the word 'general', with a leading space"
+  },
+  {
+   "key": " particular",
+   "emit": " particular",
+   "description": "the word 'particular', with a leading space"
+  },
+  {
+   "key": " certain",
+   "emit": " certain",
+   "description": "the word 'certain', with a leading space"
+  },
+  {
+   "key": " possible",
+   "emit": " possible",
+   "description": "the word 'possible', with a leading space"
+  },
+  {
+   "key": " impossible",
+   "emit": " impossible",
+   "description": "the word 'impossible', with a leading space"
+  },
+  {
+   "key": " necessary",
+   "emit": " necessary",
+   "description": "the word 'necessary', with a leading space"
+  },
+  {
+   "key": " important",
+   "emit": " important",
+   "description": "the word 'important', with a leading space"
+  },
+  {
+   "key": " useful",
+   "emit": " useful",
+   "description": "the word 'useful', with a leading space"
+  },
+  {
+   "key": " useless",
+   "emit": " useless",
+   "description": "the word 'useless', with a leading space"
+  },
+  {
+   "key": " beautiful",
+   "emit": " beautiful",
+   "description": "the word 'beautiful', with a leading space"
+  },
+  {
+   "key": " ugly",
+   "emit": " ugly",
+   "description": "the word 'ugly', with a leading space"
+  },
+  {
+   "key": " nice",
+   "emit": " nice",
+   "description": "the word 'nice', with a leading space"
+  },
+  {
+   "key": " kind",
+   "emit": " kind",
+   "description": "the word 'kind', with a leading space"
+  },
+  {
+   "key": " cruel",
+   "emit": " cruel",
+   "description": "the word 'cruel', with a leading space"
+  },
+  {
+   "key": " honest",
+   "emit": " honest",
+   "description": "the word 'honest', with a leading space"
+  },
+  {
+   "key": " brave",
+   "emit": " brave",
+   "description": "the word 'brave', with a leading space"
+  },
+  {
+   "key": " afraid",
+   "emit": " afraid",
+   "description": "the word 'afraid', with a leading space"
+  },
+  {
+   "key": " tired",
+   "emit": " tired",
+   "description": "the word 'tired', with a leading space"
+  },
+  {
+   "key": " fresh",
+   "emit": " fresh",
+   "description": "the word 'fresh', with a leading space"
+  },
+  {
+   "key": " rotten",
+   "emit": " rotten",
+   "description": "the word 'rotten', with a leading space"
+  },
+  {
+   "key": " sweet",
+   "emit": " sweet",
+   "description": "the word 'sweet', with a leading space"
+  },
+  {
+   "key": " sour",
+   "emit": " sour",
+   "description": "the word 'sour', with a leading space"
+  },
+  {
+   "key": " bitter",
+   "emit": " bitter",
+   "description": "the word 'bitter', with a leading space"
+  },
+  {
+   "key": " salty",
+   "emit": " salty",
+   "description": "the word 'salty', with a leading space"
+  },
+  {
+   "key": " spicy",
+   "emit": " spicy",
+   "description": "the word 'spicy', with a leading space"
+  },
+  {
+   "key": " smooth",
+   "emit": " smooth",
+   "description": "the word 'smooth', with a leading space"
+  },
+  {
+   "key": " rough",
+   "emit": " rough",
+   "description": "the word 'rough', with a leading space"
+  },
+  {
+   "key": " sharp",
+   "emit": " sharp",
+   "description": "the word 'sharp', with a leading space"
+  },
+  {
+   "key": " dull",
+   "emit": " dull",
+   "description": "the word 'dull', with a leading space"
+  },
+  {
+   "key": " round",
+   "emit": " round",
+   "description": "the word 'round', with a leading space"
+  },
+  {
+   "key": " square",
+   "emit": " square",
+   "description": "the word 'square', with a leading space"
+  },
+  {
+   "key": " flat",
+   "emit": " flat",
+   "description": "the word 'flat', with a leading space"
+  },
+  {
+   "key": " curved",
+   "emit": " curved",
+   "description": "the word 'curved', with a leading space"
+  },
+  {
+   "key": " straight",
+   "emit": " straight",
+   "description": "the word 'straight', with a leading space"
+  },
+  {
+   "key": " modern",
+   "emit": " modern",
+   "description": "the word 'modern', with a leading space"
+  },
+  {
+   "key": " ancient",
+   "emit": " ancient",
+   "description": "the word 'ancient', with a leading space"
+  },
+  {
+   "key": " local",
+   "emit": " local",
+   "description": "the word 'local', with a leading space"
+  },
+  {
+   "key": " foreign",
+   "emit": " foreign",
+   "description": "the word 'foreign', with a leading space"
+  },
+  {
+   "key": " public",
+   "emit": " public",
+   "description": "the word 'public', with a leading space"
+  },
+  {
+   "key": " private",
+   "emit": " private",
+   "description": "the word 'private', with a leading space"
+  },
+  {
+   "key": " personal",
+   "emit": " personal",
+   "description": "the word 'personal', with a leading space"
+  },
+  {
+   "key": " official",
+   "emit": " official",
+   "description": "the word 'official', with a leading space"
+  },
+  {
+   "key": " natural",
+   "emit": " natural",
+   "description": "the word 'natural', with a leading space"
+  },
+  {
+   "key": " artificial",
+   "emit": " artificial",
+   "description": "the word 'artificial', with a leading space"
+  },
+  {
+   "key": " alive",
+   "emit": " alive",
+   "description": "the word 'alive', with a leading space"
+  },
+  {
+   "key": " dead",
+   "emit": " dead",
+   "description": "the word 'dead', with a leading space"
+  },
+  {
+   "key": " awake",
+   "emit": " awake",
+   "description": "the word 'awake', with a leading space"
+  },
+  {
+   "key": " asleep",
+   "emit": " asleep",
+   "description": "the word 'asleep', with a leading space"
+  },
+  {
+   "key": " lucky",
+   "emit": " lucky",
+   "description": "the word 'lucky', with a leading space"
+  },
+  {
+   "key": " famous",
+   "emit": " famous",
+   "description": "the word 'famous', with a leading space"
+  },
+  {
+   "key": " serious",
+   "emit": " serious",
+   "description": "the word 'serious', with a leading space"
+  },
+  {
+   "key": " funny",
+   "emit": " funny",
+   "description": "the word 'funny', with a leading space"
+  },
+  {
+   "key": " polite",
+   "emit": " polite",
+   "description": "the word 'polite', with a leading space"
+  },
+  {
+   "key": " rude",
+   "emit": " rude",
+   "description": "the word 'rude', with a leading space"
+  },
+  {
+   "key": " gentle",
+   "emit": " gentle",
+   "description": "the word 'gentle', with a leading space"
+  },
+  {
+   "key": " fierce",
+   "emit": " fierce",
+   "description": "the word 'fierce', with a leading space"
+  },
+  {
+   "key": " red",
+   "emit": " red",
+   "description": "the word 'red', with a leading space"
+  },
+  {
+   "key": " blue",
+   "emit": " blue",
+   "description": "the word 'blue', with a leading space"
+  },
+  {
+   "key": " green",
+   "emit": " green",
+   "description": "the word 'green', with a leading space"
+  },
+  {
+   "key": " yellow",
+   "emit": " yellow",
+   "description": "the word 'yellow', with a leading space"
+  },
+  {
+   "key": " orange",
+   "emit": " orange",
+   "description": "the word 'orange', with a leading space"
+  },
+  {
+   "key": " purple",
+   "emit": " purple",
+   "description": "the word 'purple', with a leading space"
+  },
+  {
+   "key": " pink",
+   "emit": " pink",
+   "description": "the word 'pink', with a leading space"
+  },
+  {
+   "key": " brown",
+   "emit": " brown",
+   "description": "the word 'brown', with a leading space"
+  },
+  {
+   "key": " black",
+   "emit": " black",
+   "description": "the word 'black', with a leading space"
+  },
+  {
+   "key": " white",
+   "emit": " white",
+   "description": "the word 'white', with a leading space"
+  },
+  {
+   "key": " grey",
+   "emit": " grey",
+   "description": "the word 'grey', with a leading space"
+  },
+  {
+   "key": " gold",
+   "emit": " gold",
+   "description": "the word 'gold', with a leading space"
+  },
+  {
+   "key": " silver",
+   "emit": " silver",
+   "description": "the word 'silver', with a leading space"
+  },
+  {
+   "key": " zero",
+   "emit": " zero",
+   "description": "the word 'zero', with a leading space"
+  },
+  {
+   "key": " two",
+   "emit": " two",
+   "description": "the word 'two', with a leading space"
+  },
+  {
+   "key": " Two",
+   "emit": " Two",
+   "description": "the capitalised word 'Two', with a leading space"
+  },
+  {
+   "key": " three",
+   "emit": " three",
+   "description": "the word 'three', with a leading space"
+  },
+  {
+   "key": " Three",
+   "emit": " Three",
+   "description": "the capitalised word 'Three', with a leading space"
+  },
+  {
+   "key": " four",
+   "emit": " four",
+   "description": "the word 'four', with a leading space"
+  },
+  {
+   "key": " five",
+   "emit": " five",
+   "description": "the word 'five', with a leading space"
+  },
+  {
+   "key": " six",
+   "emit": " six",
+   "description": "the word 'six', with a leading space"
+  },
+  {
+   "key": " seven",
+   "emit": " seven",
+   "description": "the word 'seven', with a leading space"
+  },
+  {
+   "key": " eight",
+   "emit": " eight",
+   "description": "the word 'eight', with a leading space"
+  },
+  {
+   "key": " nine",
+   "emit": " nine",
+   "description": "the word 'nine', with a leading space"
+  },
+  {
+   "key": " ten",
+   "emit": " ten",
+   "description": "the word 'ten', with a leading space"
+  },
+  {
+   "key": " eleven",
+   "emit": " eleven",
+   "description": "the word 'eleven', with a leading space"
+  },
+  {
+   "key": " twelve",
+   "emit": " twelve",
+   "description": "the word 'twelve', with a leading space"
+  },
+  {
+   "key": " thirteen",
+   "emit": " thirteen",
+   "description": "the word 'thirteen', with a leading space"
+  },
+  {
+   "key": " fourteen",
+   "emit": " fourteen",
+   "description": "the word 'fourteen', with a leading space"
+  },
+  {
+   "key": " fifteen",
+   "emit": " fifteen",
+   "description": "the word 'fifteen', with a leading space"
+  },
+  {
+   "key": " sixteen",
+   "emit": " sixteen",
+   "description": "the word 'sixteen', with a leading space"
+  },
+  {
+   "key": " seventeen",
+   "emit": " seventeen",
+   "description": "the word 'seventeen', with a leading space"
+  },
+  {
+   "key": " eighteen",
+   "emit": " eighteen",
+   "description": "the word 'eighteen', with a leading space"
+  },
+  {
+   "key": " nineteen",
+   "emit": " nineteen",
+   "description": "the word 'nineteen', with a leading space"
+  },
+  {
+   "key": " twenty",
+   "emit": " twenty",
+   "description": "the word 'twenty', with a leading space"
+  },
+  {
+   "key": " thirty",
+   "emit": " thirty",
+   "description": "the word 'thirty', with a leading space"
+  },
+  {
+   "key": " forty",
+   "emit": " forty",
+   "description": "the word 'forty', with a leading space"
+  },
+  {
+   "key": " fifty",
+   "emit": " fifty",
+   "description": "the word 'fifty', with a leading space"
+  },
+  {
+   "key": " sixty",
+   "emit": " sixty",
+   "description": "the word 'sixty', with a leading space"
+  },
+  {
+   "key": " seventy",
+   "emit": " seventy",
+   "description": "the word 'seventy', with a leading space"
+  },
+  {
+   "key": " eighty",
+   "emit": " eighty",
+   "description": "the word 'eighty', with a leading space"
+  },
+  {
+   "key": " ninety",
+   "emit": " ninety",
+   "description": "the word 'ninety', with a leading space"
+  },
+  {
+   "key": " hundred",
+   "emit": " hundred",
+   "description": "the word 'hundred', with a leading space"
+  },
+  {
+   "key": " thousand",
+   "emit": " thousand",
+   "description": "the word 'thousand', with a leading space"
+  },
+  {
+   "key": " million",
+   "emit": " million",
+   "description": "the word 'million', with a leading space"
+  },
+  {
+   "key": " billion",
+   "emit": " billion",
+   "description": "the word 'billion', with a leading space"
+  },
+  {
+   "key": " first",
+   "emit": " first",
+   "description": "the word 'first', with a leading space"
+  },
+  {
+   "key": " second",
+   "emit": " second",
+   "description": "the word 'second', with a leading space"
+  },
+  {
+   "key": " third",
+   "emit": " third",
+   "description": "the word 'third', with a leading space"
+  },
+  {
+   "key": " fourth",
+   "emit": " fourth",
+   "description": "the word 'fourth', with a leading space"
+  },
+  {
+   "key": " fifth",
+   "emit": " fifth",
+   "description": "the word 'fifth', with a leading space"
+  },
+  {
+   "key": " half",
+   "emit": " half",
+   "description": "the word 'half', with a leading space"
+  },
+  {
+   "key": " quarter",
+   "emit": " quarter",
+   "description": "the word 'quarter', with a leading space"
+  },
+  {
+   "key": " double",
+   "emit": " double",
+   "description": "the word 'double', with a leading space"
+  },
+  {
+   "key": " triple",
+   "emit": " triple",
+   "description": "the word 'triple', with a leading space"
+  },
+  {
+   "key": " dozen",
+   "emit": " dozen",
+   "description": "the word 'dozen', with a leading space"
+  },
+  {
+   "key": " pair",
+   "emit": " pair",
+   "description": "the word 'pair', with a leading space"
+  },
+  {
+   "key": " body",
+   "emit": " body",
+   "description": "the word 'body', with a leading space"
+  },
+  {
+   "key": " head",
+   "emit": " head",
+   "description": "the word 'head', with a leading space"
+  },
+  {
+   "key": " face",
+   "emit": " face",
+   "description": "the word 'face', with a leading space"
+  },
+  {
+   "key": " eye",
+   "emit": " eye",
+   "description": "the word 'eye', with a leading space"
+  },
+  {
+   "key": " ear",
+   "emit": " ear",
+   "description": "the word 'ear', with a leading space"
+  },
+  {
+   "key": " nose",
+   "emit": " nose",
+   "description": "the word 'nose', with a leading space"
+  },
+  {
+   "key": " mouth",
+   "emit": " mouth",
+   "description": "the word 'mouth', with a leading space"
+  },
+  {
+   "key": " tooth",
+   "emit": " tooth",
+   "description": "the word 'tooth', with a leading space"
+  },
+  {
+   "key": " teeth",
+   "emit": " teeth",
+   "description": "the word 'teeth', with a leading space"
+  },
+  {
+   "key": " tongue",
+   "emit": " tongue",
+   "description": "the word 'tongue', with a leading space"
+  },
+  {
+   "key": " neck",
+   "emit": " neck",
+   "description": "the word 'neck', with a leading space"
+  },
+  {
+   "key": " shoulder",
+   "emit": " shoulder",
+   "description": "the word 'shoulder', with a leading space"
+  },
+  {
+   "key": " arm",
+   "emit": " arm",
+   "description": "the word 'arm', with a leading space"
+  },
+  {
+   "key": " hand",
+   "emit": " hand",
+   "description": "the word 'hand', with a leading space"
+  },
+  {
+   "key": " finger",
+   "emit": " finger",
+   "description": "the word 'finger', with a leading space"
+  },
+  {
+   "key": " thumb",
+   "emit": " thumb",
+   "description": "the word 'thumb', with a leading space"
+  },
+  {
+   "key": " chest",
+   "emit": " chest",
+   "description": "the word 'chest', with a leading space"
+  },
+  {
+   "key": " back",
+   "emit": " back",
+   "description": "the word 'back', with a leading space"
+  },
+  {
+   "key": " leg",
+   "emit": " leg",
+   "description": "the word 'leg', with a leading space"
+  },
+  {
+   "key": " knee",
+   "emit": " knee",
+   "description": "the word 'knee', with a leading space"
+  },
+  {
+   "key": " foot",
+   "emit": " foot",
+   "description": "the word 'foot', with a leading space"
+  },
+  {
+   "key": " toe",
+   "emit": " toe",
+   "description": "the word 'toe', with a leading space"
+  },
+  {
+   "key": " skin",
+   "emit": " skin",
+   "description": "the word 'skin', with a leading space"
+  },
+  {
+   "key": " bone",
+   "emit": " bone",
+   "description": "the word 'bone', with a leading space"
+  },
+  {
+   "key": " blood",
+   "emit": " blood",
+   "description": "the word 'blood', with a leading space"
+  },
+  {
+   "key": " heart",
+   "emit": " heart",
+   "description": "the word 'heart', with a leading space"
+  },
+  {
+   "key": " brain",
+   "emit": " brain",
+   "description": "the word 'brain', with a leading space"
+  },
+  {
+   "key": " lung",
+   "emit": " lung",
+   "description": "the word 'lung', with a leading space"
+  },
+  {
+   "key": " stomach",
+   "emit": " stomach",
+   "description": "the word 'stomach', with a leading space"
+  },
+  {
+   "key": " muscle",
+   "emit": " muscle",
+   "description": "the word 'muscle', with a leading space"
+  },
+  {
+   "key": " hair",
+   "emit": " hair",
+   "description": "the word 'hair', with a leading space"
+  },
+  {
+   "key": " throat",
+   "emit": " throat",
+   "description": "the word 'throat', with a leading space"
+  },
+  {
+   "key": " lip",
+   "emit": " lip",
+   "description": "the word 'lip', with a leading space"
+  },
+  {
+   "key": " cheek",
+   "emit": " cheek",
+   "description": "the word 'cheek', with a leading space"
+  },
+  {
+   "key": " chin",
+   "emit": " chin",
+   "description": "the word 'chin', with a leading space"
+  },
+  {
+   "key": " wrist",
+   "emit": " wrist",
+   "description": "the word 'wrist', with a leading space"
+  },
+  {
+   "key": " elbow",
+   "emit": " elbow",
+   "description": "the word 'elbow', with a leading space"
+  },
+  {
+   "key": " ankle",
+   "emit": " ankle",
+   "description": "the word 'ankle', with a leading space"
+  },
+  {
+   "key": " nail",
+   "emit": " nail",
+   "description": "the word 'nail', with a leading space"
+  },
+  {
+   "key": " person",
+   "emit": " person",
+   "description": "the word 'person', with a leading space"
+  },
+  {
+   "key": " people",
+   "emit": " people",
+   "description": "the word 'people', with a leading space"
+  },
+  {
+   "key": " man",
+   "emit": " man",
+   "description": "the word 'man', with a leading space"
+  },
+  {
+   "key": " woman",
+   "emit": " woman",
+   "description": "the word 'woman', with a leading space"
+  },
+  {
+   "key": " child",
+   "emit": " child",
+   "description": "the word 'child', with a leading space"
+  },
+  {
+   "key": " children",
+   "emit": " children",
+   "description": "the word 'children', with a leading space"
+  },
+  {
+   "key": " boy",
+   "emit": " boy",
+   "description": "the word 'boy', with a leading space"
+  },
+  {
+   "key": " girl",
+   "emit": " girl",
+   "description": "the word 'girl', with a leading space"
+  },
+  {
+   "key": " baby",
+   "emit": " baby",
+   "description": "the word 'baby', with a leading space"
+  },
+  {
+   "key": " family",
+   "emit": " family",
+   "description": "the word 'family', with a leading space"
+  },
+  {
+   "key": " mother",
+   "emit": " mother",
+   "description": "the word 'mother', with a leading space"
+  },
+  {
+   "key": " father",
+   "emit": " father",
+   "description": "the word 'father', with a leading space"
+  },
+  {
+   "key": " parent",
+   "emit": " parent",
+   "description": "the word 'parent', with a leading space"
+  },
+  {
+   "key": " son",
+   "emit": " son",
+   "description": "the word 'son', with a leading space"
+  },
+  {
+   "key": " daughter",
+   "emit": " daughter",
+   "description": "the word 'daughter', with a leading space"
+  },
+  {
+   "key": " brother",
+   "emit": " brother",
+   "description": "the word 'brother', with a leading space"
+  },
+  {
+   "key": " sister",
+   "emit": " sister",
+   "description": "the word 'sister', with a leading space"
+  },
+  {
+   "key": " friend",
+   "emit": " friend",
+   "description": "the word 'friend', with a leading space"
+  },
+  {
+   "key": " neighbour",
+   "emit": " neighbour",
+   "description": "the word 'neighbour', with a leading space"
+  },
+  {
+   "key": " teacher",
+   "emit": " teacher",
+   "description": "the word 'teacher', with a leading space"
+  },
+  {
+   "key": " student",
+   "emit": " student",
+   "description": "the word 'student', with a leading space"
+  },
+  {
+   "key": " doctor",
+   "emit": " doctor",
+   "description": "the word 'doctor', with a leading space"
+  },
+  {
+   "key": " nurse",
+   "emit": " nurse",
+   "description": "the word 'nurse', with a leading space"
+  },
+  {
+   "key": " farmer",
+   "emit": " farmer",
+   "description": "the word 'farmer', with a leading space"
+  },
+  {
+   "key": " worker",
+   "emit": " worker",
+   "description": "the word 'worker', with a leading space"
+  },
+  {
+   "key": " driver",
+   "emit": " driver",
+   "description": "the word 'driver', with a leading space"
+  },
+  {
+   "key": " writer",
+   "emit": " writer",
+   "description": "the word 'writer', with a leading space"
+  },
+  {
+   "key": " artist",
+   "emit": " artist",
+   "description": "the word 'artist', with a leading space"
+  },
+  {
+   "key": " scientist",
+   "emit": " scientist",
+   "description": "the word 'scientist', with a leading space"
+  },
+  {
+   "key": " king",
+   "emit": " king",
+   "description": "the word 'king', with a leading space"
+  },
+  {
+   "key": " queen",
+   "emit": " queen",
+   "description": "the word 'queen', with a leading space"
+  },
+  {
+   "key": " leader",
+   "emit": " leader",
+   "description": "the word 'leader', with a leading space"
+  },
+  {
+   "key": " group",
+   "emit": " group",
+   "description": "the word 'group', with a leading space"
+  },
+  {
+   "key": " team",
+   "emit": " team",
+   "description": "the word 'team', with a leading space"
+  },
+  {
+   "key": " crowd",
+   "emit": " crowd",
+   "description": "the word 'crowd', with a leading space"
+  },
+  {
+   "key": " someone",
+   "emit": " someone",
+   "description": "the word 'someone', with a leading space"
+  },
+  {
+   "key": " anyone",
+   "emit": " anyone",
+   "description": "the word 'anyone', with a leading space"
+  },
+  {
+   "key": " everyone",
+   "emit": " everyone",
+   "description": "the word 'everyone', with a leading space"
+  },
+  {
+   "key": " nobody",
+   "emit": " nobody",
+   "description": "the word 'nobody', with a leading space"
+  },
+  {
+   "key": " stranger",
+   "emit": " stranger",
+   "description": "the word 'stranger', with a leading space"
+  },
+  {
+   "key": " guest",
+   "emit": " guest",
+   "description": "the word 'guest', with a leading space"
+  },
+  {
+   "key": " host",
+   "emit": " host",
+   "description": "the word 'host', with a leading space"
+  },
+  {
+   "key": " owner",
+   "emit": " owner",
+   "description": "the word 'owner', with a leading space"
+  },
+  {
+   "key": " member",
+   "emit": " member",
+   "description": "the word 'member', with a leading space"
+  },
+  {
+   "key": " captain",
+   "emit": " captain",
+   "description": "the word 'captain', with a leading space"
+  },
+  {
+   "key": " soldier",
+   "emit": " soldier",
+   "description": "the word 'soldier', with a leading space"
+  },
+  {
+   "key": " judge",
+   "emit": " judge",
+   "description": "the word 'judge', with a leading space"
+  },
+  {
+   "key": " water",
+   "emit": " water",
+   "description": "the word 'water', with a leading space"
+  },
+  {
+   "key": " air",
+   "emit": " air",
+   "description": "the word 'air', with a leading space"
+  },
+  {
+   "key": " fire",
+   "emit": " fire",
+   "description": "the word 'fire', with a leading space"
+  },
+  {
+   "key": " earth",
+   "emit": " earth",
+   "description": "the word 'earth', with a leading space"
+  },
+  {
+   "key": " land",
+   "emit": " land",
+   "description": "the word 'land', with a leading space"
+  },
+  {
+   "key": " sea",
+   "emit": " sea",
+   "description": "the word 'sea', with a leading space"
+  },
+  {
+   "key": " ocean",
+   "emit": " ocean",
+   "description": "the word 'ocean', with a leading space"
+  },
+  {
+   "key": " river",
+   "emit": " river",
+   "description": "the word 'river', with a leading space"
+  },
+  {
+   "key": " lake",
+   "emit": " lake",
+   "description": "the word 'lake', with a leading space"
+  },
+  {
+   "key": " mountain",
+   "emit": " mountain",
+   "description": "the word 'mountain', with a leading space"
+  },
+  {
+   "key": " hill",
+   "emit": " hill",
+   "description": "the word 'hill', with a leading space"
+  },
+  {
+   "key": " valley",
+   "emit": " valley",
+   "description": "the word 'valley', with a leading space"
+  },
+  {
+   "key": " forest",
+   "emit": " forest",
+   "description": "the word 'forest', with a leading space"
+  },
+  {
+   "key": " tree",
+   "emit": " tree",
+   "description": "the word 'tree', with a leading space"
+  },
+  {
+   "key": " plant",
+   "emit": " plant",
+   "description": "the word 'plant', with a leading space"
+  },
+  {
+   "key": " flower",
+   "emit": " flower",
+   "description": "the word 'flower', with a leading space"
+  },
+  {
+   "key": " grass",
+   "emit": " grass",
+   "description": "the word 'grass', with a leading space"
+  },
+  {
+   "key": " leaf",
+   "emit": " leaf",
+   "description": "the word 'leaf', with a leading space"
+  },
+  {
+   "key": " root",
+   "emit": " root",
+   "description": "the word 'root', with a leading space"
+  },
+  {
+   "key": " seed",
+   "emit": " seed",
+   "description": "the word 'seed', with a leading space"
+  },
+  {
+   "key": " rock",
+   "emit": " rock",
+   "description": "the word 'rock', with a leading space"
+  },
+  {
+   "key": " stone",
+   "emit": " stone",
+   "description": "the word 'stone', with a leading space"
+  },
+  {
+   "key": " sand",
+   "emit": " sand",
+   "description": "the word 'sand', with a leading space"
+  },
+  {
+   "key": " soil",
+   "emit": " soil",
+   "description": "the word 'soil', with a leading space"
+  },
+  {
+   "key": " ice",
+   "emit": " ice",
+   "description": "the word 'ice', with a leading space"
+  },
+  {
+   "key": " snow",
+   "emit": " snow",
+   "description": "the word 'snow', with a leading space"
+  },
+  {
+   "key": " rain",
+   "emit": " rain",
+   "description": "the word 'rain', with a leading space"
+  },
+  {
+   "key": " wind",
+   "emit": " wind",
+   "description": "the word 'wind', with a leading space"
+  },
+  {
+   "key": " storm",
+   "emit": " storm",
+   "description": "the word 'storm', with a leading space"
+  },
+  {
+   "key": " cloud",
+   "emit": " cloud",
+   "description": "the word 'cloud', with a leading space"
+  },
+  {
+   "key": " sky",
+   "emit": " sky",
+   "description": "the word 'sky', with a leading space"
+  },
+  {
+   "key": " sun",
+   "emit": " sun",
+   "description": "the word 'sun', with a leading space"
+  },
+  {
+   "key": " moon",
+   "emit": " moon",
+   "description": "the word 'moon', with a leading space"
+  },
+  {
+   "key": " star",
+   "emit": " star",
+   "description": "the word 'star', with a leading space"
+  },
+  {
+   "key": " world",
+   "emit": " world",
+   "description": "the word 'world', with a leading space"
+  },
+  {
+   "key": " nature",
+   "emit": " nature",
+   "description": "the word 'nature', with a leading space"
+  },
+  {
+   "key": " weather",
+   "emit": " weather",
+   "description": "the word 'weather', with a leading space"
+  },
+  {
+   "key": " season",
+   "emit": " season",
+   "description": "the word 'season', with a leading space"
+  },
+  {
+   "key": " spring",
+   "emit": " spring",
+   "description": "the word 'spring', with a leading space"
+  },
+  {
+   "key": " summer",
+   "emit": " summer",
+   "description": "the word 'summer', with a leading space"
+  },
+  {
+   "key": " autumn",
+   "emit": " autumn",
+   "description": "the word 'autumn', with a leading space"
+  },
+  {
+   "key": " winter",
+   "emit": " winter",
+   "description": "the word 'winter', with a leading space"
+  },
+  {
+   "key": " shadow",
+   "emit": " shadow",
+   "description": "the word 'shadow', with a leading space"
+  },
+  {
+   "key": " wave",
+   "emit": " wave",
+   "description": "the word 'wave', with a leading space"
+  },
+  {
+   "key": " beach",
+   "emit": " beach",
+   "description": "the word 'beach', with a leading space"
+  },
+  {
+   "key": " island",
+   "emit": " island",
+   "description": "the word 'island', with a leading space"
+  },
+  {
+   "key": " desert",
+   "emit": " desert",
+   "description": "the word 'desert', with a leading space"
+  },
+  {
+   "key": " field",
+   "emit": " field",
+   "description": "the word 'field', with a leading space"
+  },
+  {
+   "key": " garden",
+   "emit": " garden",
+   "description": "the word 'garden', with a leading space"
+  },
+  {
+   "key": " branch",
+   "emit": " branch",
+   "description": "the word 'branch', with a leading space"
+  },
+  {
+   "key": " bush",
+   "emit": " bush",
+   "description": "the word 'bush', with a leading space"
+  },
+  {
+   "key": " mud",
+   "emit": " mud",
+   "description": "the word 'mud', with a leading space"
+  },
+  {
+   "key": " dust",
+   "emit": " dust",
+   "description": "the word 'dust', with a leading space"
+  },
+  {
+   "key": " smoke",
+   "emit": " smoke",
+   "description": "the word 'smoke', with a leading space"
+  },
+  {
+   "key": " steam",
+   "emit": " steam",
+   "description": "the word 'steam', with a leading space"
+  },
+  {
+   "key": " animal",
+   "emit": " animal",
+   "description": "the word 'animal', with a leading space"
+  },
+  {
+   "key": " dog",
+   "emit": " dog",
+   "description": "the word 'dog', with a leading space"
+  },
+  {
+   "key": " cat",
+   "emit": " cat",
+   "description": "the word 'cat', with a leading space"
+  },
+  {
+   "key": " bird",
+   "emit": " bird",
+   "description": "the word 'bird', with a leading space"
+  },
+  {
+   "key": " fish",
+   "emit": " fish",
+   "description": "the word 'fish', with a leading space"
+  },
+  {
+   "key": " horse",
+   "emit": " horse",
+   "description": "the word 'horse', with a leading space"
+  },
+  {
+   "key": " cow",
+   "emit": " cow",
+   "description": "the word 'cow', with a leading space"
+  },
+  {
+   "key": " pig",
+   "emit": " pig",
+   "description": "the word 'pig', with a leading space"
+  },
+  {
+   "key": " sheep",
+   "emit": " sheep",
+   "description": "the word 'sheep', with a leading space"
+  },
+  {
+   "key": " goat",
+   "emit": " goat",
+   "description": "the word 'goat', with a leading space"
+  },
+  {
+   "key": " chicken",
+   "emit": " chicken",
+   "description": "the word 'chicken', with a leading space"
+  },
+  {
+   "key": " duck",
+   "emit": " duck",
+   "description": "the word 'duck', with a leading space"
+  },
+  {
+   "key": " mouse",
+   "emit": " mouse",
+   "description": "the word 'mouse', with a leading space"
+  },
+  {
+   "key": " rat",
+   "emit": " rat",
+   "description": "the word 'rat', with a leading space"
+  },
+  {
+   "key": " rabbit",
+   "emit": " rabbit",
+   "description": "the word 'rabbit', with a leading space"
+  },
+  {
+   "key": " bear",
+   "emit": " bear",
+   "description": "the word 'bear', with a leading space"
+  },
+  {
+   "key": " wolf",
+   "emit": " wolf",
+   "description": "the word 'wolf', with a leading space"
+  },
+  {
+   "key": " fox",
+   "emit": " fox",
+   "description": "the word 'fox', with a leading space"
+  },
+  {
+   "key": " lion",
+   "emit": " lion",
+   "description": "the word 'lion', with a leading space"
+  },
+  {
+   "key": " tiger",
+   "emit": " tiger",
+   "description": "the word 'tiger', with a leading space"
+  },
+  {
+   "key": " elephant",
+   "emit": " elephant",
+   "description": "the word 'elephant', with a leading space"
+  },
+  {
+   "key": " monkey",
+   "emit": " monkey",
+   "description": "the word 'monkey', with a leading space"
+  },
+  {
+   "key": " snake",
+   "emit": " snake",
+   "description": "the word 'snake', with a leading space"
+  },
+  {
+   "key": " frog",
+   "emit": " frog",
+   "description": "the word 'frog', with a leading space"
+  },
+  {
+   "key": " insect",
+   "emit": " insect",
+   "description": "the word 'insect', with a leading space"
+  },
+  {
+   "key": " bee",
+   "emit": " bee",
+   "description": "the word 'bee', with a leading space"
+  },
+  {
+   "key": " ant",
+   "emit": " ant",
+   "description": "the word 'ant', with a leading space"
+  },
+  {
+   "key": " spider",
+   "emit": " spider",
+   "description": "the word 'spider', with a leading space"
+  },
+  {
+   "key": " butterfly",
+   "emit": " butterfly",
+   "description": "the word 'butterfly', with a leading space"
+  },
+  {
+   "key": " worm",
+   "emit": " worm",
+   "description": "the word 'worm', with a leading space"
+  },
+  {
+   "key": " whale",
+   "emit": " whale",
+   "description": "the word 'whale', with a leading space"
+  },
+  {
+   "key": " shark",
+   "emit": " shark",
+   "description": "the word 'shark', with a leading space"
+  },
+  {
+   "key": " egg",
+   "emit": " egg",
+   "description": "the word 'egg', with a leading space"
+  },
+  {
+   "key": " nest",
+   "emit": " nest",
+   "description": "the word 'nest', with a leading space"
+  },
+  {
+   "key": " wing",
+   "emit": " wing",
+   "description": "the word 'wing', with a leading space"
+  },
+  {
+   "key": " tail",
+   "emit": " tail",
+   "description": "the word 'tail', with a leading space"
+  },
+  {
+   "key": " feather",
+   "emit": " feather",
+   "description": "the word 'feather', with a leading space"
+  },
+  {
+   "key": " fur",
+   "emit": " fur",
+   "description": "the word 'fur', with a leading space"
+  },
+  {
+   "key": " paw",
+   "emit": " paw",
+   "description": "the word 'paw', with a leading space"
+  },
+  {
+   "key": " beak",
+   "emit": " beak",
+   "description": "the word 'beak', with a leading space"
+  },
+  {
+   "key": " hive",
+   "emit": " hive",
+   "description": "the word 'hive', with a leading space"
+  },
+  {
+   "key": " herd",
+   "emit": " herd",
+   "description": "the word 'herd', with a leading space"
+  },
+  {
+   "key": " food",
+   "emit": " food",
+   "description": "the word 'food', with a leading space"
+  },
+  {
+   "key": " bread",
+   "emit": " bread",
+   "description": "the word 'bread', with a leading space"
+  },
+  {
+   "key": " milk",
+   "emit": " milk",
+   "description": "the word 'milk', with a leading space"
+  },
+  {
+   "key": " cheese",
+   "emit": " cheese",
+   "description": "the word 'cheese', with a leading space"
+  },
+  {
+   "key": " butter",
+   "emit": " butter",
+   "description": "the word 'butter', with a leading space"
+  },
+  {
+   "key": " meat",
+   "emit": " meat",
+   "description": "the word 'meat', with a leading space"
+  },
+  {
+   "key": " rice",
+   "emit": " rice",
+   "description": "the word 'rice', with a leading space"
+  },
+  {
+   "key": " pasta",
+   "emit": " pasta",
+   "description": "the word 'pasta', with a leading space"
+  },
+  {
+   "key": " soup",
+   "emit": " soup",
+   "description": "the word 'soup', with a leading space"
+  },
+  {
+   "key": " salad",
+   "emit": " salad",
+   "description": "the word 'salad', with a leading space"
+  },
+  {
+   "key": " fruit",
+   "emit": " fruit",
+   "description": "the word 'fruit', with a leading space"
+  },
+  {
+   "key": " apple",
+   "emit": " apple",
+   "description": "the word 'apple', with a leading space"
+  },
+  {
+   "key": " banana",
+   "emit": " banana",
+   "description": "the word 'banana', with a leading space"
+  },
+  {
+   "key": " grape",
+   "emit": " grape",
+   "description": "the word 'grape', with a leading space"
+  },
+  {
+   "key": " berry",
+   "emit": " berry",
+   "description": "the word 'berry', with a leading space"
+  },
+  {
+   "key": " vegetable",
+   "emit": " vegetable",
+   "description": "the word 'vegetable', with a leading space"
+  },
+  {
+   "key": " potato",
+   "emit": " potato",
+   "description": "the word 'potato', with a leading space"
+  },
+  {
+   "key": " tomato",
+   "emit": " tomato",
+   "description": "the word 'tomato', with a leading space"
+  },
+  {
+   "key": " carrot",
+   "emit": " carrot",
+   "description": "the word 'carrot', with a leading space"
+  },
+  {
+   "key": " onion",
+   "emit": " onion",
+   "description": "the word 'onion', with a leading space"
+  },
+  {
+   "key": " bean",
+   "emit": " bean",
+   "description": "the word 'bean', with a leading space"
+  },
+  {
+   "key": " corn",
+   "emit": " corn",
+   "description": "the word 'corn', with a leading space"
+  },
+  {
+   "key": " sugar",
+   "emit": " sugar",
+   "description": "the word 'sugar', with a leading space"
+  },
+  {
+   "key": " salt",
+   "emit": " salt",
+   "description": "the word 'salt', with a leading space"
+  },
+  {
+   "key": " pepper",
+   "emit": " pepper",
+   "description": "the word 'pepper', with a leading space"
+  },
+  {
+   "key": " oil",
+   "emit": " oil",
+   "description": "the word 'oil', with a leading space"
+  },
+  {
+   "key": " honey",
+   "emit": " honey",
+   "description": "the word 'honey', with a leading space"
+  },
+  {
+   "key": " cake",
+   "emit": " cake",
+   "description": "the word 'cake', with a leading space"
+  },
+  {
+   "key": " juice",
+   "emit": " juice",
+   "description": "the word 'juice', with a leading space"
+  },
+  {
+   "key": " tea",
+   "emit": " tea",
+   "description": "the word 'tea', with a leading space"
+  },
+  {
+   "key": " coffee",
+   "emit": " coffee",
+   "description": "the word 'coffee', with a leading space"
+  },
+  {
+   "key": " wine",
+   "emit": " wine",
+   "description": "the word 'wine', with a leading space"
+  },
+  {
+   "key": " beer",
+   "emit": " beer",
+   "description": "the word 'beer', with a leading space"
+  },
+  {
+   "key": " meal",
+   "emit": " meal",
+   "description": "the word 'meal', with a leading space"
+  },
+  {
+   "key": " breakfast",
+   "emit": " breakfast",
+   "description": "the word 'breakfast', with a leading space"
+  },
+  {
+   "key": " lunch",
+   "emit": " lunch",
+   "description": "the word 'lunch', with a leading space"
+  },
+  {
+   "key": " dinner",
+   "emit": " dinner",
+   "description": "the word 'dinner', with a leading space"
+  },
+  {
+   "key": " plate",
+   "emit": " plate",
+   "description": "the word 'plate', with a leading space"
+  },
+  {
+   "key": " cup",
+   "emit": " cup",
+   "description": "the word 'cup', with a leading space"
+  },
+  {
+   "key": " bowl",
+   "emit": " bowl",
+   "description": "the word 'bowl', with a leading space"
+  },
+  {
+   "key": " flour",
+   "emit": " flour",
+   "description": "the word 'flour', with a leading space"
+  },
+  {
+   "key": " dough",
+   "emit": " dough",
+   "description": "the word 'dough', with a leading space"
+  },
+  {
+   "key": " pie",
+   "emit": " pie",
+   "description": "the word 'pie', with a leading space"
+  },
+  {
+   "key": " biscuit",
+   "emit": " biscuit",
+   "description": "the word 'biscuit', with a leading space"
+  },
+  {
+   "key": " jam",
+   "emit": " jam",
+   "description": "the word 'jam', with a leading space"
+  },
+  {
+   "key": " sauce",
+   "emit": " sauce",
+   "description": "the word 'sauce', with a leading space"
+  },
+  {
+   "key": " thing",
+   "emit": " thing",
+   "description": "the word 'thing', with a leading space"
+  },
+  {
+   "key": " object",
+   "emit": " object",
+   "description": "the word 'object', with a leading space"
+  },
+  {
+   "key": " tool",
+   "emit": " tool",
+   "description": "the word 'tool', with a leading space"
+  },
+  {
+   "key": " machine",
+   "emit": " machine",
+   "description": "the word 'machine', with a leading space"
+  },
+  {
+   "key": " car",
+   "emit": " car",
+   "description": "the word 'car', with a leading space"
+  },
+  {
+   "key": " bus",
+   "emit": " bus",
+   "description": "the word 'bus', with a leading space"
+  },
+  {
+   "key": " plane",
+   "emit": " plane",
+   "description": "the word 'plane', with a leading space"
+  },
+  {
+   "key": " boat",
+   "emit": " boat",
+   "description": "the word 'boat', with a leading space"
+  },
+  {
+   "key": " ship",
+   "emit": " ship",
+   "description": "the word 'ship', with a leading space"
+  },
+  {
+   "key": " bike",
+   "emit": " bike",
+   "description": "the word 'bike', with a leading space"
+  },
+  {
+   "key": " road",
+   "emit": " road",
+   "description": "the word 'road', with a leading space"
+  },
+  {
+   "key": " street",
+   "emit": " street",
+   "description": "the word 'street', with a leading space"
+  },
+  {
+   "key": " bridge",
+   "emit": " bridge",
+   "description": "the word 'bridge', with a leading space"
+  },
+  {
+   "key": " house",
+   "emit": " house",
+   "description": "the word 'house', with a leading space"
+  },
+  {
+   "key": " home",
+   "emit": " home",
+   "description": "the word 'home', with a leading space"
+  },
+  {
+   "key": " room",
+   "emit": " room",
+   "description": "the word 'room', with a leading space"
+  },
+  {
+   "key": " door",
+   "emit": " door",
+   "description": "the word 'door', with a leading space"
+  },
+  {
+   "key": " window",
+   "emit": " window",
+   "description": "the word 'window', with a leading space"
+  },
+  {
+   "key": " wall",
+   "emit": " wall",
+   "description": "the word 'wall', with a leading space"
+  },
+  {
+   "key": " floor",
+   "emit": " floor",
+   "description": "the word 'floor', with a leading space"
+  },
+  {
+   "key": " roof",
+   "emit": " roof",
+   "description": "the word 'roof', with a leading space"
+  },
+  {
+   "key": " table",
+   "emit": " table",
+   "description": "the word 'table', with a leading space"
+  },
+  {
+   "key": " chair",
+   "emit": " chair",
+   "description": "the word 'chair', with a leading space"
+  },
+  {
+   "key": " bed",
+   "emit": " bed",
+   "description": "the word 'bed', with a leading space"
+  },
+  {
+   "key": " desk",
+   "emit": " desk",
+   "description": "the word 'desk', with a leading space"
+  },
+  {
+   "key": " book",
+   "emit": " book",
+   "description": "the word 'book', with a leading space"
+  },
+  {
+   "key": " paper",
+   "emit": " paper",
+   "description": "the word 'paper', with a leading space"
+  },
+  {
+   "key": " pen",
+   "emit": " pen",
+   "description": "the word 'pen', with a leading space"
+  },
+  {
+   "key": " pencil",
+   "emit": " pencil",
+   "description": "the word 'pencil', with a leading space"
+  },
+  {
+   "key": " phone",
+   "emit": " phone",
+   "description": "the word 'phone', with a leading space"
+  },
+  {
+   "key": " computer",
+   "emit": " computer",
+   "description": "the word 'computer', with a leading space"
+  },
+  {
+   "key": " screen",
+   "emit": " screen",
+   "description": "the word 'screen', with a leading space"
+  },
+  {
+   "key": " key",
+   "emit": " key",
+   "description": "the word 'key', with a leading space"
+  },
+  {
+   "key": " lock",
+   "emit": " lock",
+   "description": "the word 'lock', with a leading space"
+  },
+  {
+   "key": " box",
+   "emit": " box",
+   "description": "the word 'box', with a leading space"
+  },
+  {
+   "key": " bag",
+   "emit": " bag",
+   "description": "the word 'bag', with a leading space"
+  },
+  {
+   "key": " clothes",
+   "emit": " clothes",
+   "description": "the word 'clothes', with a leading space"
+  },
+  {
+   "key": " shirt",
+   "emit": " shirt",
+   "description": "the word 'shirt', with a leading space"
+  },
+  {
+   "key": " shoe",
+   "emit": " shoe",
+   "description": "the word 'shoe', with a leading space"
+  },
+  {
+   "key": " hat",
+   "emit": " hat",
+   "description": "the word 'hat', with a leading space"
+  },
+  {
+   "key": " coat",
+   "emit": " coat",
+   "description": "the word 'coat', with a leading space"
+  },
+  {
+   "key": " money",
+   "emit": " money",
+   "description": "the word 'money', with a leading space"
+  },
+  {
+   "key": " coin",
+   "emit": " coin",
+   "description": "the word 'coin', with a leading space"
+  },
+  {
+   "key": " card",
+   "emit": " card",
+   "description": "the word 'card', with a leading space"
+  },
+  {
+   "key": " glass",
+   "emit": " glass",
+   "description": "the word 'glass', with a leading space"
+  },
+  {
+   "key": " bottle",
+   "emit": " bottle",
+   "description": "the word 'bottle', with a leading space"
+  },
+  {
+   "key": " knife",
+   "emit": " knife",
+   "description": "the word 'knife', with a leading space"
+  },
+  {
+   "key": " fork",
+   "emit": " fork",
+   "description": "the word 'fork', with a leading space"
+  },
+  {
+   "key": " spoon",
+   "emit": " spoon",
+   "description": "the word 'spoon', with a leading space"
+  },
+  {
+   "key": " clock",
+   "emit": " clock",
+   "description": "the word 'clock', with a leading space"
+  },
+  {
+   "key": " lamp",
+   "emit": " lamp",
+   "description": "the word 'lamp', with a leading space"
+  },
+  {
+   "key": " mirror",
+   "emit": " mirror",
+   "description": "the word 'mirror', with a leading space"
+  },
+  {
+   "key": " picture",
+   "emit": " picture",
+   "description": "the word 'picture', with a leading space"
+  },
+  {
+   "key": " camera",
+   "emit": " camera",
+   "description": "the word 'camera', with a leading space"
+  },
+  {
+   "key": " radio",
+   "emit": " radio",
+   "description": "the word 'radio', with a leading space"
+  },
+  {
+   "key": " television",
+   "emit": " television",
+   "description": "the word 'television', with a leading space"
+  },
+  {
+   "key": " wheel",
+   "emit": " wheel",
+   "description": "the word 'wheel', with a leading space"
+  },
+  {
+   "key": " engine",
+   "emit": " engine",
+   "description": "the word 'engine', with a leading space"
+  },
+  {
+   "key": " rope",
+   "emit": " rope",
+   "description": "the word 'rope', with a leading space"
+  },
+  {
+   "key": " hammer",
+   "emit": " hammer",
+   "description": "the word 'hammer', with a leading space"
+  },
+  {
+   "key": " needle",
+   "emit": " needle",
+   "description": "the word 'needle', with a leading space"
+  },
+  {
+   "key": " thread",
+   "emit": " thread",
+   "description": "the word 'thread', with a leading space"
+  },
+  {
+   "key": " brush",
+   "emit": " brush",
+   "description": "the word 'brush', with a leading space"
+  },
+  {
+   "key": " basket",
+   "emit": " basket",
+   "description": "the word 'basket', with a leading space"
+  },
+  {
+   "key": " time",
+   "emit": " time",
+   "description": "the word 'time', with a leading space"
+  },
+  {
+   "key": " year",
+   "emit": " year",
+   "description": "the word 'year', with a leading space"
+  },
+  {
+   "key": " month",
+   "emit": " month",
+   "description": "the word 'month', with a leading space"
+  },
+  {
+   "key": " week",
+   "emit": " week",
+   "description": "the word 'week', with a leading space"
+  },
+  {
+   "key": " day",
+   "emit": " day",
+   "description": "the word 'day', with a leading space"
+  },
+  {
+   "key": " hour",
+   "emit": " hour",
+   "description": "the word 'hour', with a leading space"
+  },
+  {
+   "key": " minute",
+   "emit": " minute",
+   "description": "the word 'minute', with a leading space"
+  },
+  {
+   "key": " moment",
+   "emit": " moment",
+   "description": "the word 'moment', with a leading space"
+  },
+  {
+   "key": " past",
+   "emit": " past",
+   "description": "the word 'past', with a leading space"
+  },
+  {
+   "key": " present",
+   "emit": " present",
+   "description": "the word 'present', with a leading space"
+  },
+  {
+   "key": " future",
+   "emit": " future",
+   "description": "the word 'future', with a leading space"
+  },
+  {
+   "key": " life",
+   "emit": " life",
+   "description": "the word 'life', with a leading space"
+  },
+  {
+   "key": " death",
+   "emit": " death",
+   "description": "the word 'death', with a leading space"
+  },
+  {
+   "key": " birth",
+   "emit": " birth",
+   "description": "the word 'birth', with a leading space"
+  },
+  {
+   "key": " age",
+   "emit": " age",
+   "description": "the word 'age', with a leading space"
+  },
+  {
+   "key": " name",
+   "emit": " name",
+   "description": "the word 'name', with a leading space"
+  },
+  {
+   "key": " word",
+   "emit": " word",
+   "description": "the word 'word', with a leading space"
+  },
+  {
+   "key": " language",
+   "emit": " language",
+   "description": "the word 'language', with a leading space"
+  },
+  {
+   "key": " story",
+   "emit": " story",
+   "description": "the word 'story', with a leading space"
+  },
+  {
+   "key": " idea",
+   "emit": " idea",
+   "description": "the word 'idea', with a leading space"
+  },
+  {
+   "key": " thought",
+   "emit": " thought",
+   "description": "the word 'thought', with a leading space"
+  },
+  {
+   "key": " mind",
+   "emit": " mind",
+   "description": "the word 'mind', with a leading space"
+  },
+  {
+   "key": " memory",
+   "emit": " memory",
+   "description": "the word 'memory', with a leading space"
+  },
+  {
+   "key": " reason",
+   "emit": " reason",
+   "description": "the word 'reason', with a leading space"
+  },
+  {
+   "key": " effect",
+   "emit": " effect",
+   "description": "the word 'effect', with a leading space"
+  },
+  {
+   "key": " result",
+   "emit": " result",
+   "description": "the word 'result', with a leading space"
+  },
+  {
+   "key": " problem",
+   "emit": " problem",
+   "description": "the word 'problem', with a leading space"
+  },
+  {
+   "key": " solution",
+   "emit": " solution",
+   "description": "the word 'solution', with a leading space"
+  },
+  {
+   "key": " fact",
+   "emit": " fact",
+   "description": "the word 'fact', with a leading space"
+  },
+  {
+   "key": " truth",
+   "emit": " truth",
+   "description": "the word 'truth', with a leading space"
+  },
+  {
+   "key": " rule",
+   "emit": " rule",
+   "description": "the word 'rule', with a leading space"
+  },
+  {
+   "key": " law",
+   "emit": " law",
+   "description": "the word 'law', with a leading space"
+  },
+  {
+   "key": " choice",
+   "emit": " choice",
+   "description": "the word 'choice', with a leading space"
+  },
+  {
+   "key": " chance",
+   "emit": " chance",
+   "description": "the word 'chance', with a leading space"
+  },
+  {
+   "key": " luck",
+   "emit": " luck",
+   "description": "the word 'luck', with a leading space"
+  },
+  {
+   "key": " fear",
+   "emit": " fear",
+   "description": "the word 'fear', with a leading space"
+  },
+  {
+   "key": " joy",
+   "emit": " joy",
+   "description": "the word 'joy', with a leading space"
+  },
+  {
+   "key": " pain",
+   "emit": " pain",
+   "description": "the word 'pain', with a leading space"
+  },
+  {
+   "key": " health",
+   "emit": " health",
+   "description": "the word 'health', with a leading space"
+  },
+  {
+   "key": " job",
+   "emit": " job",
+   "description": "the word 'job', with a leading space"
+  },
+  {
+   "key": " business",
+   "emit": " business",
+   "description": "the word 'business', with a leading space"
+  },
+  {
+   "key": " price",
+   "emit": " price",
+   "description": "the word 'price', with a leading space"
+  },
+  {
+   "key": " cost",
+   "emit": " cost",
+   "description": "the word 'cost', with a leading space"
+  },
+  {
+   "key": " value",
+   "emit": " value",
+   "description": "the word 'value', with a leading space"
+  },
+  {
+   "key": " number",
+   "emit": " number",
+   "description": "the word 'number', with a leading space"
+  },
+  {
+   "key": " amount",
+   "emit": " amount",
+   "description": "the word 'amount', with a leading space"
+  },
+  {
+   "key": " part",
+   "emit": " part",
+   "description": "the word 'part', with a leading space"
+  },
+  {
+   "key": " side",
+   "emit": " side",
+   "description": "the word 'side', with a leading space"
+  },
+  {
+   "key": " end",
+   "emit": " end",
+   "description": "the word 'end', with a leading space"
+  },
+  {
+   "key": " middle",
+   "emit": " middle",
+   "description": "the word 'middle', with a leading space"
+  },
+  {
+   "key": " space",
+   "emit": " space",
+   "description": "the word 'space', with a leading space"
+  },
+  {
+   "key": " area",
+   "emit": " area",
+   "description": "the word 'area', with a leading space"
+  },
+  {
+   "key": " distance",
+   "emit": " distance",
+   "description": "the word 'distance', with a leading space"
+  },
+  {
+   "key": " size",
+   "emit": " size",
+   "description": "the word 'size', with a leading space"
+  },
+  {
+   "key": " shape",
+   "emit": " shape",
+   "description": "the word 'shape', with a leading space"
+  },
+  {
+   "key": " colour",
+   "emit": " colour",
+   "description": "the word 'colour', with a leading space"
+  },
+  {
+   "key": " noise",
+   "emit": " noise",
+   "description": "the word 'noise', with a leading space"
+  },
+  {
+   "key": " music",
+   "emit": " music",
+   "description": "the word 'music', with a leading space"
+  },
+  {
+   "key": " voice",
+   "emit": " voice",
+   "description": "the word 'voice', with a leading space"
+  },
+  {
+   "key": " silence",
+   "emit": " silence",
+   "description": "the word 'silence', with a leading space"
+  },
+  {
+   "key": " power",
+   "emit": " power",
+   "description": "the word 'power', with a leading space"
+  },
+  {
+   "key": " energy",
+   "emit": " energy",
+   "description": "the word 'energy', with a leading space"
+  },
+  {
+   "key": " force",
+   "emit": " force",
+   "description": "the word 'force', with a leading space"
+  },
+  {
+   "key": " speed",
+   "emit": " speed",
+   "description": "the word 'speed', with a leading space"
+  },
+  {
+   "key": " weight",
+   "emit": " weight",
+   "description": "the word 'weight', with a leading space"
+  },
+  {
+   "key": " temperature",
+   "emit": " temperature",
+   "description": "the word 'temperature', with a leading space"
+  },
+  {
+   "key": " method",
+   "emit": " method",
+   "description": "the word 'method', with a leading space"
+  },
+  {
+   "key": " system",
+   "emit": " system",
+   "description": "the word 'system', with a leading space"
+  },
+  {
+   "key": " process",
+   "emit": " process",
+   "description": "the word 'process', with a leading space"
+  },
+  {
+   "key": " purpose",
+   "emit": " purpose",
+   "description": "the word 'purpose', with a leading space"
+  },
+  {
+   "key": " meaning",
+   "emit": " meaning",
+   "description": "the word 'meaning', with a leading space"
+  },
+  {
+   "key": " detail",
+   "emit": " detail",
+   "description": "the word 'detail', with a leading space"
+  },
+  {
+   "key": " example",
+   "emit": " example",
+   "description": "the word 'example', with a leading space"
+  },
+  {
+   "key": " pattern",
+   "emit": " pattern",
+   "description": "the word 'pattern', with a leading space"
+  },
+  {
+   "key": " level",
+   "emit": " level",
+   "description": "the word 'level', with a leading space"
+  },
+  {
+   "key": " limit",
+   "emit": " limit",
+   "description": "the word 'limit', with a leading space"
+  },
+  {
+   "key": " city",
+   "emit": " city",
+   "description": "the word 'city', with a leading space"
+  },
+  {
+   "key": " town",
+   "emit": " town",
+   "description": "the word 'town', with a leading space"
+  },
+  {
+   "key": " village",
+   "emit": " village",
+   "description": "the word 'village', with a leading space"
+  },
+  {
+   "key": " country",
+   "emit": " country",
+   "description": "the word 'country', with a leading space"
+  },
+  {
+   "key": " state",
+   "emit": " state",
+   "description": "the word 'state', with a leading space"
+  },
+  {
+   "key": " park",
+   "emit": " park",
+   "description": "the word 'park', with a leading space"
+  },
+  {
+   "key": " school",
+   "emit": " school",
+   "description": "the word 'school', with a leading space"
+  },
+  {
+   "key": " hospital",
+   "emit": " hospital",
+   "description": "the word 'hospital', with a leading space"
+  },
+  {
+   "key": " shop",
+   "emit": " shop",
+   "description": "the word 'shop', with a leading space"
+  },
+  {
+   "key": " store",
+   "emit": " store",
+   "description": "the word 'store', with a leading space"
+  },
+  {
+   "key": " market",
+   "emit": " market",
+   "description": "the word 'market', with a leading space"
+  },
+  {
+   "key": " office",
+   "emit": " office",
+   "description": "the word 'office', with a leading space"
+  },
+  {
+   "key": " factory",
+   "emit": " factory",
+   "description": "the word 'factory', with a leading space"
+  },
+  {
+   "key": " church",
+   "emit": " church",
+   "description": "the word 'church', with a leading space"
+  },
+  {
+   "key": " library",
+   "emit": " library",
+   "description": "the word 'library', with a leading space"
+  },
+  {
+   "key": " museum",
+   "emit": " museum",
+   "description": "the word 'museum', with a leading space"
+  },
+  {
+   "key": " station",
+   "emit": " station",
+   "description": "the word 'station', with a leading space"
+  },
+  {
+   "key": " airport",
+   "emit": " airport",
+   "description": "the word 'airport', with a leading space"
+  },
+  {
+   "key": " port",
+   "emit": " port",
+   "description": "the word 'port', with a leading space"
+  },
+  {
+   "key": " hotel",
+   "emit": " hotel",
+   "description": "the word 'hotel', with a leading space"
+  },
+  {
+   "key": " restaurant",
+   "emit": " restaurant",
+   "description": "the word 'restaurant', with a leading space"
+  },
+  {
+   "key": " bank",
+   "emit": " bank",
+   "description": "the word 'bank', with a leading space"
+  },
+  {
+   "key": " farm",
+   "emit": " farm",
+   "description": "the word 'farm', with a leading space"
+  },
+  {
+   "key": " zoo",
+   "emit": " zoo",
+   "description": "the word 'zoo', with a leading space"
+  },
+  {
+   "key": " border",
+   "emit": " border",
+   "description": "the word 'border', with a leading space"
+  },
+  {
+   "key": " capital",
+   "emit": " capital",
+   "description": "the word 'capital', with a leading space"
+  },
+  {
+   "key": " region",
+   "emit": " region",
+   "description": "the word 'region', with a leading space"
+  },
+  {
+   "key": " again",
+   "emit": " again",
+   "description": "the word 'again', with a leading space"
+  },
+  {
+   "key": " already",
+   "emit": " already",
+   "description": "the word 'already', with a leading space"
+  },
+  {
+   "key": " also",
+   "emit": " also",
+   "description": "the word 'also', with a leading space"
+  },
+  {
+   "key": " always",
+   "emit": " always",
+   "description": "the word 'always', with a leading space"
+  },
+  {
+   "key": " away",
+   "emit": " away",
+   "description": "the word 'away', with a leading space"
+  },
+  {
+   "key": " ever",
+   "emit": " ever",
+   "description": "the word 'ever', with a leading space"
+  },
+  {
+   "key": " forward",
+   "emit": " forward",
+   "description": "the word 'forward', with a leading space"
+  },
+  {
+   "key": " indeed",
+   "emit": " indeed",
+   "description": "the word 'indeed', with a leading space"
+  },
+  {
+   "key": " just",
+   "emit": " just",
+   "description": "the word 'just', with a leading space"
+  },
+  {
+   "key": " maybe",
+   "emit": " maybe",
+   "description": "the word 'maybe', with a leading space"
+  },
+  {
+   "key": " never",
+   "emit": " never",
+   "description": "the word 'never', with a leading space"
+  },
+  {
+   "key": " now",
+   "emit": " now",
+   "description": "the word 'now', with a leading space"
+  },
+  {
+   "key": " often",
+   "emit": " often",
+   "description": "the word 'often', with a leading space"
+  },
+  {
+   "key": " once",
+   "emit": " once",
+   "description": "the word 'once', with a leading space"
+  },
+  {
+   "key": " perhaps",
+   "emit": " perhaps",
+   "description": "the word 'perhaps', with a leading space"
+  },
+  {
+   "key": " quite",
+   "emit": " quite",
+   "description": "the word 'quite', with a leading space"
+  },
+  {
+   "key": " rather",
+   "emit": " rather",
+   "description": "the word 'rather', with a leading space"
+  },
+  {
+   "key": " really",
+   "emit": " really",
+   "description": "the word 'really', with a leading space"
+  },
+  {
+   "key": " sometimes",
+   "emit": " sometimes",
+   "description": "the word 'sometimes', with a leading space"
+  },
+  {
+   "key": " soon",
+   "emit": " soon",
+   "description": "the word 'soon', with a leading space"
+  },
+  {
+   "key": " still",
+   "emit": " still",
+   "description": "the word 'still', with a leading space"
+  },
+  {
+   "key": " today",
+   "emit": " today",
+   "description": "the word 'today', with a leading space"
+  },
+  {
+   "key": " tomorrow",
+   "emit": " tomorrow",
+   "description": "the word 'tomorrow', with a leading space"
+  },
+  {
+   "key": " yesterday",
+   "emit": " yesterday",
+   "description": "the word 'yesterday', with a leading space"
+  },
+  {
+   "key": " usually",
+   "emit": " usually",
+   "description": "the word 'usually', with a leading space"
+  },
+  {
+   "key": " well",
+   "emit": " well",
+   "description": "the word 'well', with a leading space"
+  },
+  {
+   "key": " yet",
+   "emit": " yet",
+   "description": "the word 'yet', with a leading space"
+  },
+  {
+   "key": " almost",
+   "emit": " almost",
+   "description": "the word 'almost', with a leading space"
+  },
+  {
+   "key": " enough",
+   "emit": " enough",
+   "description": "the word 'enough', with a leading space"
+  },
+  {
+   "key": " least",
+   "emit": " least",
+   "description": "the word 'least', with a leading space"
+  },
+  {
+   "key": " less",
+   "emit": " less",
+   "description": "the word 'less', with a leading space"
+  },
+  {
+   "key": " more",
+   "emit": " more",
+   "description": "the word 'more', with a leading space"
+  },
+  {
+   "key": " nearly",
+   "emit": " nearly",
+   "description": "the word 'nearly', with a leading space"
+  },
+  {
+   "key": " quickly",
+   "emit": " quickly",
+   "description": "the word 'quickly', with a leading space"
+  },
+  {
+   "key": " slowly",
+   "emit": " slowly",
+   "description": "the word 'slowly', with a leading space"
+  },
+  {
+   "key": " together",
+   "emit": " together",
+   "description": "the word 'together', with a leading space"
+  },
+  {
+   "key": " apart",
+   "emit": " apart",
+   "description": "the word 'apart', with a leading space"
+  },
+  {
+   "key": " instead",
+   "emit": " instead",
+   "description": "the word 'instead', with a leading space"
+  },
+  {
+   "key": " finally",
+   "emit": " finally",
+   "description": "the word 'finally', with a leading space"
+  },
+  {
+   "key": " probably",
+   "emit": " probably",
+   "description": "the word 'probably', with a leading space"
+  },
+  {
+   "key": " certainly",
+   "emit": " certainly",
+   "description": "the word 'certainly', with a leading space"
+  },
+  {
+   "key": " exactly",
+   "emit": " exactly",
+   "description": "the word 'exactly', with a leading space"
+  },
+  {
+   "key": " mostly",
+   "emit": " mostly",
+   "description": "the word 'mostly', with a leading space"
+  },
+  {
+   "key": " hardly",
+   "emit": " hardly",
+   "description": "the word 'hardly', with a leading space"
+  },
+  {
+   "key": " barely",
+   "emit": " barely",
+   "description": "the word 'barely', with a leading space"
+  },
+  {
+   "key": " suddenly",
+   "emit": " suddenly",
+   "description": "the word 'suddenly', with a leading space"
+  },
+  {
+   "key": "a",
+   "emit": "a",
+   "description": "the bare letter 'a', for spelling a word that is not listed"
+  },
+  {
+   "key": "b",
+   "emit": "b",
+   "description": "the bare letter 'b', for spelling a word that is not listed"
+  },
+  {
+   "key": "c",
+   "emit": "c",
+   "description": "the bare letter 'c', for spelling a word that is not listed"
+  },
+  {
+   "key": "d",
+   "emit": "d",
+   "description": "the bare letter 'd', for spelling a word that is not listed"
+  },
+  {
+   "key": "e",
+   "emit": "e",
+   "description": "the bare letter 'e', for spelling a word that is not listed"
+  },
+  {
+   "key": "f",
+   "emit": "f",
+   "description": "the bare letter 'f', for spelling a word that is not listed"
+  },
+  {
+   "key": "g",
+   "emit": "g",
+   "description": "the bare letter 'g', for spelling a word that is not listed"
+  },
+  {
+   "key": "h",
+   "emit": "h",
+   "description": "the bare letter 'h', for spelling a word that is not listed"
+  },
+  {
+   "key": "i",
+   "emit": "i",
+   "description": "the bare letter 'i', for spelling a word that is not listed"
+  },
+  {
+   "key": "j",
+   "emit": "j",
+   "description": "the bare letter 'j', for spelling a word that is not listed"
+  },
+  {
+   "key": "k",
+   "emit": "k",
+   "description": "the bare letter 'k', for spelling a word that is not listed"
+  },
+  {
+   "key": "l",
+   "emit": "l",
+   "description": "the bare letter 'l', for spelling a word that is not listed"
+  },
+  {
+   "key": "m",
+   "emit": "m",
+   "description": "the bare letter 'm', for spelling a word that is not listed"
+  },
+  {
+   "key": "n",
+   "emit": "n",
+   "description": "the bare letter 'n', for spelling a word that is not listed"
+  },
+  {
+   "key": "o",
+   "emit": "o",
+   "description": "the bare letter 'o', for spelling a word that is not listed"
+  },
+  {
+   "key": "p",
+   "emit": "p",
+   "description": "the bare letter 'p', for spelling a word that is not listed"
+  },
+  {
+   "key": "q",
+   "emit": "q",
+   "description": "the bare letter 'q', for spelling a word that is not listed"
+  },
+  {
+   "key": "r",
+   "emit": "r",
+   "description": "the bare letter 'r', for spelling a word that is not listed"
+  },
+  {
+   "key": "s",
+   "emit": "s",
+   "description": "the bare letter 's', for spelling a word that is not listed"
+  },
+  {
+   "key": "t",
+   "emit": "t",
+   "description": "the bare letter 't', for spelling a word that is not listed"
+  },
+  {
+   "key": "u",
+   "emit": "u",
+   "description": "the bare letter 'u', for spelling a word that is not listed"
+  },
+  {
+   "key": "v",
+   "emit": "v",
+   "description": "the bare letter 'v', for spelling a word that is not listed"
+  },
+  {
+   "key": "w",
+   "emit": "w",
+   "description": "the bare letter 'w', for spelling a word that is not listed"
+  },
+  {
+   "key": "x",
+   "emit": "x",
+   "description": "the bare letter 'x', for spelling a word that is not listed"
+  },
+  {
+   "key": "y",
+   "emit": "y",
+   "description": "the bare letter 'y', for spelling a word that is not listed"
+  },
+  {
+   "key": "z",
+   "emit": "z",
+   "description": "the bare letter 'z', for spelling a word that is not listed"
+  },
+  {
+   "key": "A",
+   "emit": "A",
+   "description": "the capital letter 'A', for spelling a name"
+  },
+  {
+   "key": "B",
+   "emit": "B",
+   "description": "the capital letter 'B', for spelling a name"
+  },
+  {
+   "key": "C",
+   "emit": "C",
+   "description": "the capital letter 'C', for spelling a name"
+  },
+  {
+   "key": "D",
+   "emit": "D",
+   "description": "the capital letter 'D', for spelling a name"
+  },
+  {
+   "key": "E",
+   "emit": "E",
+   "description": "the capital letter 'E', for spelling a name"
+  },
+  {
+   "key": "F",
+   "emit": "F",
+   "description": "the capital letter 'F', for spelling a name"
+  },
+  {
+   "key": "G",
+   "emit": "G",
+   "description": "the capital letter 'G', for spelling a name"
+  },
+  {
+   "key": "H",
+   "emit": "H",
+   "description": "the capital letter 'H', for spelling a name"
+  },
+  {
+   "key": "I",
+   "emit": "I",
+   "description": "the capital letter 'I', for spelling a name"
+  },
+  {
+   "key": "J",
+   "emit": "J",
+   "description": "the capital letter 'J', for spelling a name"
+  },
+  {
+   "key": "K",
+   "emit": "K",
+   "description": "the capital letter 'K', for spelling a name"
+  },
+  {
+   "key": "L",
+   "emit": "L",
+   "description": "the capital letter 'L', for spelling a name"
+  },
+  {
+   "key": "M",
+   "emit": "M",
+   "description": "the capital letter 'M', for spelling a name"
+  },
+  {
+   "key": "N",
+   "emit": "N",
+   "description": "the capital letter 'N', for spelling a name"
+  },
+  {
+   "key": "O",
+   "emit": "O",
+   "description": "the capital letter 'O', for spelling a name"
+  },
+  {
+   "key": "P",
+   "emit": "P",
+   "description": "the capital letter 'P', for spelling a name"
+  },
+  {
+   "key": "Q",
+   "emit": "Q",
+   "description": "the capital letter 'Q', for spelling a name"
+  },
+  {
+   "key": "R",
+   "emit": "R",
+   "description": "the capital letter 'R', for spelling a name"
+  },
+  {
+   "key": "S",
+   "emit": "S",
+   "description": "the capital letter 'S', for spelling a name"
+  },
+  {
+   "key": "T",
+   "emit": "T",
+   "description": "the capital letter 'T', for spelling a name"
+  },
+  {
+   "key": "U",
+   "emit": "U",
+   "description": "the capital letter 'U', for spelling a name"
+  },
+  {
+   "key": "V",
+   "emit": "V",
+   "description": "the capital letter 'V', for spelling a name"
+  },
+  {
+   "key": "W",
+   "emit": "W",
+   "description": "the capital letter 'W', for spelling a name"
+  },
+  {
+   "key": "X",
+   "emit": "X",
+   "description": "the capital letter 'X', for spelling a name"
+  },
+  {
+   "key": "Y",
+   "emit": "Y",
+   "description": "the capital letter 'Y', for spelling a name"
+  },
+  {
+   "key": "Z",
+   "emit": "Z",
+   "description": "the capital letter 'Z', for spelling a name"
+  },
+  {
+   "key": "ed",
+   "emit": "ed",
+   "description": "the suffix 'ed', joined to the word before it"
+  },
+  {
+   "key": "ing",
+   "emit": "ing",
+   "description": "the suffix 'ing', joined to the word before it"
+  },
+  {
+   "key": "ly",
+   "emit": "ly",
+   "description": "the suffix 'ly', joined to the word before it"
+  },
+  {
+   "key": "er",
+   "emit": "er",
+   "description": "the suffix 'er', joined to the word before it"
+  },
+  {
+   "key": "es",
+   "emit": "es",
+   "description": "the suffix 'es', joined to the word before it"
+  },
+  {
+   "key": "tion",
+   "emit": "tion",
+   "description": "the suffix 'tion', joined to the word before it"
+  },
+  {
+   "key": "ment",
+   "emit": "ment",
+   "description": "the suffix 'ment', joined to the word before it"
+  },
+  {
+   "key": "ness",
+   "emit": "ness",
+   "description": "the suffix 'ness', joined to the word before it"
+  },
+  {
+   "key": "'s",
+   "emit": "'s",
+   "description": "the suffix \"'s\", joined to the word before it"
+  },
+  {
+   "key": "n't",
+   "emit": "n't",
+   "description": "the suffix \"n't\", joined to the word before it"
+  },
+  {
+   "key": "0",
+   "emit": "0",
+   "description": "the digit 0"
+  },
+  {
+   "key": "1",
+   "emit": "1",
+   "description": "the digit 1"
+  },
+  {
+   "key": "2",
+   "emit": "2",
+   "description": "the digit 2"
+  },
+  {
+   "key": "3",
+   "emit": "3",
+   "description": "the digit 3"
+  },
+  {
+   "key": "4",
+   "emit": "4",
+   "description": "the digit 4"
+  },
+  {
+   "key": "5",
+   "emit": "5",
+   "description": "the digit 5"
+  },
+  {
+   "key": "6",
+   "emit": "6",
+   "description": "the digit 6"
+  },
+  {
+   "key": "7",
+   "emit": "7",
+   "description": "the digit 7"
+  },
+  {
+   "key": "8",
+   "emit": "8",
+   "description": "the digit 8"
+  },
+  {
+   "key": "9",
+   "emit": "9",
+   "description": "the digit 9"
+  },
+  {
+   "key": "SPACE",
+   "emit": " ",
+   "description": "a single space"
+  },
+  {
+   "key": "NEWLINE",
+   "emit": "\n",
+   "description": "a newline (line break)"
+  },
+  {
+   "key": "PARAGRAPH",
+   "emit": "\n\n",
+   "description": "a blank line (paragraph break)"
+  },
+  {
+   "key": ".",
+   "emit": ".",
+   "description": "a period"
+  },
+  {
+   "key": ",",
+   "emit": ",",
+   "description": "a comma"
+  },
+  {
+   "key": "!",
+   "emit": "!",
+   "description": "an exclamation mark"
+  },
+  {
+   "key": "?",
+   "emit": "?",
+   "description": "a question mark"
+  },
+  {
+   "key": "'",
+   "emit": "'",
+   "description": "an apostrophe"
+  },
+  {
+   "key": "\"",
+   "emit": "\"",
+   "description": "a double quote"
+  },
+  {
+   "key": "-",
+   "emit": "-",
+   "description": "a hyphen"
+  },
+  {
+   "key": ":",
+   "emit": ":",
+   "description": "a colon"
+  },
+  {
+   "key": ";",
+   "emit": ";",
+   "description": "a semicolon"
+  },
+  {
+   "key": "(",
+   "emit": "(",
+   "description": "an opening parenthesis"
+  },
+  {
+   "key": ")",
+   "emit": ")",
+   "description": "a closing parenthesis"
+  }
+ ]
+}

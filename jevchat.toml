@@ -1,0 +1,78 @@
+# jevchat configuration. Every key is optional; CLI flags override these.
+[jevchat]
+
+# Which alphabet Jev scores at each step: a builtin name (see `jevchat alphabets`),
+# a bare name resolved against ./alphabets/, or a path to a .json file.
+#   lower26    28 choices   a-z + space. One API call per letter.
+#   ascii      89 choices   letters, digits, punctuation. One API call per character.
+#   tokens    255 choices   words, suffixes, letters. The largest that fits one question.
+#   words1k  1122 choices   1009 common words + a spelling fallback.  strategy = buckets
+#   bpe2k    2433 choices   GPT-2's most frequent BPE pieces.          strategy = buckets
+#   bpe5k    5228 choices   ...twice as many, for better coverage.     strategy = buckets
+#   bpe50k  49862 choices   GPT-2's entire real BPE vocabulary.        strategy = buckets
+#                           ~9 requests and ~370k input tokens per step: slow and not
+#                           cheap, but it is the whole thing.
+alphabet = "words1k"
+
+model = "jev-latest"
+
+# Jev leans towards whichever options come first in the criteria map, so the
+# alphabet is re-ordered on every call. Turning this off roughly halves how often
+# the right symbol is scored highest.
+shuffle_criteria = true
+
+# How the next symbol's distribution is obtained.
+#   choice  one question over the whole alphabet
+#   bisect  earlier/later questions down to bisect_cutoff, then one small choice
+#   buckets one question per slice of the alphabet, each with an OTHER escape.
+#           The only strategy that can hold more than 255 symbols.
+strategy = "buckets"
+bisect_cutoff = 20   # stop bisecting once a group is this small
+bisect_swap = true   # ask each split both ways to cancel Jev's lean towards yes
+
+bucket_size = 127      # symbols per bucket question; at most 254, leaving room for OTHER
+bucket_batch = 48      # most bucket questions per request; it backs off on overflow
+bucket_describe = false # per-option descriptions cost ~2.3x tokens and did not help
+
+# Score this many re-orderings per step and average them. They travel as parallel
+# questions inside a single request, so latency stays roughly flat, but input
+# tokens scale with it. Raising it widens the usable support (Jev rounds to 0.01)
+# but does not improve accuracy -- see `jevchat bench`.
+ensemble = 1
+
+# --- sampling -----------------------------------------------------------------
+# How the options are worded.
+#   symbol      the options are the symbols themselves
+#   hypothesis  the options are the resulting texts, so Jev ranks finished strings.
+#               Roughly triples character-level accuracy; neutral at word level.
+presentation = "hypothesis"
+window = 40         # characters of the reply's tail shown in each hypothesis option
+
+temperature = 0.4   # 0 is greedy (always the top-scored symbol)
+top_p = 0.9         # nucleus filter
+top_k = 0           # 0 disables
+stop_bias = 0.5     # <1 for longer replies, >1 for shorter. Hypothesis options
+                    # inflate STOP, because the unchanged reply is a valid prefix
+                    # of every extension of it; this compensates.
+min_steps = 3       # symbols that must be drawn before STOP is allowed
+max_steps = 400
+max_chars = 1500
+# seed = 7          # uncomment for a reproducible reply
+
+# Degeneracy guards. Without them generation stalls on runs of spaces or on one
+# repeated symbol. Set repetition_penalty = 1.0 for the character alphabets, where
+# penalising a recent letter also blocks legitimate double letters ("green").
+repetition_penalty = 1.1
+repetition_window = 8
+no_repeat_space = true
+
+# --- conversation --------------------------------------------------------------
+history_turns = 6   # prior turns sent to Jev as context
+
+# --- display --------------------------------------------------------------------
+live = true         # live panel; false streams raw text instead
+show_dist = 3       # how many of Jev's top-scored symbols to show each step
+
+# --- transport -------------------------------------------------------------------
+timeout = 60.0
+max_retries = 4

@@ -1,0 +1,28 @@
+[project]
+name = "jevchat"
+version = "0.1.0"
+description = "Turn TypeSafe's Jev decision model into a chat model by sampling a reply one symbol at a time."
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "httpx (>=0.27,<1.0)",
+    "python-dotenv (>=1.0,<2.0)",
+    "rich (>=13.7,<15.0)",
+    "click (>=8.1,<9.0)",
+]
+
+[project.scripts]
+jevchat = "jevchat.cli:main"
+
+[tool.poetry]
+packages = [{ include = "jevchat" }]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0"]
+build-backend = "poetry.core.masonry.api"
