@@ -6,12 +6,13 @@ We know [Jev](https://docs.typesafe.ai/api).
 
 > Given the user's question and the reply written so far, which symbol comes next?
 
-The options are an alphabet plus a way to stop. Jev returns a probability for each
+The options are an alphabet plus an option to stop emitting. Jev returns a probability for each
 one, and the sampler draws the next symbol from that normalised distribution.
-Append, repeat, and stop when STOP is drawn. The decision model becomes a language
-model, one symbol at a time.
+Append, repeat, and stop when STOP is drawn.
 
-There are several alphabets and sampling strategies.  The idea is for fun, the cost is somewhat impractical, and the results are hilarious.
+There are several alphabets and sampling strategies available.  
+
+The idea is for fun, the cost is somewhat impractical, and the results are hilarious.
 
 <img width="450" height="403" alt="image" src="https://github.com/user-attachments/assets/8be3a47a-da3c-4df6-a617-d485c61a7db7" />
 
