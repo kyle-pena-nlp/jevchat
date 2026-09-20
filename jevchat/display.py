@@ -79,6 +79,7 @@ class LiveRenderer(Renderer):
         self._text = ""
         self._status = Text("starting…", style="dim")
         self._final: Done | None = None
+        self._printed = False
 
     # -- geometry ---------------------------------------------------------
     def _tail(self) -> str:
@@ -101,6 +102,9 @@ class LiveRenderer(Renderer):
             console=self.console,
             refresh_per_second=10,
             vertical_overflow="crop",
+            # The live panel is scratch space: it holds only the tail and is erased
+            # on stop, so that `finish` can leave the reply on screen exactly once.
+            transient=True,
         )
         self._live.start()
 
@@ -120,6 +124,7 @@ class LiveRenderer(Renderer):
     def finish(self, done: Done) -> None:
         self._final = done
         self.close()
+        self._printed = True
         # Reprint the reply in full: the live panel only ever showed the tail.
         self.console.print(Panel(Text(done.text or "(empty)", style="bold"),
                                  title=self.title, border_style="cyan"))
@@ -131,6 +136,13 @@ class LiveRenderer(Renderer):
         if self._live is not None:
             self._live.stop()
             self._live = None
+        if self._final is None and self._text and not self._printed:
+            # Stopped without a Done (aborted mid-reply): keep what was written,
+            # since the transient panel has just been erased.
+            self._printed = True
+            self.console.print(
+                Panel(Text(self._tail(), style="bold"), title=self.title, border_style="cyan")
+            )
 
 
 class PlainRenderer(Renderer):

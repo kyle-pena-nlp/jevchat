@@ -406,6 +406,115 @@ it is not the full distribution.
 
 ---
 
+## 10. Representative weighting, flat and hierarchical
+
+*Replace OTHER with a question over bucket winners.*
+
+Pass 1 asks K plain buckets (no OTHER, no anchors) for `p(x | bucket)`. Pass 2 asks
+**one** question over each bucket's argmax, so those K numbers are on a single
+normalised scale by construction. The representative is a *probe*, not a stand-in:
+
+```
+w_k  ∝  r_k / p(rep_k | bucket k)          p(x) = w_k · p(x | k)
+```
+
+which is exact under Luce — a bucket whose winner is strong but which is otherwise
+empty gets scaled down correctly.
+
+Reconstructing an 88-option `ascii` question, 5 contexts:
+
+| method | top-1 | Spearman | TV | \|log-odds\| | non-zero |
+|---|---|---|---|---|---|
+| *noise floor* | *4/5* | *0.95* | *0.23* | *0.69* | *11* |
+| OTHER, K=6 | 4/5 | 0.89 | 0.40 | 0.85 | 21 |
+| reps, K=6 | 5/5 | 0.51 | 0.29 | 0.89 | 57 |
+| OTHER, K=22 | 2/5 | 0.70 | 0.49 | 0.97 | 31 |
+| reps, K=22 | 5/5 | 0.45 | 0.38 | 1.02 | 48 |
+| hierarchical 22→5→1 | 4/5 | 0.24 | 0.53 | 1.06 | 82 |
+
+**The predicted dynamic-range failure did not happen.** `w_k = r_k / p(rep_k|k)`
+multiplies two quantised values, giving 10⁻⁴ resolution, so representatives resolve
+*more* tail than OTHER (57 non-zero against 21) rather than less. The multiplicative
+range expected from a hierarchy already appears at two levels.
+
+**Three levels is worse** — TV 0.53. Errors compound across levels, so two is the
+design.
+
+**Spearman should not be used for these comparisons.** Ground truth has ~11 non-zero
+values out of 88, so 77 are tied at zero and their ranking is arbitrary. A method is
+penalised for assigning finite mass to symbols the reference calls zero, which is
+the behaviour we want. This also weakens the Spearman column in §8.
+
+**reps vs OTHER is inside the noise.** Re-run with fresh samples (§11) reversed the
+ordering — reps 0.37 / OTHER 0.35 against this run's 0.29 / 0.40. Five contexts is
+not enough to separate them against a 0.9-nat floor.
+
+---
+
+## 11. Nucleus reselection and reweighting (the robust win)
+
+*Project the first estimate back down, reselect a nucleus, re-aggregate.*
+
+After pass 2 gives a first global estimate `p0`, take the top-m of each bucket by
+`p0`, pool them, and score the pool in **one** question. Two ways to use that:
+
+* **splice** — the pooled distribution becomes the head; the tail keeps `p0`'s
+  original weights.
+* **reweight** — the pooled question re-estimates each bucket's weight, applied to
+  the *whole* bucket, tail included. Exact under Luce, since `q(x)/p(x|k) = Z_k/Q`
+  is constant across a bucket's members:
+
+```
+w_k  ∝  Σ_{x ∈ nucleus_k} q(x)  /  Σ_{x ∈ nucleus_k} p(x | k)
+```
+
+Averaging over m members is better conditioned than dividing by a single quantised
+argmax probability.
+
+| method | top-1 | TV | \|log-odds\| | non-zero |
+|---|---|---|---|---|
+| *noise floor* | *4/5* | *0.23* | *0.76* | *10* |
+| OTHER | 4/5 | 0.35 | 0.80 | 22 |
+| reps (argmax probe only) | 3/5 | 0.40 | 0.87 | 61 |
+| splice, m=3 | 4/5 | 0.27 | 0.76 | 56 |
+| **reweight, m=3** | 4/5 | 0.28 | **0.67** | 58 |
+| splice, m=6 | 3/5 | 0.29 | 0.79 | 39 |
+| reweight, m=6 | 3/5 | 0.32 | 0.80 | 55 |
+
+**TV: splice and reweight tie** (0.27 / 0.28). TV is mass-weighted, so it is
+dominated by the head, which both fix.
+
+**\|log-odds\|: reweight wins, 0.67 against 0.76.** That metric weights all pairs
+equally, so it is the tail-sensitive one — exactly what reweighting the whole bucket
+was meant to improve. It is the best figure measured anywhere in this log, and it
+sits *below* the single-sample noise floor, which is coherent: the reconstruction
+averages six bucket questions and so can be less noisy than one reference sample.
+
+Reweighting also **retains more support** (58 vs 56 at m=3, 55 vs 39 at m=6),
+because correcting `w_k` lifts a bucket's tail along with its head rather than
+overwriting the head and leaving the tail on stale weights.
+
+`m=3` beats `m=6` on both metrics — a smaller nucleus overwrites less of the first
+estimate.
+
+Cost: 3 sequential round trips (each pass needs the previous pass's winners). Only
+one and a half turns of the up-down-up loop were run; iterating further is untested
+and costs one request per turn.
+
+**Scaling note.** The pooled question holds K×m options — 18 at K=6, m=3, but 1,179
+for `bpe50k`'s 393 buckets, over the 255 cap. That is where a hierarchy earns its
+place, rather than the three-level version in §10.
+
+### The measurement problem
+
+**There is no ground truth for the tail.** A single 88-option question resolves ~11
+symbols, so it cannot validate a method that resolves 58. Every tail comparison on
+this page is therefore unverified. The only available check is *reproducibility* —
+run the same method twice with different bucket assignments and see whether the same
+tail symbols light up. Signal should reproduce; noise should not. Untested.
+
+---
+
 ## What shipped
 
 | decision | because |
@@ -423,10 +532,18 @@ it is not the full distribution.
 
 ## Open questions
 
+* **Validating the tail.** No reference resolves deeper than a single question, so
+  every claim about low-probability symbols on this page is unverified. A
+  reproducibility check (same method, different bucket assignment, do the same tail
+  symbols recur?) is the cheapest way in.
+* **More replicates.** Five contexts against a 0.9-nat floor could not separate
+  representatives from OTHER. Anything claiming a TV difference below ~0.08 needs
+  more.
 * **Simulating the full distribution** rather than truncating to a shortlist. The
   pairwise/Bradley–Terry route is the only one measured that assigns finite mass to
   everything it touches, but it converges to a flatter distribution than bulk
-  scoring and the temperature correction does not close the gap.
+  scoring and the temperature correction does not close the gap. Nucleus
+  reselection (§11) is the most promising measured route.
 * **Batching trie levels** into one request per level (§9) — untested, worth ~10×.
 * **Semantic bucketing.** `bisect` failed partly because alphabetical halves are
   semantically meaningless. GPT-2's own token embedding matrix (50257 × 768) would
