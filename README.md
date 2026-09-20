@@ -16,6 +16,8 @@ There are several alphabets and sampling strategies.  The results are hilarious.
 <img width="450" height="403" alt="image" src="https://github.com/user-attachments/assets/8be3a47a-da3c-4df6-a617-d485c61a7db7" />
 
 
+This was a Claude accelerated experiment.  I described the sampling algorithms, strategies, and so on, and it implemented them.
+
 ## Setup
 
 ```bash
